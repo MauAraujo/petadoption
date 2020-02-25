@@ -1,15 +1,21 @@
 import React from 'react'
+import './NavBar.css'
 
 class NavBar extends React.Component {
   render() {
     return (
       <nav>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Terms of use</a></li>
-          <li><a href="#">Contact</a></li>
+          <div>
+            <li><a  className="primary" href="#">LOGO</a></li>
+            <li><span>|</span></li>
+            <li><a href="#">ADOPCIONES</a></li>
+          </div>
+          <div>
+            <li><a className="primary" ref="#">ADOPTA AHORA</a></li>
+            <li><span>|</span></li>
+            <li><a href="#">INGRESAR</a></li>
+          </div>
         </ul>
       </nav>
     )
