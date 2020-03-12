@@ -1,46 +1,26 @@
-ul {
-    list-style-type: none;
-    margin: 1px;
-    padding: 1px;
-    overflow: hidden;
-    background-color: #f397B0;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-}
+@import '../../assets/scss/variables.scss';
 
-li {
-    float: left;
-    font-family: 'Montserrat';
-    font-weight: bold;
-    font-size: 16px;
-}
+.navbar {
+    background-color: $pink !important;
 
-/* Add a border to all( but not the last) list items */
-li:last-child {
-    border-right: none;
-}
+    .nav-item {
+        padding: .3em .5em;
+        color: $yellow;
 
-li a {
-    display: block;
-    color: white;
-    text-align: left;
-    padding: 15px;
-    text-decoration: none;
-}
+        a {
+            color: $yellow;
+            font-weight: light;
+            transition: ease .4s;
+            &:hover {
+                color: $purple;
+                text-decoration: none;
+            }
+        }
 
-span {
-    display: block;
-    color: white;
-    padding: 15px 17px;
+        &-capital {
+            @extend .nav-item;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
 }
-
-.primary {
-    color:#FDFFD5;
-}
-/* Links will change color when hovered over
-li a:hover {
-    background-color: #7300ff;
-}*/

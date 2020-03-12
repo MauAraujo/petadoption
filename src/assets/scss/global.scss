@@ -1,0 +1,52 @@
+@import './variables.scss';
+
+body {
+  background: $gray;
+  color: #2D2D2D;
+
+  //Utils
+
+  .contain {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+  }
+
+  //typography
+  .title {
+    font-size: 4.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: $pink;
+  }
+
+  .subtitle {
+    font-size: 1.3em;
+    font-weight: light;
+    text-transform: uppercase;
+    color: $green;
+  }
+
+  .txt {
+    font-weight: 1.1em;
+    font-weight: lighter;
+  }
+
+  //buttoms
+  .btn {
+    background: $purple;
+    color: $yellow;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: .4em 3em;
+    border-radius: .4em;
+    min-width: 90%;
+    text-align: center;
+
+    &-aux {
+      @extend .btn;
+      background: $pink;
+    }
+  }
+}
