@@ -43,10 +43,22 @@ body {
     border-radius: .4em;
     min-width: 90%;
     text-align: center;
+    cursor: pointer;
+    transition: ease .4s;
+
+    &:hover {
+      background: darken($color: $purple, $amount: 30%);
+      color: whitesmoke;
+    }
 
     &-aux {
       @extend .btn;
       background: $pink;
+
+      &:hover {
+      background: darken($color: $pink, $amount: 10%);
+      color: whitesmoke;
+    }
     }
   }
 }
