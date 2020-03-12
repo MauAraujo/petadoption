@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 
 function App() {
   return (
+    // Test
     <div className="App">
       <NavBar />
       <Hero />
