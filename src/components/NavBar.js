@@ -1,11 +1,11 @@
 import React from 'react'
-import './NavBar.css'
+import './styles/NavBar.scss'
 
 class NavBar extends React.Component {
   render() {
     return (
-      <nav>
-        <ul>
+      <nav className='navbar'>
+        <ul className=''>
           <div>
             <li><a  className="primary" href="#">LOGO</a></li>
             <li><span>|</span></li>

@@ -1,14 +1,16 @@
 import React from 'react';
-import './App.css';
-import NavBar  from './components/NavBar'
-import Hero from './components/Hero'
+import { BrowserRouter as Router } from "react-router-dom";
+
+import "bootstrap/dist/css/bootstrap.css"
+import './assets/scss/global.scss'
+
+import AppNavigation from './pages/app-navigation'
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <Hero />
-    </div>
+    <Router>
+      <AppNavigation/>
+    </Router>
   );
 }
 
