@@ -24,6 +24,10 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     color: $pink;
+
+    @media screen and (max-width: 414px) {
+        font-size: 2em;
+    }
   }
 
   .subtitle {
@@ -50,7 +54,7 @@ body {
     color: $yellow;
     font-weight: bold;
     font-size: 1.2em;
-    padding: .4em 3em;
+    padding: .4em 1em;
     border-radius: .4em;
     min-width: 90%;
     text-align: center;
@@ -60,6 +64,10 @@ body {
     &:hover {
       background: darken($color: $purple, $amount: 30%);
       color: whitesmoke;
+    }
+
+    @media screen and (max-width: 414px) {
+        min-width: 100%;
     }
 
     &-aux {
@@ -82,5 +90,12 @@ body {
     font-size: 1.4em;
     font-weight: bold;
     padding: 1.2em .8em;
+  }
+
+  .input-outline {
+    background-color: transparent !important;
+    color: white !important;
+    border-radius: 0;
+    border-color: white;
   }
 }

@@ -8,7 +8,7 @@ export default function Available(props) {
 
   let petCard = () => {
     return (
-      <div className='col-2 col-md'>
+      <div className='col-12 col-md'>
         <div className='img-container'>
           <img className='contain' src={dummy} alt={dummy} />
         </div>
