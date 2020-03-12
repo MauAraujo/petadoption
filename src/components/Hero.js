@@ -20,12 +20,12 @@ export default function Hero() {
                 </p>
                 <div className='row no-gutters mt-5'>
                     <div className='col-12 col-md-6'>
-                        <div className="btn">
+                        <div className="btn button">
                             Accion
                         </div>
                     </div>
                     <div className='col-12 col-md-6'>
-                        <div className="btn-aux">
+                        <div className="btn button-aux">
                             Accion 2
                         </div>
                     </div>

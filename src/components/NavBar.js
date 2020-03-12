@@ -4,7 +4,7 @@ import './styles/NavBar.scss'
 
 export default function NavBar() {
   return (
-    <nav className='navbar navbar-expand-lg navbar-light bg-light'>
+    <nav className='navbar navbar-expand-lg navbar-light fixed-top'>
       <div className='container'>
         <NavLink className='navbar-brand d-none d-sm-block' to='/'>
           Logotipo
@@ -24,7 +24,9 @@ export default function NavBar() {
 
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
-            <li className='nav-item'><span>|</span></li>
+            <li className='nav-item'>
+              <span>|</span>
+            </li>
             <li className='nav-item-capital'>
               <NavLink exact activeClassName='active' to='/'>
                 Adopciones
@@ -37,7 +39,9 @@ export default function NavBar() {
                 Adopta ahora
               </NavLink>
             </li>
-            <li className='nav-item'><span>|</span></li>
+            <li className='nav-item'>
+              <span>|</span>
+            </li>
             <li className='nav-item'>
               <NavLink exact activeClassName='active' to='/'>
                 Ingresar

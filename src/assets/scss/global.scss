@@ -22,10 +22,16 @@ body {
   }
 
   .subtitle {
-    font-size: 1.3em;
-    font-weight: light;
+    font-size: 2.4em;
+    font-weight: bold;
     text-transform: uppercase;
     color: $green;
+
+    &-pet {
+      color: $pink;
+      text-align: center;
+      font-size: 2.6em;
+    }
   }
 
   .txt {
@@ -34,7 +40,7 @@ body {
   }
 
   //buttoms
-  .btn {
+  .button {
     background: $purple;
     color: $yellow;
     font-weight: bold;
@@ -52,13 +58,24 @@ body {
     }
 
     &-aux {
-      @extend .btn;
+      @extend .button;
       background: $pink;
 
       &:hover {
-      background: darken($color: $pink, $amount: 10%);
-      color: whitesmoke;
+        background: darken($color: $pink, $amount: 10%);
+        color: whitesmoke;
+      }
     }
-    }
+  }
+
+  //forms
+  .input {
+    border: none;
+    border-radius: .5em;
+    background: $gray;
+    color: $purple;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 1.2em .8em;
   }
 }
