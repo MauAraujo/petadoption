@@ -5,7 +5,7 @@ import SearchBar from '../components/search-bar'
 import Available from '../components/available'
 import Steps from '../components/steps'
 
-export default function Homepage() {
+export default function Catalogo() {
   return (
     <Fragment>
       <div className='container my-4'>
