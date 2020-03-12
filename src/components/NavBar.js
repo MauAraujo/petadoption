@@ -1,5 +1,7 @@
 import React from 'react'
 import { NavLink } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBars } from "@fortawesome/free-solid-svg-icons"
 import './styles/NavBar.scss'
 
 export default function NavBar() {
@@ -49,7 +51,7 @@ export default function NavBar() {
             </li>
             <li className='nav-item'>
               <NavLink exact activeClassName='active' to='/'>
-                X
+                <FontAwesomeIcon icon={faBars} />
               </NavLink>
             </li>
           </ul>
