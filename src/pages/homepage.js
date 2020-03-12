@@ -4,6 +4,8 @@ import Hero from '../components/Hero'
 import SearchBar from '../components/search-bar'
 import Available from '../components/available'
 import Steps from '../components/steps'
+import Help from '../components/help'
+import DiscoverCard from '../components/discover-card'
 
 export default function Homepage() {
   return (
@@ -14,8 +16,16 @@ export default function Homepage() {
         <Available />
       </div>
       <section className='bg-white'>
-        <div className="container my-3">
-          <Steps/>
+        <div className='container my-3'>
+          <Steps />
+        </div>
+      </section>
+      <div className='container my-4'>
+        <DiscoverCard/>
+      </div>
+      <section className='bg-white'>
+        <div className='container my-3'>
+          <Help />
         </div>
       </section>
     </Fragment>

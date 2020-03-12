@@ -1,9 +1,12 @@
 import React from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCalendarAlt, faHeart, faUser } from "@fortawesome/free-regular-svg-icons"
+import {
+  faFolder,
+  faQuestionCircle,
+  faHandPaper
+} from "@fortawesome/free-regular-svg-icons"
 
-export default function Steps(props) {
-
+export default function Help() {
   let step = (icon, title, text) => {
     return (
       <div className='col-12 col-md-4 px-5 py-5'>
@@ -11,9 +14,7 @@ export default function Steps(props) {
           <FontAwesomeIcon icon={icon} size='8x' />
         </div>
         <h3 className='subtitle-pet my-3'>{title}</h3>
-        <p className='txt'>
-          {text}
-        </p>
+        <p className='txt'>{text}</p>
       </div>
     )
   }
@@ -21,17 +22,17 @@ export default function Steps(props) {
   return (
     <div className='row align-items-center py-4 text-center'>
       {step(
-        faCalendarAlt,
+        faFolder,
         "Agenda tu cita",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       )}
       {step(
-        faHeart,
+        faQuestionCircle,
         "Conoce tu mascota",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       )}
       {step(
-        faUser,
+        faHandPaper,
         "Aprende",
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
       )}
