@@ -13,6 +13,11 @@ body {
     overflow: hidden;
   }
 
+  .bg-white {
+    background: white !important;
+    min-height: 25vh;
+  }
+
   //typography
   .title {
     font-size: 4.2em;
