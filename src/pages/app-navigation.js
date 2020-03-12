@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom"
 import Layout from '../components/layout'
 // Pages
 import Homepage from './homepage'
+import Catalogo from './catalogo'
 
 // Errors
 
@@ -16,6 +17,7 @@ export default class AppNavigation extends Component {
           <Switch>
             <Route path='/' exact component={Homepage} />
             <Route path='/about' exact component={Homepage} />
+            <Route path='/catalogo' exact component={Catalogo} />
             <Route component={Homepage} />
           </Switch>
         </Layout>

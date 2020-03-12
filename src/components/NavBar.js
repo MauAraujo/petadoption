@@ -30,14 +30,14 @@ export default function NavBar() {
               <span>|</span>
             </li>
             <li className='nav-item-capital'>
-              <NavLink exact activeClassName='active' to='/'>
+              <NavLink exact activeClassName='active' to='/catalogo'>
                 Adopciones
               </NavLink>
             </li>
           </ul>
           <ul className='navbar-nav ml-auto'>
             <li className='nav-item-capital'>
-              <NavLink exact activeClassName='active' to='/'>
+              <NavLink exact activeClassName='active' to='/catalogo'>
                 Adopta ahora
               </NavLink>
             </li>
