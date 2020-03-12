@@ -18,6 +18,11 @@ body {
     min-height: 25vh;
   }
 
+  .bg-yellow {
+    background: $yellow !important;
+    min-height: 85vh;
+  }
+
   //typography
   .title {
     font-size: 4.2em;
