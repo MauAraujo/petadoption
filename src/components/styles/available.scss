@@ -1,0 +1,13 @@
+@import '../../assets/scss/variables.scss';
+
+.available-container {
+  background: $yellow;
+  padding: 2em;
+
+  .img-container {
+    background: red;
+    max-height: 20vh !important;
+    overflow: hidden;
+    border-radius: .4em;
+  }
+}

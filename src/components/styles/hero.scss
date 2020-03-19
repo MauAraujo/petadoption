@@ -1,0 +1,19 @@
+.hero-container {
+    background-color: #FDFFD5;
+    border-radius: 1em;
+    min-height: 20vh;
+    overflow: hidden;
+
+    .title, .subtitle, .txt {
+        max-width: 80%;
+
+        @media screen and (max-width: 414px) {
+            max-width: 100%;
+        }
+    }
+
+    .subtitle {
+        font-size: 1.4em !important;
+        font-weight: normal;
+    }
+}

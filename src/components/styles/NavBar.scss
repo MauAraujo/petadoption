@@ -1,0 +1,40 @@
+@import '../../assets/scss/variables.scss';
+
+.navbar {
+    background-color: $pink !important;
+
+    .nav-item {
+        padding: .3em .5em;
+        color: $yellow;
+
+        a {
+            color: $yellow;
+            font-weight: light;
+            transition: ease .4s;
+            &:hover {
+                color: $purple;
+                text-decoration: none;
+            }
+        }
+
+        &-capital {
+            @extend .nav-item;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.sub-header{
+    background-color: $purple;
+    // margin: 0px;
+    color: white;
+    // height: 50px;
+    padding: 15px;
+    
+}
+
+.search{
+    background-color: transparent;
+    color: white;
+}
