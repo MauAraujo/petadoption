@@ -1,22 +1,21 @@
 import React, { Fragment } from 'react'
 //components
-import Hero from '../components/Hero'
-import ActionCard from '../components/ActionCard'
-import DetailCard from '../components/DetailCard'
-import DetailHero from '../components/DetailHero'
+import ActionCard from '../components/actionCard'
+import DetailCard from '../components/detailCard'
+import DetailHero from '../components/detailHero'
 
 export default function Detail() {
   return (
     <Fragment>
       <div className='container my-4'>
-        <Hero/>
+        <DetailHero/>
       </div>
         <div className="container my-3">
           <div className="row">
             <div className="col">
               <DetailCard className="col"/>
             </div>
-            <div className="col">
+            <div id="action-card-container" className="col">
               <ActionCard className="col"/>
             </div>
           </div>
