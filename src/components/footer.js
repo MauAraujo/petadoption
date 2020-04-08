@@ -44,25 +44,25 @@ export default function Footer(props) {
                 ¿Quieres actualizaciones y noticias en tu correo?
               </p>
               <form>
-                <div class='form-row'>
-                  <div class='form-group col-md-6'>
+                <div className='form-row'>
+                  <div className='form-group col-md-6'>
                     <input
                       type='text'
-                      class='form-control input-outline'
+                      className='form-control input-outline'
                       id='name'
                       placeholder='Nombre'
                     />
                   </div>
-                  <div class='form-group col-md-6'>
+                  <div className='form-group col-md-6'>
                     <input
                       type='mail'
-                      class='form-control input-outline'
+                      className='form-control input-outline'
                       id='mail'
                       placeholder='Correo electronico'
                     />
                   </div>
                 </div>
-                <button type='submit' class='btn button'>
+                <button type='submit' className='btn button'>
                   Aceptar
                 </button>
               </form>

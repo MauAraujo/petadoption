@@ -11,7 +11,7 @@ export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" fixed="top" >
       <Container>
-        <Navbar.Brand fluid>
+        <Navbar.Brand >
 
           <NavLink className='navbar-brand d-none d-sm-block' to='/'>
             Logotipo
