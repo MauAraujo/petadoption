@@ -5,7 +5,7 @@ let dummy = 'https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3
 
 export default function DiscoverCard(props) {
   return (
-    <div className='row discover-container my-5'>
+    <div className='row justify-content-center discover-container my-5'>
       <div className='col-12 col-md-6'>
         <div className='img-container'>
           <img className='contain' src={dummy} alt={dummy} />

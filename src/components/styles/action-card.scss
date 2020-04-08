@@ -1,0 +1,47 @@
+#action-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-card {
+  margin-top: 30px;
+
+  #action {
+    background-color: #966fbf;
+    width: 25em;
+    height: 15em;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .btn {
+    width: 75%;
+    margin-bottom: 20px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-color: transparent;
+  }
+
+  .social-banner {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .social {
+    font-size: 3em;
+
+    path {
+      fill: white;
+    }
+  }
+}
