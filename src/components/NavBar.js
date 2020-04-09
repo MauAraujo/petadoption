@@ -3,8 +3,7 @@ import { NavLink } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import './styles/NavBar.scss'
-import { Navbar, Container, Nav, Image, Row, Col } from 'react-bootstrap'
-import logo from '../assets/images/cat.svg'
+import { Navbar, Container, Nav } from 'react-bootstrap'
 
 
 export default function NavBar() {
