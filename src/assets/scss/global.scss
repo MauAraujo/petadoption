@@ -1,8 +1,8 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 body {
   background: $gray;
-  color: #2D2D2D;
+  color: #2d2d2d;
 
   //Utils
 
@@ -31,7 +31,7 @@ body {
     color: $pink;
 
     @media screen and (max-width: 414px) {
-        font-size: 2em;
+      font-size: 2em;
     }
   }
 
@@ -59,12 +59,12 @@ body {
     color: $yellow;
     font-weight: bold;
     font-size: 1.2em;
-    padding: .4em 1em;
-    border-radius: .4em;
+    padding: 0.4em 1em;
+    border-radius: 0.4em;
     min-width: 90%;
     text-align: center;
     cursor: pointer;
-    transition: ease .4s;
+    transition: ease 0.4s;
 
     &:hover {
       background: darken($color: $purple, $amount: 30%);
@@ -72,7 +72,7 @@ body {
     }
 
     @media screen and (max-width: 414px) {
-        min-width: 100%;
+      min-width: 100%;
     }
 
     &-aux {
@@ -89,12 +89,12 @@ body {
   //forms
   .input {
     border: none;
-    border-radius: .5em;
+    border-radius: 0.5em;
     background: $gray;
     color: $purple;
     font-size: 1.4em;
     font-weight: bold;
-    padding: 1.2em .8em;
+    padding: 1.2em 0.8em;
   }
 
   .input-outline {
@@ -103,4 +103,16 @@ body {
     border-radius: 0;
     border-color: white;
   }
+}
+
+:root {
+  //   $pink: #f397B0;
+  // $yellow: #FDFFD5;
+  // $purple: #966FBF;
+  // $gray: #EBEBEB;
+  // $green: #76D9D2;
+
+  --amplify-primary-color: #966fbf;
+  --amplify-primary-tint: #f397b0;
+  --amplify-primary-shade: #f397b0;
 }

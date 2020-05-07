@@ -52,7 +52,7 @@ export default function NavBar() {
               <span>|</span>
             </Nav.Item>
             <Nav.Item >
-              <NavLink exact activeClassName='active' to='/'>
+              <NavLink exact activeClassName='active' to='/login'>
                 Ingresar
               </NavLink>
             </Nav.Item>

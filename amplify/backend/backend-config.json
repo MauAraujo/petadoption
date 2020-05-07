@@ -1,0 +1,9 @@
+{
+	"auth": {
+		"petadpotiond7e3299dd7e3299d": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
+	}
+}

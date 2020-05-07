@@ -7,6 +7,7 @@ import Homepage from './homepage'
 import Detail from './detail'
 import Catalogo from './catalogo'
 import Dashboard from './dashboard'
+import Login from './login'
 
 // Errors
 
@@ -22,6 +23,7 @@ export default class AppNavigation extends Component {
             <Route path='/detail' exact component={Detail} />
             <Route path='/catalogo' exact component={Catalogo} />
             <Route path="/dashboard" exact component={Dashboard} />
+            <Route path="/login" exact component={Login} />
             <Route component={Homepage} />
           </Switch>
         </Layout>
