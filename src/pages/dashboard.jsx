@@ -25,9 +25,9 @@ import { Posts, NewPost, Inbox } from "../components/DasboardContent";
 const { Content, Sider } = Layout;
 
 export default function Dashboard() {
-  // const media = window.matchMedia(" (max-width: 600px)")
-  const [content, setContent] = useState(<NewPost />);
-  const session = useRef(null);
+    // const media = window.matchMedia(" (max-width: 600px)")
+    const session = useRef(async () => await Auth.currentSession());
+    const [content, setContent] = useState(<NewPost user={session}/>);
 
   // media.addListener(() => {
   //     if (media.matches !== menuClosed) {
@@ -49,17 +49,16 @@ export default function Dashboard() {
   //   }
 
   let handleContent = (e) => {
-    console.log("click ", e.key);
-    console.log(session)
-    switch (e.key) {
+      console.log("click ", e.key);
+      switch (e.key) {
       case "new":
-        setContent(<NewPost />);
+        setContent(<NewPost user={session.current.user} />);
         break;
       case "posts":
-        setContent(<Posts />);
+          setContent(<Posts user={session.current.user} />);
         break;
       case "inbox":
-        setContent(<Inbox />);
+          setContent(<Inbox user={session.current.user} />);
         break;
       default:
         break;

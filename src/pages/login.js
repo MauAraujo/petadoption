@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox, Card } from "antd";
+import { Form, Input, Button, Checkbox, Card, Spin, Row, Col } from "antd";
 import "./styles/login.scss";
 import React from "react";
 import { Auth } from "aws-amplify";
@@ -27,41 +27,44 @@ class Login extends React.Component {
   }
 
   async onCredentialsEntered(values) {
-    this.setState({ loading: true });
     await this.SignIn(values);
-    this.setState({ loading: false });
   }
 
-  async onNewPasswordSet({password}) {
-    console.debug('New password', password)
-    this.setState({isLoading: true})
+  async onNewPasswordSet({ password }) {
+    console.debug("New password", password);
+    this.setState({ isLoading: true });
 
     try {
       const { requiredAttributes } = this.state.user.challengeParam;
-      console.log(this.state.user)
-      console.log(requiredAttributes)
-      const user = await Auth.completeNewPassword(this.state.user, password, requiredAttributes)
-      
+      console.log(this.state.user);
+      console.log(requiredAttributes);
+      const user = await Auth.completeNewPassword(
+        this.state.user,
+        password,
+        requiredAttributes
+      );
+
       if (!user.challengeName) {
-        this.finishAuth(user)
+        this.finishAuth(user);
       }
     } catch (err) {
-      console.debug('Error updating password', err)
+      console.debug("Error updating password", err);
     }
   }
 
   finishAuth(user) {
-    console.debug('Signed in')
-    this.setState({isLoggedIn: true, isLoading: false})
-    this.props.history.push('/dashboard')
+    console.debug("Signed in");
+    this.setState({ isLoggedIn: true, isLoading: false });
+    this.props.history.push("/dashboard");
   }
 
   async SignIn({ username, password }) {
+    this.setState({ isLoading: true });
     console.log(username, password);
     try {
       const user = await Auth.signIn(username, password);
       console.log(user);
-      this.setState({user: user, isLoggedIn: true})
+      this.setState({ user: user, isLoggedIn: true });
       if (
         user.challengeName === ChallengeName.SMSMFA ||
         user.challengeName === ChallengeName.SoftwareTokenMFA
@@ -70,7 +73,7 @@ class Login extends React.Component {
         // this.handleAuthStateChange(AuthState.ConfirmSignIn, user);
       } else if (user.challengeName === ChallengeName.NewPasswordRequired) {
         console.debug("require new password", user.challengeParam);
-        this.setState({needsNewPassword: true})
+        this.setState({ needsNewPassword: true, loading: false });
         // this.handleAuthStateChange(AuthState.ResetPassword, user);
       } else if (user.challengeName === ChallengeName.MFASetup) {
         console.debug("TOTP setup", user.challengeParam);
@@ -86,20 +89,32 @@ class Login extends React.Component {
         this.finishAuth(user);
       }
     } catch (error) {
-      console.log("error signing in", error);
+      switch (error.code) {
+        case "NotAuthorizedException":
+          break;
+        default:
+          console.error(error);
+          break;
+      }
     }
   }
 
   render() {
     return (
-      <div className="login-card">
-      {
-        !this.state.isLoggedIn ?  
-        <SignIn onFinish={this.onCredentialsEntered} /> :
-        this.state.needsNewPassword ? 
-        <NewPassword onFinish={this.onNewPasswordSet}/> :
-        <h3>Greeting</h3>
-      }
+        <div className="login-card">
+        {!this.state.isLoggedIn ? (
+          <SignIn
+            onFinish={this.onCredentialsEntered}
+            isLoading={this.state.isLoading}
+          />
+        ) : this.state.needsNewPassword ? (
+          <NewPassword
+            onFinish={this.onNewPasswordSet}
+            isLoading={this.state.isLoading}
+          />
+        ) : (
+          <h3>Greeting</h3>
+        )}
       </div>
     );
   }
@@ -118,11 +133,11 @@ function SignIn(props) {
   const tailLayout = {
     wrapperCol: {
       offset: 6,
-      span: 16,
+      span: 20,
     },
   };
   return (
-    <Card style={{ width: "40%" }} title="Ingresa tus datos">
+      <Card className="inner-card" style={{ width: "40%" }} title="Ingresa tus datos">
       <Form
         {...layout}
         name="basic"
@@ -162,9 +177,22 @@ function SignIn(props) {
         </Form.Item>
 
         <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Ingresar
-          </Button>
+          <Row>
+            <Col span="12">
+              <Button type="primary" htmlType="submit">
+                Ingresar
+              </Button>
+            </Col>
+            {props.isLoading ? (
+              <Col span="12">
+                <Spin />
+              </Col>
+            ) : (
+              <Col span="12">
+                <div />
+              </Col>
+            )}
+          </Row>
         </Form.Item>
       </Form>
     </Card>
@@ -183,12 +211,11 @@ function NewPassword(props) {
 
   const tailLayout = {
     wrapperCol: {
-      offset: 6,
       span: 16,
     },
   };
   return (
-    <Card style={{ width: "40%" }} title="Cambia tu contraseña">
+      <Card className="inner-card" style={{ width: "40%" }} title="Cambia tu contraseña">
       <Form
         {...layout}
         name="basic"
