@@ -1,0 +1,5 @@
+{
+    "tableName": "publications",
+    "partitionKeyName": "publicationID",
+    "partitionKeyType": "S"
+}

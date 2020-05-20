@@ -1,26 +1,34 @@
 {
 	"auth": {
-		"petadpotiond7e3299dd7e3299d": {
+		"petadpotionb0ec652c": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": []
 		}
 	},
 	"storage": {
-		"dynamoae3ea481": {
+		"dynamo7875e7c2": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		},
+		"dynamoa9a53556": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		},
+		"dynamofce979fc": {
 			"service": "DynamoDB",
 			"providerPlugin": "awscloudformation"
 		}
 	},
 	"function": {
-		"petadpotion10312bcc": {
+		"petadpotion33b0f2e5": {
 			"build": true,
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda",
 			"dependsOn": [
 				{
 					"category": "storage",
-					"resourceName": "dynamoae3ea481",
+					"resourceName": "dynamo7875e7c2",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -32,14 +40,14 @@
 				}
 			]
 		},
-		"petadpotion41bf71dc": {
+		"petadpotion84c38c04": {
 			"build": true,
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda",
 			"dependsOn": [
 				{
 					"category": "storage",
-					"resourceName": "dynamoae3ea481",
+					"resourceName": "dynamoa9a53556",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -51,14 +59,14 @@
 				}
 			]
 		},
-		"petadpotionf7b892f7": {
+		"petadpotion564acf4b": {
 			"build": true,
 			"providerPlugin": "awscloudformation",
 			"service": "Lambda",
 			"dependsOn": [
 				{
 					"category": "storage",
-					"resourceName": "dynamoae3ea481",
+					"resourceName": "dynamofce979fc",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -72,13 +80,13 @@
 		}
 	},
 	"api": {
-		"api3893de5a": {
+		"api024fb227": {
 			"service": "API Gateway",
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [
 				{
 					"category": "function",
-					"resourceName": "petadpotion10312bcc",
+					"resourceName": "petadpotion33b0f2e5",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -86,7 +94,7 @@
 				},
 				{
 					"category": "function",
-					"resourceName": "petadpotion41bf71dc",
+					"resourceName": "petadpotion84c38c04",
 					"attributes": [
 						"Name",
 						"Arn"
@@ -94,7 +102,7 @@
 				},
 				{
 					"category": "function",
-					"resourceName": "petadpotionf7b892f7",
+					"resourceName": "petadpotion564acf4b",
 					"attributes": [
 						"Name",
 						"Arn"

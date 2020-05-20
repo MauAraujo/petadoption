@@ -12,13 +12,6 @@
             "Type": "String"
         },
         
-        "sortKeyName": {
-            "Type": "String"
-        },
-        "sortKeyType": {
-            "Type": "String"
-        },
-        
         "tableName": {
             "Type": "String"
         }
@@ -40,12 +33,7 @@
                 "AttributeDefinitions": [
                   
                   {
-                      "AttributeName": "userID",
-                      "AttributeType": "S"
-                  }  , 
-                  
-                  {
-                      "AttributeName": "publicationID",
+                      "AttributeName": "petID",
                       "AttributeType": "S"
                   } 
                   
@@ -53,13 +41,8 @@
                 "KeySchema": [
                   
                   {
-                    "AttributeName": "userID",
+                    "AttributeName": "petID",
                     "KeyType": "HASH"
-                  }  , 
-                  
-                  {
-                    "AttributeName": "publicationID",
-                    "KeyType": "RANGE"
                   } 
                   
                 ],
@@ -127,17 +110,6 @@
         "PartitionKeyType": {
             "Value": {
                 "Ref": "partitionKeyType"
-            }
-        },
-        
-        "SortKeyName": {
-            "Value": {
-                "Ref": "sortKeyName"
-            }
-        },
-        "SortKeyType": {
-            "Value": {
-                "Ref": "sortKeyType"
             }
         },
         

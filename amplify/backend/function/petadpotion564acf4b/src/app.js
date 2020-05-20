@@ -17,18 +17,18 @@ AWS.config.update({ region: process.env.TABLE_REGION });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-let tableName = "petadoption";
+let tableName = "associations";
 if(process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
 
 const userIdPresent = false; // TODO: update in case is required to use that definition
-const partitionKeyName = "userID";
+const partitionKeyName = "associationID";
 const partitionKeyType = "S";
-const sortKeyName = "publicationID";
-const sortKeyType = "S";
+const sortKeyName = "";
+const sortKeyType = "";
 const hasSortKey = sortKeyName !== "";
-const path = "/pets";
+const path = "/users";
 const UNAUTH = 'UNAUTH';
 const hashKeyPath = '/:' + partitionKeyName;
 const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
@@ -40,7 +40,7 @@ app.use(awsServerlessExpressMiddleware.eventContext())
 // Enable CORS for all methods
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  res.header("Access-Control-Allow-Headers", "*")
   next()
 });
 
@@ -53,6 +53,7 @@ const convertUrlType = (param, type) => {
       return param;
   }
 }
+
 
 /********************************
  * HTTP Get method for list objects *
@@ -68,7 +69,7 @@ app.get(path, function(req, res) {
     condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
   } else {
     try {
-      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ];
+      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.query[partitionKeyName], partitionKeyType) ];
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});
@@ -188,14 +189,14 @@ app.post(path, function(req, res) {
 * HTTP remove method to delete object *
 ***************************************/
 
-app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
+app.delete(path + '/object', function(req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
+    params[partitionKeyName] = req.query[partitionKeyName];
      try {
-      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
+      params[partitionKeyName] = convertUrlType(req.query[partitionKeyName], partitionKeyType);
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});
@@ -203,7 +204,7 @@ app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
   }
   if (hasSortKey) {
     try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+      params[sortKeyName] = convertUrlType(req.query[sortKeyName], sortKeyType);
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});

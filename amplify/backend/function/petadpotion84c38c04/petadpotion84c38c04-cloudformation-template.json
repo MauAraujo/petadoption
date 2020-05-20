@@ -10,13 +10,13 @@
 		"env": {
 			"Type": "String"
 		},
-		"storagedynamoae3ea481Name": {
+		"storagedynamoa9a53556Name": {
 			"Type": "String",
-			"Default": "storagedynamoae3ea481Name"
+			"Default": "storagedynamoa9a53556Name"
 		},
-		"storagedynamoae3ea481Arn": {
+		"storagedynamoa9a53556Arn": {
 			"Type": "String",
-			"Default": "storagedynamoae3ea481Arn"
+			"Default": "storagedynamoa9a53556Arn"
 		}
 	},
 	"Conditions": {
@@ -41,12 +41,12 @@
 				"FunctionName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"petAdoptionPublications",
+						"petsLambda",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"petAdoptionPublications",
+									"petsLambda",
 									"-",
 									{
 										"Ref": "env"
@@ -75,8 +75,8 @@
 				"Runtime": "nodejs12.x",
 				"Timeout": "25",
 				"Code": {
-					"S3Bucket": "amplify-petadpotion-dev-94613-deployment",
-					"S3Key": "amplify-builds/petadpotion10312bcc-687a6668557069556570-build.zip"
+					"S3Bucket": "amplify-petadpotion-dev-153255-deployment",
+					"S3Key": "amplify-builds/petadpotion84c38c04-5164785a597666757368-build.zip"
 				}
 			}
 		},
@@ -86,12 +86,12 @@
 				"RoleName": {
 					"Fn::If": [
 						"ShouldNotCreateEnvResources",
-						"petadpotionLambdaRolefde0b9ba",
+						"petadpotionLambdaRole6db87fc7",
 						{
 							"Fn::Join": [
 								"",
 								[
-									"petadpotionLambdaRolefde0b9ba",
+									"petadpotionLambdaRole6db87fc7",
 									"-",
 									{
 										"Ref": "env"
@@ -171,14 +171,14 @@
 							],
 							"Resource": [
 								{
-									"Ref": "storagedynamoae3ea481Arn"
+									"Ref": "storagedynamoa9a53556Arn"
 								},
 								{
 									"Fn::Join": [
 										"/",
 										[
 											{
-												"Ref": "storagedynamoae3ea481Arn"
+												"Ref": "storagedynamoa9a53556Arn"
 											},
 											"index/*"
 										]

@@ -1,12 +1,12 @@
 {
-    "identityPoolName": "petadpotiond7e3299d_identitypool_d7e3299d",
-    "allowUnauthenticatedIdentities": true,
-    "resourceNameTruncated": "petadpd7e3299d",
-    "userPoolName": "petadpotiond7e3299d_userpool_d7e3299d",
+    "identityPoolName": "petadpotionb0ec652c_identitypool_b0ec652c",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "petadpb0ec652c",
+    "userPoolName": "petadpotionb0ec652c_userpool_b0ec652c",
     "autoVerifiedAttributes": [
         "email"
     ],
-    "mfaConfiguration": "OPTIONAL",
+    "mfaConfiguration": "OFF",
     "mfaTypes": [
         "SMS Text Message"
     ],
@@ -26,17 +26,11 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "petadpd7e3299d_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "petadpb0ec652c_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "useDefault": "manual",
+    "sharedId": "b0ec652c",
+    "resourceName": "petadpotionb0ec652c",
     "authSelections": "identityPoolAndUserPool",
-    "resourceName": "petadpotiond7e3299dd7e3299d",
-    "thirdPartyAuth": false,
-    "userPoolGroups": false,
-    "adminQueries": false,
-    "triggers": "{}",
-    "hostedUI": false,
-    "userPoolGroupList": [],
     "authRoleArn": {
         "Fn::GetAtt": [
             "AuthRole",
@@ -49,6 +43,9 @@
             "Arn"
         ]
     },
+    "useDefault": "default",
+    "triggers": "{}",
+    "userPoolGroupList": [],
     "parentStack": {
         "Ref": "AWS::StackId"
     },

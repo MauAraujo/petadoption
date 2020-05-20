@@ -1,7 +1,0 @@
-{
-    "tableName": "petadoption",
-    "partitionKeyName": "userID",
-    "partitionKeyType": "S",
-    "sortKeyName": "publicationID",
-    "sortKeyType": "S"
-}

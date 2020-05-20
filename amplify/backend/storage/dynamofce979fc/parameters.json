@@ -1,0 +1,5 @@
+{
+    "tableName": "associations",
+    "partitionKeyName": "associationID",
+    "partitionKeyType": "S"
+}
