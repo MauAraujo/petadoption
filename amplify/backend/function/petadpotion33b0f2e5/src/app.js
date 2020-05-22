@@ -40,7 +40,14 @@ const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
 // declare a new express app
 var app = express()
 app.use(bodyParser.json())
-app.use(express.raw())
+app.use(bodyParser.urlencoded(
+    {
+        extended: true,
+        type: 'multipart/form-data',
+        limit: '20mb',
+        parameterLimit: 1000000
+    }
+))
 app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
@@ -238,24 +245,21 @@ app.delete(path + '/object', function(req, res) {
 
 
 app.post(path + '/image', (req, res) => {
-    console.log(req)
     console.log(req.body);
-    console.log(req.get('Content-Type'))
-    console.log(req.get('filename'))
-    // const params = {
-    //     Bucket: bucket,
-    //     Key: req.fileNam,
-    //     Body: req.params,
-    //     ContentType: "image"
-    // };
-    // try {
-    //     const putResult = await s3.putObject(params).promise();
-    res.json({success: 'post call succeded!', url: req.url});
-    // }
-    // catch (e) {
-    //     res.statusCode = 500;
-    //     res.json({error: err, url: req.url});
-    // }
+    const params = {
+        Bucket: bucket,
+        Key: req.body.filename,
+        ContentType: req.body.type
+    };
+    s3.createSignedPost(params, (err, data) => {
+        if (err) {
+            console.error(err)
+            res.statusCode = 500;
+            res.json({error: err, url: req.url});
+        } else {
+            res.json({url: req.url, data: data})
+        }
+    })
 })
 
 app.listen(3000, function() {

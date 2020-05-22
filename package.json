@@ -16,6 +16,7 @@
     "amplify": "0.0.11",
     "antd": "^4.1.1",
     "aws-amplify": "^3.0.10",
+    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "node-sass": "^4.13.1",

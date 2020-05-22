@@ -10,10 +10,10 @@ import {
   Input,
   message,
 } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import { Container } from "react-bootstrap";
 import { uploadPublication } from "../services/publications.service";
-
+const axios = require('axios')
 /* AWS Config */
 API.configure();
 const apiName = "api024fb227";
@@ -36,13 +36,14 @@ const normFile = (e) => {
     return e;
   }
 
-  return e && e.fileList;
+    return e && e.fileList;
 };
 
 export function NewPost(props) {
   console.log(props.user);
   const [form] = Form.useForm()
   const [animal, setanimal] = useState("");
+  const [endpoint, setEndpoint] = useState('')
 
   //   Submit
   const onFinish = (values) => {
@@ -53,7 +54,6 @@ export function NewPost(props) {
     });
   };
 
-  
   const getBreeds = () => {
     switch (animal) {
       case "dog":
@@ -88,6 +88,22 @@ export function NewPost(props) {
   useEffect(() => {
     message.success("La puclicación se ha guardado exitosamente");
   });
+
+    const uploadProps = {
+        action: endpoint,
+        multiple: false,
+        listType: 'picture',
+        className: 'upload-list-inline',
+        beforeUpload: async (file) => {
+            console.log(file)
+            let url = await API.post(apiName, '/publications/image', {
+                filename: `${file.filename}-${file.uid}`,
+                type: file.type
+            })
+            console.log(url)
+            setEndpoint(url)
+        }
+    };
 
   return (
     <Container>
@@ -228,21 +244,16 @@ export function NewPost(props) {
         <Form.Item label="Dragger">
           <Form.Item
             name="dragger"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
             noStyle
           >
-            <Upload.Dragger name="files" action="/upload.do">
-              <p className="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p className="ant-upload-text">
-                Click or drag file to this area to upload
-              </p>
-              <p className="ant-upload-hint">
-                Support for a single or bulk upload.
-              </p>
-            </Upload.Dragger>
+          <div>
+            <Upload {...uploadProps}>
+              <Button>
+                <UploadOutlined />
+                  Elegir Archivo
+                </Button>
+            </Upload>
+          </div>
           </Form.Item>
         </Form.Item>
         <Form.Item
