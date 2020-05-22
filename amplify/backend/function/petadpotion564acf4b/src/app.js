@@ -1,4 +1,8 @@
-/*
+/* Amplify Params - DO NOT EDIT
+	ENV
+	REGION
+	STORAGE_S33FB5F4EE_BUCKETNAME
+Amplify Params - DO NOT EDIT *//*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
     http://aws.amazon.com/apache2.0/
@@ -16,6 +20,7 @@ var express = require('express')
 AWS.config.update({ region: process.env.TABLE_REGION });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
+const s3 = new AWS.S3();
 
 let tableName = "associations";
 if(process.env.ENV && process.env.ENV !== "NONE") {
@@ -224,6 +229,18 @@ app.delete(path + '/object', function(req, res) {
     }
   });
 });
+
+
+/*****************************************
+ * HTTP Post method for image upload     *
+ *****************************************/
+
+app.post(path + '/image', (req, res) => {
+    console.log(req.body)
+    res.json({success: 'post call succeded!', url: 'requestContext'})
+})
+
+
 app.listen(3000, function() {
     console.log("App started")
 });

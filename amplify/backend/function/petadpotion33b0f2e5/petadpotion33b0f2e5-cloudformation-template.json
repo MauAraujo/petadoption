@@ -17,6 +17,10 @@
 		"storagedynamo7875e7c2Arn": {
 			"Type": "String",
 			"Default": "storagedynamo7875e7c2Arn"
+		},
+		"storages33fb5f4eeBucketName": {
+			"Type": "String",
+			"Default": "storages33fb5f4eeBucketName"
 		}
 	},
 	"Conditions": {
@@ -63,6 +67,9 @@
 						},
 						"REGION": {
 							"Ref": "AWS::Region"
+						},
+						"STORAGE_S33FB5F4EE_BUCKETNAME": {
+							"Ref": "storages33fb5f4eeBucketName"
 						}
 					}
 				},
@@ -76,7 +83,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-petadpotion-dev-153255-deployment",
-					"S3Key": "amplify-builds/petadpotion33b0f2e5-454e79444b4d72595262-build.zip"
+					"S3Key": "amplify-builds/petadpotion33b0f2e5-353236496935706a3965-build.zip"
 				}
 			}
 		},
@@ -181,6 +188,48 @@
 												"Ref": "storagedynamo7875e7c2Arn"
 											},
 											"index/*"
+										]
+									]
+								}
+							]
+						}
+					]
+				}
+			}
+		},
+		"AmplifyResourcesPolicy": {
+			"DependsOn": [
+				"LambdaExecutionRole"
+			],
+			"Type": "AWS::IAM::Policy",
+			"Properties": {
+				"PolicyName": "amplify-lambda-execution-policy",
+				"Roles": [
+					{
+						"Ref": "LambdaExecutionRole"
+					}
+				],
+				"PolicyDocument": {
+					"Version": "2012-10-17",
+					"Statement": [
+						{
+							"Effect": "Allow",
+							"Action": [
+								"s3:PutObject",
+								"s3:GetObject",
+								"s3:ListBucket",
+								"s3:DeleteObject"
+							],
+							"Resource": [
+								{
+									"Fn::Join": [
+										"",
+										[
+											"arn:aws:s3:::",
+											{
+												"Ref": "storages33fb5f4eeBucketName"
+											},
+											"/*"
 										]
 									]
 								}

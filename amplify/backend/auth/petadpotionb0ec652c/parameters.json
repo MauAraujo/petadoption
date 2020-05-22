@@ -1,6 +1,6 @@
 {
     "identityPoolName": "petadpotionb0ec652c_identitypool_b0ec652c",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "petadpb0ec652c",
     "userPoolName": "petadpotionb0ec652c_userpool_b0ec652c",
     "autoVerifiedAttributes": [

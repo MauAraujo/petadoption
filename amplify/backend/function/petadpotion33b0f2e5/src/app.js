@@ -1,4 +1,8 @@
-/*
+/* Amplify Params - DO NOT EDIT
+	ENV
+	REGION
+	STORAGE_S33FB5F4EE_BUCKETNAME
+Amplify Params - DO NOT EDIT *//*
 Copyright 2017 - 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
     http://aws.amazon.com/apache2.0/
@@ -16,12 +20,13 @@ var express = require('express')
 AWS.config.update({ region: process.env.TABLE_REGION });
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
+const s3 = new AWS.S3();
 
 let tableName = "publications";
 if(process.env.ENV && process.env.ENV !== "NONE") {
   tableName = tableName + '-' + process.env.ENV;
 }
-
+const bucket = 	process.env.STORAGE_S33FB5F4EE_BUCKETNAME;
 const userIdPresent = false; // TODO: update in case is required to use that definition
 const partitionKeyName = "publicationID";
 const partitionKeyType = "S";
@@ -35,6 +40,7 @@ const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
 // declare a new express app
 var app = express()
 app.use(bodyParser.json())
+app.use(express.raw())
 app.use(awsServerlessExpressMiddleware.eventContext())
 
 // Enable CORS for all methods
@@ -224,6 +230,34 @@ app.delete(path + '/object', function(req, res) {
     }
   });
 });
+
+
+/*****************************************
+ * HTTP Post method for image upload     *
+ *****************************************/
+
+
+app.post(path + '/image', (req, res) => {
+    console.log(req)
+    console.log(req.body);
+    console.log(req.get('Content-Type'))
+    console.log(req.get('filename'))
+    // const params = {
+    //     Bucket: bucket,
+    //     Key: req.fileNam,
+    //     Body: req.params,
+    //     ContentType: "image"
+    // };
+    // try {
+    //     const putResult = await s3.putObject(params).promise();
+    res.json({success: 'post call succeded!', url: req.url});
+    // }
+    // catch (e) {
+    //     res.statusCode = 500;
+    //     res.json({error: err, url: req.url});
+    // }
+})
+
 app.listen(3000, function() {
     console.log("App started")
 });
