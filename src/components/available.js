@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/available.scss";
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 let dummy =
@@ -11,8 +11,8 @@ export default function Available(props) {
 
   let card = (publication, index) => {
     return (
-      <Col md={2} className="mb-5 publication-card" key={publication.id || index} >
-        <Link to={"/detail/"+(publication.id || index)}>
+      <Col md={2} className="mb-5 publication-card" key={publication.publicationID || index} >
+        <Link to={"/detail/"+(publication.publicationID || index)}>
           <div className='img-container'>
             <img className='contain' src={dummy} alt={dummy} />
           </div>
@@ -24,24 +24,12 @@ export default function Available(props) {
     )
   }
 
-  let petCard = (publication, index) => {
-    return (
-      <div className="col-12 col-md" key={publication.id || index}>
-        <div className="img-container">
-          <img className="contain" src={dummy} alt={dummy} />
-        </div>
-        <h4 className="subtitle-pet py-3">
-          {publication.name || "Sin nombre"}
-        </h4>
-      </div>
-    );
-  };
 
   return (
     <div className="available-container">
       <h2 className="subtitle">Mascotas disponibles</h2>
       <div className="row mt-5 pb-3 available">
-        
+
         {props.publications.map((publication, index) => {
           return card(publication, index);
         })}
