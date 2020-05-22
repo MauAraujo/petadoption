@@ -1,49 +1,46 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from "react";
 //components
-import Hero from '../components/Hero'
-import SearchBar from '../components/search-bar'
-import Available from '../components/available'
-import Steps from '../components/steps'
-import Help from '../components/help'
-import DiscoverCard from '../components/discover-card'
-import { getPublications } from '../services/publications.service'
-
+import Hero from "../components/Hero";
+import SearchBar from "../components/search-bar";
+import Available from "../components/available";
+import Steps from "../components/steps";
+import Help from "../components/help";
+import DiscoverCard from "../components/discover-card";
+import {
+  getPublications,
+} from "../services/publications.service";
 
 export default function Homepage() {
+  const [publications, setpublications] = useState([]);
 
-  const [publications, setpublications] = useState([])
-
-  useEffect( () => {
-    console.log("Mounted")
+  useEffect(() => {
     async function fetchPublications() {
-      setpublications(await getPublications())
+      setpublications(await getPublications());
     }
-    fetchPublications()
-    console.log(publications)
-
-  }, [publications])
-
+    fetchPublications();
+    console.log(publications);
+  }, [publications]);
 
   return (
     <Fragment>
-      <div className='container my-4'>
+      <div className="container my-4">
         <Hero />
         <SearchBar />
-        <Available publications={publications}/>
+        <Available publications={publications} />
       </div>
-      <section className='bg-white'>
-        <div className='container my-3'>
+      <section className="bg-white">
+        <div className="container my-3">
           <Steps />
         </div>
       </section>
-      <div className='container my-4'>
-        <DiscoverCard/>
+      <div className="container my-4">
+        <DiscoverCard />
       </div>
-      <section className='bg-white'>
-        <div className='container my-3'>
+      <section className="bg-white">
+        <div className="container my-3">
           <Help />
         </div>
       </section>
     </Fragment>
-  )
+  );
 }

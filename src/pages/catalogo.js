@@ -24,8 +24,8 @@ export default function Catalogo() {
 
   let card = (publication, index) => {
     return (
-      <Col md={2} className="mb-5 publication-card" key={publication.id || index} >
-        <Link to={"/detail/"+(publication.id || index)}>
+      <Col md={2} className="mb-5 publication-card" key={publication.publicationID || index} >
+        <Link to={"/detail/"+(publication.publicationID || index)}>
           <div className='img-container'>
             <img className='contain' src={dummy} alt={dummy} />
           </div>
