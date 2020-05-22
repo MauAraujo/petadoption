@@ -1,22 +1,38 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import './styles/catalogo.scss'
 //components
 import SubHeader from '../components/subHeader'
 import { Col, Container, Row } from 'react-bootstrap'
+import { getPublications } from '../services/publications.service'
+import { Link } from 'react-router-dom'
 
 let dummy = 'https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg'
 
 export default function Catalogo() {
 
-  let card = () => {
+  const [publications, setpublications] = useState([])
+
+  useEffect( () => {
+    console.log("Mounted")
+    async function fetchPublications() {
+      setpublications(await getPublications())
+    }
+    fetchPublications()
+    console.log(publications)
+
+  }, [publications])
+
+  let card = (publication, index) => {
     return (
-      <Col md={2}  className="mb-5">
-        <div className='img-container'>
-          <img className='contain' src={dummy} alt={dummy} />
-        </div>
-        <div className='title-container'>
-          <h6 className='subtitle-pet text-center'>Nombre</h6>
-        </div>
+      <Col md={2} className="mb-5 publication-card" key={publication.id || index} >
+        <Link to={"/detail/"+(publication.id || index)}>
+          <div className='img-container'>
+            <img className='contain' src={dummy} alt={dummy} />
+          </div>
+          <div className='title-container'>
+            <h6 className='subtitle-pet text-center'>{publication.name}</h6>
+          </div>
+        </Link>
       </Col>
     )
   }
@@ -31,6 +47,10 @@ export default function Catalogo() {
             <Col md={8} >
               <h2 className='subtitle'>Mascotas</h2>
               <Row className="catalogo">
+                {publications.map((publication, index) => {
+                  return card(publication, index)
+                })}
+                {/* {card()}
                 {card()}
                 {card()}
                 {card()}
@@ -45,8 +65,7 @@ export default function Catalogo() {
                 {card()}
                 {card()}
                 {card()}
-                {card()}
-                {card()}
+                {card()} */}
               </Row>
             </Col>
           </Row>
