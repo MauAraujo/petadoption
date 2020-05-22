@@ -21,6 +21,7 @@ export default class AppNavigation extends Component {
             <Route path='/' exact component={Homepage} />
             <Route path='/about' exact component={Homepage} />
             <Route path='/detail' exact component={Detail} />
+            <Route path='/detail/:id' exact component={Detail} />
             <Route path='/catalogo' exact component={Catalogo} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/login" exact component={Login} />

@@ -2,8 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react'
 import './styles/catalogo.scss'
 //components
 import SubHeader from '../components/subHeader'
-import { Col, Container, Row } from 'react-bootstrap'
 import { getPublications } from '../services/publications.service'
+import { Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 let dummy = 'https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg'

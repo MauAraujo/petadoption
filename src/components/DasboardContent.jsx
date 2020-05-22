@@ -41,15 +41,19 @@ const normFile = (e) => {
 
 export function NewPost(props) {
   console.log(props.user);
+  const [form] = Form.useForm()
+  const [animal, setanimal] = useState("");
 
   //   Submit
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-    Posts(values);
-    uploadPublication(values);
+
+    uploadPublication(values).then(()=> {
+      form.resetFields()
+    });
   };
 
-  const [animal, setanimal] = useState("");
+  
   const getBreeds = () => {
     switch (animal) {
       case "dog":
@@ -88,6 +92,7 @@ export function NewPost(props) {
   return (
     <Container>
       <Form
+      form={form}
         name="post"
         {...formItemLayout}
         onFinish={onFinish}
@@ -176,8 +181,21 @@ export function NewPost(props) {
           </Form.Item>
           <span className="ant-form-text"> Años </span>
         </Form.Item>
-
-        <Form.Item  name="description"
+        <Form.Item
+          name="location"
+          label="Lugar"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "¿Donde esta la mascota?",
+            },
+          ]}
+        >
+          <Input placeholder="Lugar donde esta la mascota"></Input>
+        </Form.Item>
+        <Form.Item
+          name="description"
           label="Descripcion"
           hasFeedback
           rules={[
@@ -185,8 +203,26 @@ export function NewPost(props) {
               required: true,
               message: "Ingrese una breve descripción",
             },
-          ]}>
-            <Input.TextArea placeholder="Ingrese una breve descripción" rows="4"></Input.TextArea>
+          ]}
+        >
+          <Input.TextArea
+            placeholder="Ingrese una breve descripción acerca de la mascota"
+            rows="4"
+          ></Input.TextArea>
+        </Form.Item>
+        <Form.Item name="goodWith" label="Bueno con" hasFeedback>
+          <Input.TextArea
+            placeholder="Escriba todos sus atributos, por ejemplo si es perfecto para
+            niños pequeños, o tal vez sea bueno para parejas sin hijos..."
+            rows="4"
+          ></Input.TextArea>
+        </Form.Item>
+        <Form.Item name="preferences" label="Preferencias y tratos especiales" hasFeedback>
+          <Input.TextArea
+            placeholder="Escriba cualquier enfermedad, dsicapacidad o capricho por el cual el animalito
+            requiera de trato especial"
+            rows="4"
+          ></Input.TextArea>
         </Form.Item>
 
         <Form.Item label="Dragger">
