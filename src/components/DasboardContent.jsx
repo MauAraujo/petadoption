@@ -43,7 +43,6 @@ export function NewPost(props) {
   console.log(props.user);
   const [form] = Form.useForm()
   const [animal, setanimal] = useState("");
-  const [endpoint, setEndpoint] = useState('')
 
   //   Submit
   const onFinish = (values) => {
@@ -89,21 +88,74 @@ export function NewPost(props) {
     message.success("La puclicación se ha guardado exitosamente");
   });
 
+
+
     const uploadProps = {
-        action: endpoint,
+        action: 'https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/images',
         multiple: false,
         listType: 'picture',
         className: 'upload-list-inline',
-        beforeUpload: async (file) => {
+        onStart(file) {
+            console.log('onStart', file, file.name);
+        },
+        onSuccess(ret, file) {
+            console.log('onSuccess', ret, file.name);
+        },
+        onError(err) {
+            console.log('onError', err);
+        },
+        onProgress({ percent }, file) {
+            console.log('onProgress', `${percent}%`, file.name);
+        },
+        async customRequest({
+            action,
+            data,
+            file,
+            filename,
+            onError,
+            onProgress,
+            onSuccess,
+            withCredentials,
+        }) {
             console.log(file)
-            let url = await API.post(apiName, '/publications/image', {
-                filename: `${file.filename}-${file.uid}`,
-                type: file.type
-            })
-            console.log(url)
-            setEndpoint(url)
-        }
+            let buff = await file.arrayBuffer()
+            console.log(buff)
+            let init = {
+                body: buff
+            }
+            API
+                .post(apiName, '/publications/image', init)
+                .then(({ data: response }) => {
+                    onSuccess(response, file);
+                })
+                .catch(onError);
+
+            return {
+                abort() {
+                    console.log('upload progress is aborted.');
+                },
+            };
+        },
     };
+
+    // const uploadProps = {
+    //     action: endpoint,
+    //     multiple: false,
+    //     listType: 'picture',
+    //     className: 'upload-list-inline',
+    //     beforeUpload: async (file) => {
+    //         const init = {
+    //             body: {
+    //                 filename: file.name + '-' + file.uid,
+    //                 type: file.type
+    //             }
+    //         }
+    //         console.log(file)
+    //         let signed = await API.post(apiName, '/publications/image', init)
+    //         console.log(signed.data.url)
+    //         setEndpoint(signed.data.url)
+    //     }
+    // };
 
   return (
     <Container>

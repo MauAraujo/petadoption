@@ -13,13 +13,14 @@ import {
 export default function Homepage() {
   const [publications, setpublications] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
+        console.log('Mounted')
     async function fetchPublications() {
       setpublications(await getPublications());
     }
     fetchPublications();
     console.log(publications);
-  }, [publications]);
+  }, []);
 
   return (
     <Fragment>

@@ -5,14 +5,12 @@ API.configure();
 const apiName = "api024fb227";
 
 export async function getPublications() {
-  //    let res = await API.get(apiName, '/publications')
-  //     console.log(res)
-
-  console.log(data.default);
-  // data.forEach(publication => {
-  //     console.log(publication.name)
-  // })
-  return data.default;
+  let data = await API.get(apiName, '/publications')
+  let content = data.filter(obj => obj.content.name).map(obj => {
+      return obj.content
+  })
+    console.log(content)
+  return content;
 }
 
 export async function getPublication(publicationID) {

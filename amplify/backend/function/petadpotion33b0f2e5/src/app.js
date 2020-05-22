@@ -73,35 +73,46 @@ const convertUrlType = (param, type) => {
  ********************************/
 
 app.get(path, function(req, res) {
-  var condition = {}
-  condition[partitionKeyName] = {
-    ComparisonOperator: 'EQ'
-  }
-
-  if (userIdPresent && req.apiGateway) {
-    condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
-  } else {
-    try {
-      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.query[partitionKeyName], partitionKeyType) ];
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
+    let params = {
+        TableName: tableName
     }
-  }
+  // var condition = {}
+  // condition[partitionKeyName] = {
+  //   ComparisonOperator: 'EQ'
+  // }
 
-  let queryParams = {
-    TableName: tableName,
-    KeyConditions: condition
-  }
+  // if (userIdPresent && req.apiGateway) {
+  //   condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
+  // } else {
+  //   try {
+  //     condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.query[partitionKeyName], partitionKeyType) ];
+  //   } catch(err) {
+  //     res.statusCode = 500;
+  //     res.json({error: 'Wrong column type ' + err});
+  //   }
+  // }
 
-  dynamodb.query(queryParams, (err, data) => {
-    if (err) {
-      res.statusCode = 500;
-      res.json({error: 'Could not load items: ' + err});
-    } else {
-      res.json(data.Items);
-    }
-  });
+  // let queryParams = {
+  //   TableName: tableName,
+  //   KeyConditions: condition
+  // }
+
+  // dynamodb.query(queryParams, (err, data) => {
+  //   if (err) {
+  //     res.statusCode = 500;
+  //     res.json({error: 'Could not load items: ' + err});
+  //   } else {
+  //     res.json(data.Items);
+  //   }
+    // });
+    dynamodb.scan(params, (err, data) => {
+        if (err) {
+            res.statusCode = 500;
+            res.json({error: 'Could not load items: ' + err});
+        } else {
+            res.json(data.Items);
+        }
+    })
 });
 
 /*****************************************
@@ -248,10 +259,14 @@ app.post(path + '/image', (req, res) => {
     console.log(req.body);
     const params = {
         Bucket: bucket,
-        Key: req.body.filename,
-        ContentType: req.body.type
+        Fields: {
+            key: req.body.filename
+        },
+        Conditions: [
+            ['starts-with', '$key', '']
+        ]
     };
-    s3.createSignedPost(params, (err, data) => {
+    s3.createPresignedPost(params, (err, data) => {
         if (err) {
             console.error(err)
             res.statusCode = 500;

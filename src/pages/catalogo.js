@@ -13,14 +13,11 @@ export default function Catalogo() {
   const [publications, setpublications] = useState([])
 
   useEffect( () => {
-    console.log("Mounted")
     async function fetchPublications() {
       setpublications(await getPublications())
     }
     fetchPublications()
-    console.log(publications)
-
-  }, [publications])
+  }, [])
 
   let card = (publication, index) => {
     return (
