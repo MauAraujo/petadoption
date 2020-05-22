@@ -5,21 +5,26 @@ API.configure();
 const apiName = "api024fb227";
 
 export async function getPublications() {
-  let data = await API.get(apiName, '/publications')
-  let content = data.filter(obj => obj.content.name).map(obj => {
-      return obj.content
-  })
-    console.log(content)
+  let data = await API.get(apiName, "/publications");
+  let content = data
+    .filter((obj) => obj.content.name)
+    .map((obj) => {
+      return { publicationID: obj.publicationID, ...obj.content };
+    });
+  console.log(content);
   return content;
 }
 
 export async function getPublication(publicationID) {
   try {
-    let res = await API.get(apiName, "/publications/object?publicationID=" + publicationID);
-    console.log(res)
-    return res
-  } catch(error){
-    console.error(error)
+    let res = await API.get(
+      apiName,
+      "/publications/object?publicationID=" + publicationID
+    );
+    console.log(res);
+    return res;
+  } catch (error) {
+    console.error(error);
     return null;
   }
 }

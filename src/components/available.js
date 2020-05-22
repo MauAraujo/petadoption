@@ -10,6 +10,7 @@ export default function Available(props) {
   console.log(props);
 
   let card = (publication, index) => {
+    console.log(publication)
     return (
       <Col md={2} className="mb-5 publication-card" key={publication.publicationID || index} >
         <Link to={"/detail/"+(publication.publicationID || index)}>
@@ -31,6 +32,7 @@ export default function Available(props) {
       <div className="row mt-5 pb-3 available">
 
         {props.publications.map((publication, index) => {
+
           return card(publication, index);
         })}
         {/* {}
