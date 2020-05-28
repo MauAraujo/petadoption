@@ -13,7 +13,7 @@ import {
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import { Container } from "react-bootstrap";
 import { uploadPublication } from "../services/publications.service";
-const axios = require('axios')
+const axios = require("axios");
 /* AWS Config */
 API.configure();
 const apiName = "api024fb227";
@@ -36,20 +36,20 @@ const normFile = (e) => {
     return e;
   }
 
-    return e && e.fileList;
+  return e && e.fileList;
 };
 
 export function NewPost(props) {
   console.log(props.user);
-  const [form] = Form.useForm()
+  const [form] = Form.useForm();
   const [animal, setanimal] = useState("");
 
   //   Submit
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
 
-    uploadPublication(values).then(()=> {
-      form.resetFields()
+    uploadPublication(values).then(() => {
+      form.resetFields();
     });
   };
 
@@ -88,79 +88,77 @@ export function NewPost(props) {
     message.success("La puclicación se ha guardado exitosamente");
   });
 
+  const uploadProps = {
+    action:
+      "https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/images",
+    multiple: false,
+    listType: "picture",
+    className: "upload-list-inline",
+    onStart(file) {
+      console.log("onStart", file, file.name);
+    },
+    onSuccess(ret, file) {
+      console.log("onSuccess", ret, file.name);
+    },
+    onError(err) {
+      console.log("onError", err);
+    },
+    onProgress({ percent }, file) {
+      console.log("onProgress", `${percent}%`, file.name);
+    },
+    async customRequest({
+      action,
+      data,
+      file,
+      filename,
+      onError,
+      onProgress,
+      onSuccess,
+      withCredentials,
+    }) {
+      console.log(file);
+      let buff = await file.arrayBuffer();
+      console.log(buff);
+      let init = {
+        body: buff,
+      };
+      API.post(apiName, "/publications/image", init)
+        .then(({ data: response }) => {
+          onSuccess(response, file);
+        })
+        .catch(onError);
 
+      return {
+        abort() {
+          console.log("upload progress is aborted.");
+        },
+      };
+    },
+  };
 
-    const uploadProps = {
-        action: 'https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/images',
-        multiple: false,
-        listType: 'picture',
-        className: 'upload-list-inline',
-        onStart(file) {
-            console.log('onStart', file, file.name);
-        },
-        onSuccess(ret, file) {
-            console.log('onSuccess', ret, file.name);
-        },
-        onError(err) {
-            console.log('onError', err);
-        },
-        onProgress({ percent }, file) {
-            console.log('onProgress', `${percent}%`, file.name);
-        },
-        async customRequest({
-            action,
-            data,
-            file,
-            filename,
-            onError,
-            onProgress,
-            onSuccess,
-            withCredentials,
-        }) {
-            console.log(file)
-            let buff = await file.arrayBuffer()
-            console.log(buff)
-            let init = {
-                body: buff
-            }
-            API
-                .post(apiName, '/publications/image', init)
-                .then(({ data: response }) => {
-                    onSuccess(response, file);
-                })
-                .catch(onError);
-
-            return {
-                abort() {
-                    console.log('upload progress is aborted.');
-                },
-            };
-        },
-    };
-
-    // const uploadProps = {
-    //     action: endpoint,
-    //     multiple: false,
-    //     listType: 'picture',
-    //     className: 'upload-list-inline',
-    //     beforeUpload: async (file) => {
-    //         const init = {
-    //             body: {
-    //                 filename: file.name + '-' + file.uid,
-    //                 type: file.type
-    //             }
-    //         }
-    //         console.log(file)
-    //         let signed = await API.post(apiName, '/publications/image', init)
-    //         console.log(signed.data.url)
-    //         setEndpoint(signed.data.url)
-    //     }
-    // };
+  // const uploadProps = {
+  //     action: endpoint,
+  //     multiple: false,
+  //     listType: 'picture',
+  //     className: 'upload-list-inline',
+  //     beforeUpload: async (file) => {
+  //         const init = {
+  //             body: {
+  //                 filename: file.name + '-' + file.uid,
+  //                 type: file.type
+  //             }
+  //         }
+  //         console.log(file)
+  //         let signed = await API.post(apiName, '/publications/image', init)
+  //         console.log(signed.data.url)
+  //         setEndpoint(signed.data.url)
+  //     }
+  // };
 
   return (
     <Container>
       <Form
-      form={form}
+        form={form}
         name="post"
         {...formItemLayout}
         onFinish={onFinish}
@@ -285,7 +283,11 @@ export function NewPost(props) {
             rows="4"
           ></Input.TextArea>
         </Form.Item>
-        <Form.Item name="preferences" label="Preferencias y tratos especiales" hasFeedback>
+        <Form.Item
+          name="preferences"
+          label="Preferencias y tratos especiales"
+          hasFeedback
+        >
           <Input.TextArea
             placeholder="Escriba cualquier enfermedad, dsicapacidad o capricho por el cual el animalito
             requiera de trato especial"
@@ -294,18 +296,15 @@ export function NewPost(props) {
         </Form.Item>
 
         <Form.Item label="Dragger">
-          <Form.Item
-            name="dragger"
-            noStyle
-          >
-          <div>
-            <Upload {...uploadProps}>
-              <Button>
-                <UploadOutlined />
+          <Form.Item name="dragger" noStyle>
+            <div>
+              <Upload {...uploadProps}>
+                <Button>
+                  <UploadOutlined />
                   Elegir Archivo
                 </Button>
-            </Upload>
-          </div>
+              </Upload>
+            </div>
           </Form.Item>
         </Form.Item>
         <Form.Item
