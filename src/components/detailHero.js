@@ -1,15 +1,9 @@
 import React from "react";
 import "./styles/detail-hero.scss";
-import { Spin, Space, Carousel } from "antd";
+import { Spin, Space } from "antd";
+import Carousel from 'react-bootstrap/Carousel';
 
-let dummy =
-  "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
 export default function DetailHero(props) {
-
-    const onChange = () => {
-        console.log('Change')
-    }
-
   return (
     <div className="hero-container">
       {!props?.pet?.name ? (
@@ -19,9 +13,17 @@ export default function DetailHero(props) {
       ) : (
         <div className="row">
             <div className="col-12 col-md-5">
-                <Carousel afterChange={onChange}>
+                <Carousel>
                     {
-                        props.pet?.images.map(elem => <div key={props.pet?.images.indexOf(elem)}><img src={elem}></img></div>)
+                        props?.pet?.images?.map(elem =>
+                            <Carousel.Item key={props?.pet?.images.indexOf(elem)}>
+                                <img
+                                    className="d-block w-100"
+                                    src={elem}
+                                    alt={props?.pet?.images.indexOf(elem)}
+                                />
+                            </Carousel.Item>
+                        )
                     }
                 </Carousel>
             </div>

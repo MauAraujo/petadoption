@@ -25,7 +25,6 @@ export default function Detail() {
 
   return (
     <Fragment>
-      
       <div className="container my-4">
         <DetailHero pet={publication?.content || {}}/>
       </div>
