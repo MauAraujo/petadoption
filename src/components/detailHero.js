@@ -1,10 +1,15 @@
 import React from "react";
 import "./styles/detail-hero.scss";
-import { Spin, Space } from "antd";
+import { Spin, Space, Carousel } from "antd";
 
 let dummy =
   "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
 export default function DetailHero(props) {
+
+    const onChange = () => {
+        console.log('Change')
+    }
+
   return (
     <div className="hero-container">
       {!props?.pet?.name ? (
@@ -13,9 +18,13 @@ export default function DetailHero(props) {
         </Space>
       ) : (
         <div className="row">
-          <div className="col-12 col-md-5">
-            <img className="contain" src={dummy} alt={dummy} />
-          </div>
+            <div className="col-12 col-md-5">
+                <Carousel afterChange={onChange}>
+                    {
+                        props.pet?.images.map(elem => <div key={props.pet?.images.indexOf(elem)}><img src={elem}></img></div>)
+                    }
+                </Carousel>
+            </div>
           <div className="col-12 col-md-7 px-3 py-3 py-md-5 px-md-5">
             <div className="header">
               <h1 className="title">{props.pet?.name}</h1>

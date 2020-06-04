@@ -257,24 +257,9 @@ app.delete(path + '/object', function(req, res) {
 
 app.post(path + '/image', (req, res) => {
     console.log(req.body);
-    const params = {
-        Bucket: bucket,
-        Fields: {
-            key: req.body.filename
-        },
-        Conditions: [
-            ['starts-with', '$key', '']
-        ]
-    };
-    s3.createPresignedPost(params, (err, data) => {
-        if (err) {
-            console.error(err)
-            res.statusCode = 500;
-            res.json({error: err, url: req.url});
-        } else {
-            res.json({url: req.url, data: data})
-        }
-    })
+    const location = 'us-east-2'
+    const bucketurl = `https://${bucket}.s3.${location}.amazonaws.com`
+    res.json({url: req.url, data: bucketurl})
 })
 
 app.listen(3000, function() {
@@ -285,3 +270,4 @@ app.listen(3000, function() {
 // to port it to AWS Lambda we will create a wrapper around that will load the app from
 // this file
 module.exports = app
+

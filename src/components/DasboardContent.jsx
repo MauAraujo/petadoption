@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import API from "@aws-amplify/api";
+import Storage from "@aws-amplify/storage";
 import "./styles/Dashboard.scss";
 import {
   Form,
@@ -13,7 +14,7 @@ import {
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
 import { Container } from "react-bootstrap";
 import { uploadPublication } from "../services/publications.service";
-const axios = require('axios')
+
 /* AWS Config */
 API.configure();
 const apiName = "api024fb227";
@@ -43,14 +44,17 @@ export function NewPost(props) {
   console.log(props.user);
   const [form] = Form.useForm()
   const [animal, setanimal] = useState("");
+  const [imgKeys, setImgKeys] = useState([])
 
   //   Submit
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-
-    uploadPublication(values).then(()=> {
-      form.resetFields()
-    });
+      console.log("Received values of form: ", values);
+      console.log(imgKeys)
+      delete values.dragger
+      values['images'] = imgKeys
+      uploadPublication(values).then(()=> {
+          form.resetFields()
+      });
   };
 
   const getBreeds = () => {
@@ -91,71 +95,32 @@ export function NewPost(props) {
 
 
     const uploadProps = {
-        action: 'https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/images',
+        action: 'https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/image',
         multiple: false,
         listType: 'picture',
         className: 'upload-list-inline',
-        onStart(file) {
-            console.log('onStart', file, file.name);
-        },
-        onSuccess(ret, file) {
-            console.log('onSuccess', ret, file.name);
-        },
-        onError(err) {
-            console.log('onError', err);
-        },
-        onProgress({ percent }, file) {
-            console.log('onProgress', `${percent}%`, file.name);
-        },
-        async customRequest({
-            action,
-            data,
-            file,
-            filename,
-            onError,
-            onProgress,
-            onSuccess,
-            withCredentials,
-        }) {
-            console.log(file)
-            let buff = await file.arrayBuffer()
-            console.log(buff)
-            let init = {
-                body: buff
-            }
-            API
-                .post(apiName, '/publications/image', init)
-                .then(({ data: response }) => {
-                    onSuccess(response, file);
+        beforeUpload: (file) => {
+            const path = `publications/${props.user.current.user.id}/${file.name}`
+            console.log(path)
+            Storage.put(path, file, {
+                contentType: 'image/png'
+            })
+                .then(result => {
+                    let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(result.key)}`
+                    return setImgKeys(imgKeys.concat([url]))
                 })
-                .catch(onError);
-
-            return {
-                abort() {
-                    console.log('upload progress is aborted.');
-                },
-            };
+                .catch(err => console.log(err));
+        },
+        transformFile: (file) => {
+            return ''
+        },
+        onRemove: (file) => {
+            const path = `publications/${props.user.current.user.id}/${file.name}`
+            Storage.remove(path)
+                .then(result => console.log(result))
+                .catch(err => console.log(err))
         },
     };
-
-    // const uploadProps = {
-    //     action: endpoint,
-    //     multiple: false,
-    //     listType: 'picture',
-    //     className: 'upload-list-inline',
-    //     beforeUpload: async (file) => {
-    //         const init = {
-    //             body: {
-    //                 filename: file.name + '-' + file.uid,
-    //                 type: file.type
-    //             }
-    //         }
-    //         console.log(file)
-    //         let signed = await API.post(apiName, '/publications/image', init)
-    //         console.log(signed.data.url)
-    //         setEndpoint(signed.data.url)
-    //     }
-    // };
 
   return (
     <Container>
