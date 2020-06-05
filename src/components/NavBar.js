@@ -3,7 +3,8 @@ import { NavLink } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import './styles/NavBar.scss'
-import { Navbar, Container, Nav } from 'react-bootstrap'
+import { Navbar, Container, Nav , Image} from 'react-bootstrap'
+import logo from "../assets/images/cat.svg"
 
 
 export default function NavBar() {
@@ -13,8 +14,9 @@ export default function NavBar() {
         <Navbar.Brand >
 
           <NavLink className='navbar-brand d-none d-sm-block' to='/'>
-            Logotipo
-            {/* <Image className="logo"  src={logo}></Image> */}
+            <Image className="logo"  src={logo}></Image>
+            <span className="brand-name">Pet Adoption</span>
+
             {/* 
               <Row>
                 <Col sm={6} lg={2}>

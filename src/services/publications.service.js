@@ -34,7 +34,7 @@ export function uploadPublication(form) {
     body: {
       //   publicationID: "786tyghb8t",
       publicationID: `${new Date().getTime()}`,
-      content: form,
+      content: {publicationDate: new Date(), ...form},
     },
   });
 }

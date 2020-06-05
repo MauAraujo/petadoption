@@ -27,7 +27,7 @@ const { Content, Sider } = Layout;
 export default function Dashboard() {
     // const media = window.matchMedia(" (max-width: 600px)")
     const session = useRef(async () => await Auth.currentSession());
-    const [content, setContent] = useState(<NewPost user={session}/>);
+    const [content, setContent] = useState(<Posts user={session}/>);
 
   // media.addListener(() => {
   //     if (media.matches !== menuClosed) {
@@ -85,7 +85,7 @@ export default function Dashboard() {
             onClick={handleContent}
             className="menu"
             mode="inline"
-            defaultSelectedKeys={["new"]}
+            defaultSelectedKeys={["posts"]}
           >
             <Menu.Item className="menu-item" key="new">
               <PlusCircleOutlined />
@@ -107,36 +107,6 @@ export default function Dashboard() {
           {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
         </Layout>
       </Layout>
-
-      {/* <Button className="toggleMenu" style={{ width: menuClosed ? "5rem" : "16rem" }} type="primary" onClick={() => {
-                setMenuClosed(!menuClosed)
-            }}>
-                {menuClosed ? <RightOutlined /> : <LeftOutlined />}
-
-
-            </Button>
-            <Menu
-                onClick={handleClick}
-                style={{ width: menuClosed ? "5rem" : "16rem" }}
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                mode={menuClosed ? "horizontal" : "inline"}
-                inlineCollapsed={menuClosed}
-
-            >
-                <Menu.Item key="1">
-                    <PieChartOutlined />
-                    <span>Agregar publicación</span>
-                </Menu.Item>
-                <Menu.Item key="2">
-                    <PieChartOutlined />
-                    <span>Publicaciones</span>
-                </Menu.Item>
-                <Menu.Item key="3">
-                    <PieChartOutlined />
-                    <span>Inbox</span>
-                </Menu.Item>
-            </Menu> */}
     </Fragment>
   );
 }

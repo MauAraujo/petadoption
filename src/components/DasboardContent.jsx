@@ -9,11 +9,16 @@ import {
   Upload,
   Input,
   message,
+  Card,
 } from "antd";
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
-import { Container } from "react-bootstrap";
+import { Container, Col, Row, Image } from "react-bootstrap";
 import { uploadPublication } from "../services/publications.service";
+import filters from "../data/filters.json";
+import { getPublications } from "../services/publications.service";
+import Meta from "antd/lib/card/Meta";
 const axios = require("axios");
+
 /* AWS Config */
 API.configure();
 const apiName = "api024fb227";
@@ -40,53 +45,21 @@ const normFile = (e) => {
 };
 
 export function NewPost(props) {
-  console.log(props.user);
   const [form] = Form.useForm();
-  const [animal, setanimal] = useState("");
 
   //   Submit
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
 
-    uploadPublication(values).then(() => {
-      form.resetFields();
-    });
+    uploadPublication(values)
+      .then(() => {
+        message.success("La puclicación se ha guardado exitosamente");
+        form.resetFields();
+      })
+      .catch((err) => {
+        message.error("Ha ocurrido un error");
+      });
   };
-
-  const getBreeds = () => {
-    switch (animal) {
-      case "dog":
-        return [
-          <Option value="chihuahua" key="chihuahua">
-            Chihuahua
-          </Option>,
-          <Option value="san bernardo" key="san bernardo">
-            San bernardo
-          </Option>,
-          <Option value="golden" key="golden">
-            Golden
-          </Option>,
-        ];
-      case "cat":
-        return [
-          <Option value="blue russian" key="blue russian">
-            Blue
-          </Option>,
-          <Option value="gardfield" key="gardfield">
-            Gardfield
-          </Option>,
-          <Option value="fluffy" key="fluffy">
-            Fluffy
-          </Option>,
-        ];
-      default:
-        return [];
-    }
-  };
-
-  useEffect(() => {
-    message.success("La puclicación se ha guardado exitosamente");
-  });
 
   const uploadProps = {
     action:
@@ -183,64 +156,11 @@ export function NewPost(props) {
         >
           <Input placeholder="Nombre"></Input>
         </Form.Item>
-        <Form.Item
-          name="animal"
-          label="Animal"
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Ingresa que animal es",
-            },
-          ]}
-        >
-          <Select
-            placeholder="Selecciona que animal es"
-            allowClear
-            onSelect={(e) => setanimal(e)}
-          >
-            <Option value="dog"> Perro </Option>
-            <Option value="cat"> Gato </Option>
-            <Option value="other"> Otro </Option>
-          </Select>
-        </Form.Item>
-        {animal ? (
-          <Form.Item
-            name="breed"
-            label="Raza"
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: "Ingresa su raza",
-              },
-            ]}
-          >
-            <Select placeholder="Selecciona su raza"> {getBreeds()} </Select>
-          </Form.Item>
-        ) : (
-          <div> </div>
-        )}
-        <Form.Item
-          name="categories"
-          label="Categorias"
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Elige las categorias",
-              type: "array",
-            },
-          ]}
-        >
-          <Select
-            mode="multiple"
-            placeholder="Elige las categorias de la mascota"
-          >
-            <Option value="cute"> Cute </Option>
-            <Option value="happy"> Happy </Option>
-          </Select>
-        </Form.Item>
+
+        {filters.map((filter) => {
+          return buildFilters(filter);
+        })}
+
         <Form.Item label="Edad" hasFeedback>
           <Form.Item name="age" noStyle>
             <InputNumber min={0} max={20} />
@@ -276,7 +196,7 @@ export function NewPost(props) {
             rows="4"
           ></Input.TextArea>
         </Form.Item>
-        <Form.Item name="goodWith" label="Bueno con" hasFeedback>
+        <Form.Item name="goodWith" label="Cualidades" hasFeedback>
           <Input.TextArea
             placeholder="Escriba todos sus atributos, por ejemplo si es perfecto para
             niños pequeños, o tal vez sea bueno para parejas sin hijos..."
@@ -295,8 +215,8 @@ export function NewPost(props) {
           ></Input.TextArea>
         </Form.Item>
 
-        <Form.Item label="Dragger">
-          <Form.Item name="dragger" noStyle>
+        <Form.Item label="Imagen">
+          <Form.Item name="image" noStyle>
             <div>
               <Upload {...uploadProps}>
                 <Button>
@@ -322,17 +242,95 @@ export function NewPost(props) {
   );
 }
 export function Posts(form) {
-  API.post(apiName, "/publications", {
-    body: {
-      //   publicationID: "786tyghb8t",
-      publicationID: `${new Date().getTime()}`,
-      content: form,
-    },
-  });
-  return <Fragment> Post </Fragment>;
+  const [publications, setpublications] = useState([]);
+  useEffect(() => {
+    async function fetchPublications() {
+      setpublications(await getPublications());
+    }
+    fetchPublications();
+  }, []);
+  return (
+    <Fragment>
+      <Row>
+        {publications.map((publication) => {
+          return (
+            <Col key={publication.name}>
+              <Card
+                style={{  margin: "1rem" }}
+                cover={
+                  <img
+                    alt="example"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  />
+                }
+                actions={
+                  [
+                    // <SettingOutlined key="setting" />,
+                    // <EditOutlined key="edit" />,
+                    // <EllipsisOutlined key="ellipsis" />,
+                  ]
+                }
+              >
+                <Meta
+                  title={publication.name}
+                  description={`${publication.animal.toUpperCase()} | ${
+                    publication.publicationDate || new Date().toLocaleDateString()
+                  }`}
+                />
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+    </Fragment>
+  );
 }
 
 export function Inbox(props) {
   console.log(props.user);
   return <Fragment>Inbox </Fragment>;
+}
+
+function buildFilters(filter) {
+  return filter.mode == "options" ? (
+    <Form.Item
+      key={filter.name}
+      name={filter.name}
+      label={filter.label}
+      hasFeedback
+      rules={[
+        {
+          required: true,
+          message: filter.message,
+          type: filter.ruleType,
+        },
+      ]}
+    >
+      <Select mode={filter.mode} placeholder={filter.label}>
+        {filter.options.map((option) => {
+          return (
+            <Option value={option} key={option}>
+              {option}
+            </Option>
+          );
+        })}
+      </Select>
+    </Form.Item>
+  ) : (
+    <Form.Item
+      key={filter.name}
+      name={filter.name}
+      label={filter.label}
+      hasFeedback
+      rules={[
+        {
+          required: true,
+          message: filter.message,
+          type: filter.ruleType,
+        },
+      ]}
+    >
+      <Select mode={filter.mode} placeholder={filter.label}></Select>
+    </Form.Item>
+  );
 }
