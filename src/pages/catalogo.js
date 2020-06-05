@@ -2,7 +2,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./styles/catalogo.scss";
 //components
 import SubHeader from "../components/subHeader";
-import { getPublications } from "../services/publications.service";
+import {
+  getPublications,
+  getPublicationsFilter,
+} from "../services/publications.service";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
@@ -15,10 +18,17 @@ let dummy =
 
 export default function Catalogo() {
   const [publications, setpublications] = useState([]);
+  const [selectedFilters, setSelectedFilters] = useState({});
 
   useEffect(() => {
     async function fetchPublications() {
       setpublications(await getPublications());
+
+      await getPublicationsFilter({
+        name: "benito",
+        animal: "Gato",
+        colors: ["gris", "white"],
+      });
     }
     fetchPublications();
   }, []);
@@ -46,12 +56,24 @@ export default function Catalogo() {
     );
   };
 
-  function onChange(value) {
-    console.log(`selected ${value}`);
+  function onChange(value, key) {
+    if (value) {
+      selectedFilters[key] = value;
+    }
+    setSelectedFilters(selectedFilters);
+    console.log(value, key);
   }
 
-  function onBlur() {
-    console.log("blur");
+  async function onDeselect(value, key) {
+    delete selectedFilters[key];
+    console.log(selectedFilters);
+    setSelectedFilters(selectedFilters);
+    setpublications(await getPublicationsFilter(selectedFilters));
+  }
+
+  async function onBlur() {
+    console.log("Apply filters: ", selectedFilters)
+    setpublications(await getPublicationsFilter(selectedFilters));
   }
 
   function onFocus() {
@@ -72,8 +94,11 @@ export default function Catalogo() {
               {filters.map((filter) => {
                 return filter.options ? (
                   <Select
+                    key={filter.name}
                     showSearch
                     mode="options"
+                    onBlur={onBlur}
+                    onChange={(value) => onChange(value, filter.name)}
                     style={{ width: "100%", margin: "0.5rem" }}
                     placeholder={filter.label}
                     optionFilterProp="children"
@@ -84,25 +109,30 @@ export default function Catalogo() {
                     }
                   >
                     {filter.options.map((option) => {
-                      return <Option value={option} key={option}>
-                        {option}
-                      </Option>;
+                      return (
+                        <Option value={option} key={option}>
+                          {option}
+                        </Option>
+                      );
                     })}
                   </Select>
                 ) : (
                   <Select
+                    key={filter.name}
                     showSearch
                     mode="tags"
+                    onBlur={onBlur}
+                    onChange={(value) => onChange(value, filter.name)}
+                    onDeselect={(value) => onDeselect(value, filter.name)}
                     style={{ width: "100%", margin: "0.5rem" }}
                     placeholder={filter.label}
                     optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                  </Select>
+                    // filterOption={(input, option) =>
+                    //   option.children
+                    //     .toLowerCase()
+                    //     .indexOf(input.toLowerCase()) >= 0
+                    // }
+                  ></Select>
                 );
               })}
             </Col>
