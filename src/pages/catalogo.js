@@ -121,6 +121,7 @@ export default function Catalogo() {
                     key={filter.name}
                     showSearch
                     mode="tags"
+                    tokenSeparators={[',']}
                     onBlur={onBlur}
                     onChange={(value) => onChange(value, filter.name)}
                     onDeselect={(value) => onDeselect(value, filter.name)}

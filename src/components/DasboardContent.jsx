@@ -302,7 +302,7 @@ function buildFilters(filter) {
         },
       ]}
     >
-      <Select mode={filter.mode} placeholder={filter.label}></Select>
+      <Select mode={filter.mode} tokenSeparators={[',']} placeholder={filter.label}></Select>
     </Form.Item>
   );
 }
