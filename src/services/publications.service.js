@@ -4,12 +4,13 @@ import API from "@aws-amplify/api";
 API.configure();
 const apiName = "api024fb227";
 
-export async function getPublications() {
-  let data = await API.get(apiName, "/publications");
+export async function getPublications(filter) {
+  const path = filter ? `/publications${filter}` : '/publications'
+  let data = await API.get(apiName, path);
   let content = data
-    .filter((obj) => obj.content.name)
+    .filter((obj) => obj.name)
     .map((obj) => {
-      return { publicationID: obj.publicationID, ...obj.content };
+      return obj;
     });
   console.log(content);
   return content;

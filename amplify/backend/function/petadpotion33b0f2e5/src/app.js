@@ -76,6 +76,27 @@ app.get(path, function(req, res) {
     let params = {
         TableName: tableName
     }
+
+    // if (req.query) {
+    //     console.log(req.query)
+    //     let i = 1
+    //     for (let [key, value] of Object.entries(req.query)) {
+    //         let attribute = `:${key}`
+    //         params["ExpressionAttributeValues"] = {
+    //             [attribute] : {
+    //                 "S": value
+    //             }
+    //         }
+
+    //         i === Object.keys(req.query).length ?
+    //             params["FilterExpression"] = `${key}=:${key}`
+    //             :
+    //             params["FilterExpression"] = `${key}=:${key} AND`
+    //         ++i
+    //     }
+    // }
+
+    console.log(params)
   // var condition = {}
   // condition[partitionKeyName] = {
   //   ComparisonOperator: 'EQ'
@@ -105,6 +126,7 @@ app.get(path, function(req, res) {
   //     res.json(data.Items);
   //   }
     // });
+
     dynamodb.scan(params, (err, data) => {
         if (err) {
             res.statusCode = 500;
@@ -191,22 +213,27 @@ app.put(path, function(req, res) {
 
 app.post(path, function(req, res) {
 
-  if (userIdPresent) {
-    req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  }
-
-  let putItemParams = {
-    TableName: tableName,
-    Item: req.body
-  }
-  dynamodb.put(putItemParams, (err, data) => {
-    if(err) {
-      res.statusCode = 500;
-      res.json({error: err, url: req.url, body: req.body});
-    } else{
-      res.json({success: 'post call succeed!', url: req.url, data: data})
+    if (userIdPresent) {
+        req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
     }
-  });
+
+    let item = req.body.content
+    item['publicationID'] = req.body.publicationID
+    
+    let putItemParams = {
+        TableName: tableName,
+        Item: item
+    }
+    console.log(putItemParams)
+
+    dynamodb.put(putItemParams, (err, data) => {
+        if(err) {
+            res.statusCode = 500;
+            res.json({error: err, url: req.url, body: req.body});
+        } else{
+            res.json({success: 'post call succeed!', url: req.url, data: data})
+        }
+    });
 });
 
 /**************************************

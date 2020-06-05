@@ -12,11 +12,12 @@ export default function Detail() {
   const path = useLocation().pathname.split("/")
 
   const publicationID = path[path.length- 1]
-  // console.log(publicationID)
+  console.log(publicationID)
   useEffect( () => {
     async function fetchPublication() {
-
-      setpublication(await getPublication(publicationID || "1590121969131"))
+        const item = await getPublication(publicationID)
+        console.log(item)
+        setpublication(item)
     }
     fetchPublication()
     console.log(publication)
@@ -26,7 +27,7 @@ export default function Detail() {
   return (
     <Fragment>
       <div className="container my-4">
-        <DetailHero pet={publication?.content || {}}/>
+        <DetailHero pet={publication || {}}/>
       </div>
       <div className="container my-3">
         <div className="row">

@@ -15,6 +15,7 @@ let dummy =
 
 export default function Catalogo() {
   const [publications, setpublications] = useState([]);
+  const [filter, setfilter] = useState('?');
 
   useEffect(() => {
     async function fetchPublications() {
@@ -46,9 +47,19 @@ export default function Catalogo() {
     );
   };
 
-  function onChange(value) {
-    console.log(`selected ${value}`);
-  }
+    const onChange = (value, {label}) => {
+        const attributes = {
+            "Animal": "animal",
+            "Tamaño": "petSize",
+            "Genero": "gender"
+        }
+        const queryString = filter === '?' ?
+              `${filter}${attributes[label]}=${value}`
+              :
+              `${filter}&${attributes[label]}=${value}`
+        setfilter(queryString)
+        getPublications(queryString)
+    }
 
   function onBlur() {
     console.log("blur");
@@ -69,38 +80,42 @@ export default function Catalogo() {
         <Container fluid>
           <Row className="py-4">
             <Col md={2} className="side">
-              {filters.map((filter) => {
-                return filter.options ? (
-                  <Select
-                    showSearch
-                    mode="options"
-                    style={{ width: "100%", margin: "0.5rem" }}
-                    placeholder={filter.label}
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    {filter.options.map((option) => {
-                      return <Option value={option} key={option}>
-                        {option}
-                      </Option>;
-                    })}
+                {filters.map((filter) => {
+                  return filter.options ? (
+                      <Select
+                          key={filters.indexOf(filter)}
+                          showSearch
+                          onChange={onChange}
+                          mode="options"
+                          style={{ width: "100%", margin: "0.5rem" }}
+                          placeholder={filter.label}
+                          optionFilterProp="children"
+                          filterOption={(input, option) =>
+                              option.children
+                                  .toLowerCase()
+                                  .indexOf(input.toLowerCase()) >= 0
+                          }
+                      >
+                        {
+                            filter.options.map((option) => {
+                                return <Option label={filter.label} value={option} key={option}>
+                                           {option}
+                                       </Option>;
+                          })}
                   </Select>
                 ) : (
-                  <Select
-                    showSearch
-                    mode="tags"
-                    style={{ width: "100%", margin: "0.5rem" }}
-                    placeholder={filter.label}
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
+                    <Select
+                        key={filters.indexOf(filter)}
+                        showSearch
+                        mode="tags"
+                        style={{ width: "100%", margin: "0.5rem" }}
+                        placeholder={filter.label}
+                        optionFilterProp="children"
+                        // filterOption={(input, option) =>
+                        //     option.children
+                        //         .toLowerCase()
+                        //         .indexOf(input.toLowerCase()) >= 0
+                        //}
                   >
                   </Select>
                 );

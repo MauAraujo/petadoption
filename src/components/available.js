@@ -15,7 +15,7 @@ export default function Available(props) {
       <Col md={2} className="mb-5 publication-card" key={publication.publicationID || index} >
         <Link to={"/detail/"+(publication.publicationID || index)}>
           <div className='img-container'>
-            <img className='contain' src={dummy} alt={dummy} />
+              <img className='contain' src={publication.images ? publication.images[0] : dummy} alt={dummy} />
           </div>
           <div className='title-container'>
             <h6 className='subtitle-pet text-center'>{publication.name}</h6>

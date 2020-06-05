@@ -58,7 +58,7 @@ export function NewPost(props) {
     values["images"] = imgKeys;
     uploadPublication(values)
       .then(() => {
-        message.success("La puclicación se ha guardado exitosamente");
+        message.success("La publicación se ha guardado exitosamente");
         form.resetFields();
       })
       .catch((err) => {

@@ -38,14 +38,28 @@ export default function DetailHero(props) {
             <p className="txt">
               {props.pet?.description || "Sin descripción"}
             </p>
-            <h4 className="section">Bueno con</h4>
-            <p className="txt">
-              {props.pet?.goodWith || ""}
-            </p>
-            <h4 className="section">Prefiere</h4>
-            <p className="txt">
-            {props.pet?.preferences || ""}
-            </p>
+              {
+                  props.pet.goodWith ?
+                      <div>
+                          <h4 className="section">Cualidades</h4>
+                          <p className="txt">
+                              {props.pet?.goodWith || ""}
+                          </p>
+                      </div>
+                      :
+                  <div></div>
+              }
+              {
+                  props.pet.preferences ?
+                      <div>
+                          <h4 className="section">Preferencias y Tratos Especiales</h4>
+                          <p className="txt">
+                              {props.pet?.preferences || ""}
+                          </p>
+                      </div>
+                      :
+                      <div></div>
+              }
           </div>
         </div>
       )}
