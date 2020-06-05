@@ -5,7 +5,8 @@ import SubHeader from "../components/subHeader";
 import { getPublications } from "../services/publications.service";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Select } from 'antd';
+import { Select } from "antd";
+import filters from "../data/filters.json";
 
 const { Option } = Select;
 
@@ -31,7 +32,11 @@ export default function Catalogo() {
       >
         <Link to={"/detail/" + (publication.publicationID || index)}>
           <div className="img-container">
-            <img className="contain" src={dummy} alt={dummy} />
+            <img
+              className="contain"
+              src={publication.images ? publication.images[0] : dummy}
+              alt={dummy}
+            />
           </div>
           <div className="title-container">
             <h6 className="subtitle-pet text-center">{publication.name}</h6>
@@ -41,51 +46,65 @@ export default function Catalogo() {
     );
   };
 
-
   function onChange(value) {
     console.log(`selected ${value}`);
   }
-  
+
   function onBlur() {
-    console.log('blur');
+    console.log("blur");
   }
-  
+
   function onFocus() {
-    console.log('focus');
+    console.log("focus");
   }
-  
+
   function onSearch(val) {
-    console.log('search:', val);
+    console.log("search:", val);
   }
 
   return (
-
-    
     <Fragment>
       <SubHeader />
       <section className="bg-yellow">
         <Container fluid>
           <Row className="py-4">
-            <Col md={2}>
-              <Select
-                showSearch
-                style={{ width: 200 }}
-                placeholder="Select a person"
-                optionFilterProp="children"
-                onChange={onChange}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onSearch={onSearch}
-                filterOption={(input, option) =>
-                  
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                <Option value="jack">Jack</Option>
-                <Option value="lucy">Lucy</Option>
-                <Option value="tom">Tom</Option>
-              </Select>
+            <Col md={2} className="side">
+              {filters.map((filter) => {
+                return filter.options ? (
+                  <Select
+                    showSearch
+                    mode="options"
+                    style={{ width: "100%", margin: "0.5rem" }}
+                    placeholder={filter.label}
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    {filter.options.map((option) => {
+                      return <Option value={option} key={option}>
+                        {option}
+                      </Option>;
+                    })}
+                  </Select>
+                ) : (
+                  <Select
+                    showSearch
+                    mode="tags"
+                    style={{ width: "100%", margin: "0.5rem" }}
+                    placeholder={filter.label}
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                  </Select>
+                );
+              })}
             </Col>
             <Col md={8}>
               <h2 className="subtitle">Mascotas</h2>
@@ -93,22 +112,6 @@ export default function Catalogo() {
                 {publications.map((publication, index) => {
                   return card(publication, index);
                 })}
-                {/* {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()} */}
               </Row>
             </Col>
           </Row>

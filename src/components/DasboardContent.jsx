@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import API from "@aws-amplify/api";
+import Storage from "@aws-amplify/storage";
 import "./styles/Dashboard.scss";
 import {
   Form,
@@ -45,12 +46,16 @@ const normFile = (e) => {
 };
 
 export function NewPost(props) {
+  console.log(props.user);
   const [form] = Form.useForm();
+  const [imgKeys, setImgKeys] = useState([]);
 
   //   Submit
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-
+    console.log(imgKeys);
+    delete values.image;
+    values["images"] = imgKeys;
     uploadPublication(values)
       .then(() => {
         message.success("La puclicación se ha guardado exitosamente");
@@ -61,72 +66,38 @@ export function NewPost(props) {
       });
   };
 
+
   const uploadProps = {
     action:
-      "https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/images",
+      "https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/image",
     multiple: false,
     listType: "picture",
     className: "upload-list-inline",
-    onStart(file) {
-      console.log("onStart", file, file.name);
-    },
-    onSuccess(ret, file) {
-      console.log("onSuccess", ret, file.name);
-    },
-    onError(err) {
-      console.log("onError", err);
-    },
-    onProgress({ percent }, file) {
-      console.log("onProgress", `${percent}%`, file.name);
-    },
-    async customRequest({
-      action,
-      data,
-      file,
-      filename,
-      onError,
-      onProgress,
-      onSuccess,
-      withCredentials,
-    }) {
-      console.log(file);
-      let buff = await file.arrayBuffer();
-      console.log(buff);
-      let init = {
-        body: buff,
-      };
-      API.post(apiName, "/publications/image", init)
-        .then(({ data: response }) => {
-          onSuccess(response, file);
-        })
-        .catch(onError);
+    beforeUpload: (file) => {
+      const path = `publications/${props.user.id}/${file.name}`;
+      console.log(path);
+      Storage.put(path, file, {
+        contentType: "image/png",
 
-      return {
-        abort() {
-          console.log("upload progress is aborted.");
-        },
-      };
+      })
+        .then((result) => {
+          let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(
+            result.key
+          )}`;
+          return setImgKeys(imgKeys.concat([url]));
+        })
+        .catch((err) => console.log(err));
+    },
+    transformFile: (file) => {
+      return "";
+    },
+    onRemove: (file) => {
+      const path = `publications/${props.user.id}/${file.name}`;
+      Storage.remove(path)
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
     },
   };
-
-  // const uploadProps = {
-  //     action: endpoint,
-  //     multiple: false,
-  //     listType: 'picture',
-  //     className: 'upload-list-inline',
-  //     beforeUpload: async (file) => {
-  //         const init = {
-  //             body: {
-  //                 filename: file.name + '-' + file.uid,
-  //                 type: file.type
-  //             }
-  //         }
-  //         console.log(file)
-  //         let signed = await API.post(apiName, '/publications/image', init)
-  //         console.log(signed.data.url)
-  //         setEndpoint(signed.data.url)
-  //     }
-  // };
 
   return (
     <Container>
@@ -256,7 +227,7 @@ export function Posts(form) {
           return (
             <Col key={publication.name}>
               <Card
-                style={{  margin: "1rem" }}
+                style={{ margin: "1rem" }}
                 cover={
                   <img
                     alt="example"
@@ -274,7 +245,8 @@ export function Posts(form) {
                 <Meta
                   title={publication.name}
                   description={`${publication.animal.toUpperCase()} | ${
-                    publication.publicationDate || new Date().toLocaleDateString()
+                    publication.publicationDate ||
+                    new Date().toLocaleDateString()
                   }`}
                 />
               </Card>
