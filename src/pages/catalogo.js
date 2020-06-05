@@ -2,7 +2,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./styles/catalogo.scss";
 //components
 import SubHeader from "../components/subHeader";
-import { getPublications } from "../services/publications.service";
+import {
+  getPublications,
+  getPublicationsFilter,
+} from "../services/publications.service";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Select } from "antd";
@@ -15,11 +18,17 @@ let dummy =
 
 export default function Catalogo() {
   const [publications, setpublications] = useState([]);
-  const [filter, setfilter] = useState('?');
+  const [selectedFilters, setSelectedFilters] = useState({});
 
   useEffect(() => {
     async function fetchPublications() {
       setpublications(await getPublications());
+
+      await getPublicationsFilter({
+        name: "benito",
+        animal: "Gato",
+        colors: ["gris", "white"],
+      });
     }
     fetchPublications();
   }, []);
@@ -47,22 +56,38 @@ export default function Catalogo() {
     );
   };
 
-    const onChange = (value, {label}) => {
-        const attributes = {
-            "Animal": "animal",
-            "Tamaño": "petSize",
-            "Genero": "gender"
-        }
-        const queryString = filter === '?' ?
-              `${filter}${attributes[label]}=${value}`
-              :
-              `${filter}&${attributes[label]}=${value}`
-        setfilter(queryString)
-        getPublications(queryString)
-    }
+    // const onChange = (value, {label}) => {
+    //     const attributes = {
+    //         "Animal": "animal",
+    //         "Tamaño": "petSize",
+    //         "Genero": "gender"
+    //     }
+    //     const queryString = filter === '?' ?
+    //           `${filter}${attributes[label]}=${value}`
+    //           :
+    //           `${filter}&${attributes[label]}=${value}`
+    //     setfilter(queryString)
+    //     getPublications(queryString)
+    // }
 
-  function onBlur() {
-    console.log("blur");
+  function onChange(value, key) {
+    if (value) {
+      selectedFilters[key] = value;
+    }
+    setSelectedFilters(selectedFilters);
+    console.log(value, key);
+  }
+
+  async function onDeselect(value, key) {
+    delete selectedFilters[key];
+    console.log(selectedFilters);
+    setSelectedFilters(selectedFilters);
+    setpublications(await getPublicationsFilter(selectedFilters));
+  }
+
+  async function onBlur() {
+    console.log("Apply filters: ", selectedFilters)
+    setpublications(await getPublicationsFilter(selectedFilters));
   }
 
   function onFocus() {
@@ -80,44 +105,48 @@ export default function Catalogo() {
         <Container fluid>
           <Row className="py-4">
             <Col md={2} className="side">
-                {filters.map((filter) => {
-                  return filter.options ? (
-                      <Select
-                          key={filters.indexOf(filter)}
-                          showSearch
-                          onChange={onChange}
-                          mode="options"
-                          style={{ width: "100%", margin: "0.5rem" }}
-                          placeholder={filter.label}
-                          optionFilterProp="children"
-                          filterOption={(input, option) =>
-                              option.children
-                                  .toLowerCase()
-                                  .indexOf(input.toLowerCase()) >= 0
-                          }
-                      >
-                        {
-                            filter.options.map((option) => {
-                                return <Option label={filter.label} value={option} key={option}>
-                                           {option}
-                                       </Option>;
-                          })}
+              {filters.map((filter) => {
+                return filter.options ? (
+                  <Select
+                    key={filter.name}
+                    showSearch
+                    mode="options"
+                    onBlur={onBlur}
+                    onChange={(value) => onChange(value, filter.name)}
+                    style={{ width: "100%", margin: "0.5rem" }}
+                    placeholder={filter.label}
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      option.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    {filter.options.map((option) => {
+                      return (
+                        <Option value={option} key={option}>
+                          {option}
+                        </Option>
+                      );
+                    })}
                   </Select>
                 ) : (
-                    <Select
-                        key={filters.indexOf(filter)}
-                        showSearch
-                        mode="tags"
-                        style={{ width: "100%", margin: "0.5rem" }}
-                        placeholder={filter.label}
-                        optionFilterProp="children"
-                        // filterOption={(input, option) =>
-                        //     option.children
-                        //         .toLowerCase()
-                        //         .indexOf(input.toLowerCase()) >= 0
-                        //}
-                  >
-                  </Select>
+                  <Select
+                    key={filter.name}
+                    showSearch
+                    mode="tags"
+                    onBlur={onBlur}
+                    onChange={(value) => onChange(value, filter.name)}
+                    onDeselect={(value) => onDeselect(value, filter.name)}
+                    style={{ width: "100%", margin: "0.5rem" }}
+                    placeholder={filter.label}
+                    optionFilterProp="children"
+                    // filterOption={(input, option) =>
+                    //   option.children
+                    //     .toLowerCase()
+                    //     .indexOf(input.toLowerCase()) >= 0
+                    // }
+                  ></Select>
                 );
               })}
             </Col>
