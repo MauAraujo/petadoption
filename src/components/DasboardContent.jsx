@@ -13,6 +13,7 @@ import {
   Card,
 } from "antd";
 import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 import { Container, Col, Row, Image } from "react-bootstrap";
 import { uploadPublication } from "../services/publications.service";
 import filters from "../data/filters.json";
@@ -26,6 +27,8 @@ const apiName = "api024fb227";
 
 const { Option } = Select;
 
+let dummy =
+    "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
 const formItemLayout = {
   labelCol: {
     span: 6,
@@ -225,31 +228,33 @@ export function Posts(form) {
       <Row>
         {publications.map((publication) => {
           return (
-            <Col key={publication.name}>
-              <Card
-                style={{ margin: "1rem" }}
-                cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
-                }
-                actions={
-                  [
-                    // <SettingOutlined key="setting" />,
-                    // <EditOutlined key="edit" />,
-                    // <EllipsisOutlined key="ellipsis" />,
-                  ]
-                }
-              >
-                <Meta
-                  title={publication.name}
-                  description={`${publication.animal.toUpperCase()} | ${
-                    publication.publicationDate ||
-                    new Date().toLocaleDateString()
-                  }`}
-                />
-              </Card>
+              <Col key={publication.name}>
+                <Link to={"/detail/" + (publication.publicationID)}>
+                    <Card
+                        style={{ margin: "1rem" }}
+                        cover={
+                            <img
+                                alt="example"
+                                src={publication.images ? publication.images[0] : dummy}
+                            />
+                        }
+                        actions={
+                            [
+                                // <SettingOutlined key="setting" />,
+                                // <EditOutlined key="edit" />,
+                                // <EllipsisOutlined key="ellipsis" />,
+                            ]
+                        }
+                    >
+                        <Meta
+                            title={publication.name}
+                            description={`${publication.animal.toUpperCase()} | ${
+                            publication.publicationDate ||
+                            new Date().toLocaleDateString()
+                            }`}
+                        />
+                    </Card>
+                </Link>
             </Col>
           );
         })}

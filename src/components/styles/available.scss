@@ -5,10 +5,16 @@
   padding: 2em;
 
   .img-container {
-    background: red;
-    max-height: 20vh !important;
-    overflow: hidden;
-    border-radius: .4em;
+      max-height: 60vh !important;
+      overflow: hidden;
+      border-radius: .4em;
+      position: relative;
+  }
+
+  img, .img-container {
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
   }
 }
 
@@ -32,6 +38,12 @@
       overflow: hidden;
       border-radius: .4em;
       position: relative;
+  }
+
+  img, .img-container {
+      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
   }
 
   .subtitle {
