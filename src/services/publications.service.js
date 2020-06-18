@@ -46,8 +46,9 @@ export async function getPublicationsFilter(selectedFilters) {
   const filter = (publication) => {
     let match = true;
 
-    filters.forEach((filter) => {
-      let key = filter.name;
+    Object.keys(selectedFilters).forEach((filter) => {
+      let key = filter;
+      console.log(key)
       if (selectedFilters[key] && publication[key]) {
         if (Array.isArray(publication[key])) {
           let contains = arrayContains(selectedFilters[key], publication[key]);
@@ -57,6 +58,14 @@ export async function getPublicationsFilter(selectedFilters) {
           match = match && contains;
         } else {
           let contains = publication[key] === selectedFilters[key];
+          if (key === "age") {
+            console.log("min", publication[key] >= (selectedFilters[key]["min"]))
+            console.log("max", publication[key]<(selectedFilters[key]["max"]))
+            contains =
+              publication[key] >= (selectedFilters[key]["min"] || 0) &&
+              publication[key] <= (selectedFilters[key]["max"] || 99);
+            console.log(selectedFilters[key])  
+          }
           console.log(
             `${selectedFilters[key]} === ${publication[key]}: ${contains}`
           );
