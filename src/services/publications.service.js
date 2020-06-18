@@ -80,12 +80,22 @@ export async function getPublicationsFilter(selectedFilters) {
   return publications.filter(filter);
 }
 
-export function uploadPublication(form) {
+export function uploadPublication(data) {
   return API.post(apiName, "/publications", {
     body: {
       //   publicationID: "786tyghb8t",
       publicationID: `${new Date().getTime()}`,
-      content: { publicationDate: new Date(), ...form },
+      content: { publicationDate: new Date(), ...data },
     },
   });
+}
+
+export function updatePublication(publicationID , data){
+  console.log("update", publicationID)
+  return API.post(apiName, "/publications", {
+    body: {
+      publicationID: publicationID,
+      content: data
+    }
+  }).then(msg => console.log(msg)).catch(err => console.error("Error en update", err))
 }

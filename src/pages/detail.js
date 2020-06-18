@@ -19,14 +19,14 @@ export default function Detail() {
       setpublication(await getPublication(publicationID || "1590121969131"))
     }
     fetchPublication()
-    console.log(publication)
+
 
   },[])
 
   return (
     <Fragment>
       <div className="container my-4">
-        <DetailHero pet={publication?.content || {}}/>
+        <DetailHero pet={publication|| {}}/>
       </div>
       <div className="container my-3">
         <div className="row">
