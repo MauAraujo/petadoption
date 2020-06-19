@@ -219,7 +219,7 @@ app.post(path, function(req, res) {
 
     let item = req.body.content
     item['publicationID'] = req.body.publicationID
-    
+
     let putItemParams = {
         TableName: tableName,
         Item: item
@@ -241,30 +241,30 @@ app.post(path, function(req, res) {
 ***************************************/
 
 app.delete(path + '/object', function(req, res) {
-  var params = {};
-  if (userIdPresent && req.apiGateway) {
-    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  } else {
-    params[partitionKeyName] = req.query[partitionKeyName];
-     try {
-      params[partitionKeyName] = convertUrlType(req.query[partitionKeyName], partitionKeyType);
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
-  if (hasSortKey) {
-    try {
-      params[sortKeyName] = convertUrlType(req.query[sortKeyName], sortKeyType);
-    } catch(err) {
-      res.statusCode = 500;
-      res.json({error: 'Wrong column type ' + err});
-    }
-  }
+  //  var params = {};
+  // if (userIdPresent && req.apiGateway) {
+  //   params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+  // } else {
+  //   params[partitionKeyName] = req.query[partitionKeyName];
+  //    try {
+  //     params[partitionKeyName] = convertUrlType(req.query[partitionKeyName], partitionKeyType);
+  //   } catch(err) {
+  //     res.statusCode = 500;
+  //     res.json({error: 'Wrong column type ' + err});
+  //   }
+  // }
+  // if (hasSortKey) {
+  //   try {
+  //     params[sortKeyName] = convertUrlType(req.query[sortKeyName], sortKeyType);
+  //   } catch(err) {
+  //     res.statusCode = 500;
+  //     res.json({error: 'Wrong column type ' + err});
+  //   }
+  // }
 
   let removeItemParams = {
     TableName: tableName,
-    Key: params
+    Key: paramsreq.body.publicationID
   }
   dynamodb.delete(removeItemParams, (err, data)=> {
     if(err) {

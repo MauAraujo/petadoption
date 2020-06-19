@@ -20,14 +20,14 @@ export default function Detail() {
         setpublication(item)
     }
     fetchPublication()
-    console.log(publication)
+
 
   },[])
 
   return (
     <Fragment>
       <div className="container my-4">
-        <DetailHero pet={publication || {}}/>
+        <DetailHero pet={publication|| {}}/>
       </div>
       <div className="container my-3">
         <div className="row">
@@ -35,7 +35,7 @@ export default function Detail() {
             <DetailCard className="col" />
           </div>
           <div id="action-card-container" className="col">
-            <ActionCard className="col" />
+            <ActionCard pet={publication || {}} className="col" />
           </div>
         </div>
       </div>

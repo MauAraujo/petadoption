@@ -1,9 +1,13 @@
 .hero-container {
-    background-color: #ffffff;
+    background-color: #FDFFD59E;
     border-radius: 1em;
     min-height: 20vh;
     overflow: hidden;
     margin-bottom: 20px;
+
+    .loading {
+        background-color: white;
+    }
 
     .title {
         font-size: 2.7em;
@@ -25,6 +29,10 @@
         }
     }
 
+    .section {
+        font-weight: bold;
+    }
+
     .subtitle {
         font-size: 1em !important;
         font-weight: bold;
@@ -37,10 +45,11 @@
     }
 
     .carousel, .slide, .carousel-inner, .carousel-item {
-        height: 100%;
+        height: 35em;
     }
 }
 
 .my-3 {
+    margin-top: 2rem !important;
     margin-bottom: 2rem !important;
 }

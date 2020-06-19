@@ -15,19 +15,19 @@
     "ruleType": "array"
   },
   {
-    "name": "colors",
-    "label": "Colores",
-    "message": "Ingrese los colores de la mascota",
-    "mode": "tags",
-    "ruleType": "array"
-  },
-  {
     "name": "gender",
     "label": "Genero",
     "message": "Ingrese los colores de la mascota",
     "mode": "options",
     "options": ["Hembra", "Macho"],
     "ruleType": "string"
+  },
+  {
+    "name": "colors",
+    "label": "Colores",
+    "message": "Ingrese los colores de la mascota",
+    "mode": "tags",
+    "ruleType": "array"
   },
   {
     "name": "petSize",

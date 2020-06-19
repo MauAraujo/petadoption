@@ -1,5 +1,4 @@
 import API from "@aws-amplify/api";
-import filters from "../data/filters.json";
 
 API.configure();
 const apiName = "api024fb227";
@@ -47,8 +46,9 @@ export async function getPublicationsFilter(selectedFilters) {
   const filter = (publication) => {
     let match = true;
 
-    filters.forEach((filter) => {
-      let key = filter.name;
+    Object.keys(selectedFilters).forEach((filter) => {
+      let key = filter;
+      console.log(key)
       if (selectedFilters[key] && publication[key]) {
         if (Array.isArray(publication[key])) {
           let contains = arrayContains(selectedFilters[key], publication[key]);
@@ -58,6 +58,14 @@ export async function getPublicationsFilter(selectedFilters) {
           match = match && contains;
         } else {
           let contains = publication[key] === selectedFilters[key];
+          if (key === "age") {
+            console.log("min", publication[key] >= (selectedFilters[key]["min"]))
+            console.log("max", publication[key]<(selectedFilters[key]["max"]))
+            contains =
+              publication[key] >= (selectedFilters[key]["min"] || 0) &&
+              publication[key] <= (selectedFilters[key]["max"] || 99);
+            console.log(selectedFilters[key])  
+          }
           console.log(
             `${selectedFilters[key]} === ${publication[key]}: ${contains}`
           );
@@ -72,12 +80,32 @@ export async function getPublicationsFilter(selectedFilters) {
   return publications.filter(filter);
 }
 
-export function uploadPublication(form) {
+export function uploadPublication(data) {
   return API.post(apiName, "/publications", {
     body: {
       //   publicationID: "786tyghb8t",
       publicationID: `${new Date().getTime()}`,
-      content: { publicationDate: new Date(), ...form },
+      content: { publicationDate: new Date(), ...data },
     },
   });
+}
+
+export function updatePublication(publicationID , data){
+  console.log("update", publicationID)
+  return API.post(apiName, "/publications", {
+    body: {
+      publicationID: publicationID,
+      content: data
+    }
+  }).then(msg => console.log(msg)).catch(err => console.error("Error en update", err))
+}
+
+export async function removePublication(publicationID) {
+    console.log("remove", publicationID)
+    const init = {
+        body: {
+            partitionKeyName: publicationID
+        }
+    }
+    return API.del(apiName, "/publications/object", init).then(msg => console.log(msg)).catch(err => console.error("Error en update", err))
 }

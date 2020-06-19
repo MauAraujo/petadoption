@@ -8,7 +8,7 @@ import {
 } from "../services/publications.service";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { Select } from "antd";
+import { Select, Input } from "antd";
 import filters from "../data/filters.json";
 
 const { Option } = Select;
@@ -78,6 +78,17 @@ export default function Catalogo() {
     console.log(value, key);
   }
 
+  function saveAge(value, key) {
+    if (!selectedFilters["age"]) {
+      selectedFilters["age"] = {};
+    }
+    if (value) {
+      selectedFilters["age"][key] = parseInt(value);
+    }
+    setSelectedFilters(selectedFilters);
+    console.log(selectedFilters["age"]);
+  }
+
   async function onDeselect(value, key) {
     delete selectedFilters[key];
     console.log(selectedFilters);
@@ -86,16 +97,8 @@ export default function Catalogo() {
   }
 
   async function onBlur() {
-    console.log("Apply filters: ", selectedFilters)
+    console.log("Apply filters: ", selectedFilters);
     setpublications(await getPublicationsFilter(selectedFilters));
-  }
-
-  function onFocus() {
-    console.log("focus");
-  }
-
-  function onSearch(val) {
-    console.log("search:", val);
   }
 
   return (
@@ -107,48 +110,93 @@ export default function Catalogo() {
             <Col md={2} className="side">
               {filters.map((filter) => {
                 return filter.options ? (
-                  <Select
-                    key={filter.name}
-                    showSearch
-                    mode="options"
-                    onBlur={onBlur}
-                    onChange={(value) => onChange(value, filter.name)}
-                    style={{ width: "100%", margin: "0.5rem" }}
-                    placeholder={filter.label}
-                    optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    {filter.options.map((option) => {
-                      return (
-                        <Option value={option} key={option}>
-                          {option}
-                        </Option>
-                      );
-                    })}
-                  </Select>
+                  <div key={filter.name}>
+                    <span className="label">{filter.label}</span>
+                    <Select
+                      showSearch
+                      mode="options"
+                      onBlur={onBlur}
+                      onChange={(value) => onChange(value, filter.name)}
+                      style={{ width: "100%", margin: "0.5rem" }}
+                      placeholder={filter.label}
+                      optionFilterProp="children"
+                      filterOption={(input, option) =>
+                        option.children
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                      {filter.options.map((option) => {
+                        return (
+                          <Option value={option} key={option}>
+                            {option}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </div>
                 ) : (
-                  <Select
-                    key={filter.name}
-                    showSearch
-                    mode="tags"
-                    onBlur={onBlur}
-                    onChange={(value) => onChange(value, filter.name)}
-                    onDeselect={(value) => onDeselect(value, filter.name)}
-                    style={{ width: "100%", margin: "0.5rem" }}
-                    placeholder={filter.label}
-                    optionFilterProp="children"
-                    // filterOption={(input, option) =>
-                    //   option.children
-                    //     .toLowerCase()
-                    //     .indexOf(input.toLowerCase()) >= 0
-                    // }
-                  ></Select>
+                  <div key={filter.name}>
+                    <span className="label">{filter.label}</span>
+                    <Select
+                      showSearch
+                      mode={filter.mode}
+                      tokenSeparators={[","]}
+                      onBlur={onBlur}
+                      onChange={(value) => onChange(value, filter.name)}
+                      onDeselect={(value) => onDeselect(value, filter.name)}
+                      style={{ width: "100%", margin: "0.5rem" }}
+                      placeholder={filter.label}
+                      optionFilterProp="children"
+                      // filterOption={(input, option) =>
+                      //   option.children
+                      //     .toLowerCase()
+                      //     .indexOf(input.toLowerCase()) >= 0
+                      // }
+                    ></Select>
+                  </div>
                 );
               })}
+
+              <Input.Group
+                compact
+                style={{ width: "100%", marginLeft: "0.5rem" }}
+              >
+                <span className="label">Edad Minima</span>
+                <br></br>
+                <Input
+                  className="site-input-left"
+                  style={{ width: 80, textAlign: "center" }}
+                  placeholder="Min"
+                  type="number"
+                  onChange={(e) => saveAge(e.target.value, "min")}
+                  onBlur={onBlur}
+                />
+                <Input
+                  className="site-input-split"
+                  style={{
+                    width: 30,
+                    borderLeft: 0,
+                    borderRight: 0,
+                    pointerEvents: "none",
+                  }}
+                  placeholder="~"
+                  disabled
+                />
+                {/* <span className="label">Edad Máxima</span> */}
+                <Input
+                  // style={{ width: "50%", marginRight: "0.5rem" }}
+                  className="site-input-right"
+                  style={{
+                    width: 90,
+                    textAlign: "center",
+                  }}
+                  placeholder="Max"
+                  type="number"
+                  onBlur={onBlur}
+                  onChange={(e) => saveAge(e.target.value, "max")}
+                />
+              </Input.Group>
             </Col>
             <Col md={8}>
               <h2 className="subtitle">Mascotas</h2>

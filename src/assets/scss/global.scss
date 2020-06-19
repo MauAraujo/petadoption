@@ -116,3 +116,11 @@ body {
   --amplify-primary-tint: #f397b0;
   --amplify-primary-shade: #f397b0;
 }
+
+.label {
+  color: $purple;
+  font-family: inherit;
+  font-size: larger;
+  font-weight: 800;
+  margin: 0.5rem;
+}
