@@ -11,18 +11,22 @@ import {
   Input,
   message,
   Card,
+  Popconfirm,
+  Modal,
 } from "antd";
-import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
-import { Container, Col, Row, Image } from "react-bootstrap";
-import { uploadPublication } from "../services/publications.service";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
+import { Container, Col, Row } from "react-bootstrap";
+import {
+  uploadPublication,
+  updatePublication,
+} from "../services/publications.service";
 import filters from "../data/filters.json";
 import { getPublications } from "../services/publications.service";
 import Meta from "antd/lib/card/Meta";
-const axios = require("axios");
 
 /* AWS Config */
 API.configure();
-const apiName = "api024fb227";
 
 const { Option } = Select;
 
@@ -33,16 +37,6 @@ const formItemLayout = {
   wrapperCol: {
     span: 14,
   },
-};
-
-const normFile = (e) => {
-  console.log("Upload event:", e);
-
-  if (Array.isArray(e)) {
-    return e;
-  }
-
-  return e && e.fileList;
 };
 
 export function NewPost(props) {
@@ -61,11 +55,10 @@ export function NewPost(props) {
         message.success("La puclicación se ha guardado exitosamente");
         form.resetFields();
       })
-      .catch((err) => {
+      .catch(() => {
         message.error("Ha ocurrido un error");
       });
   };
-
 
   const uploadProps = {
     action:
@@ -78,7 +71,6 @@ export function NewPost(props) {
       console.log(path);
       Storage.put(path, file, {
         contentType: "image/png",
-
       })
         .then((result) => {
           let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(
@@ -88,7 +80,7 @@ export function NewPost(props) {
         })
         .catch((err) => console.log(err));
     },
-    transformFile: (file) => {
+    transformFile: () => {
       return "";
     },
     onRemove: (file) => {
@@ -212,17 +204,184 @@ export function NewPost(props) {
     </Container>
   );
 }
-export function Posts(form) {
+export function Posts(props) {
   const [publications, setpublications] = useState([]);
+  const [edit, setedit] = useState(null);
+
+  // Form
+  const [form] = Form.useForm();
+  const [imgKeys, setImgKeys] = useState([]);
+
+  const uploadProps = {
+    action:
+      "https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/image",
+    multiple: false,
+    listType: "picture",
+    className: "upload-list-inline",
+    beforeUpload: (file) => {
+      const path = `publications/${props.user.id}/${file.name}`;
+      console.log(path);
+      Storage.put(path, file, {
+        contentType: "image/png",
+      })
+        .then((result) => {
+          let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(
+            result.key
+          )}`;
+          return setImgKeys(imgKeys.concat([url]));
+        })
+        .catch((err) => console.log(err));
+    },
+    transformFile: () => {
+      return "";
+    },
+    onRemove: (file) => {
+      const path = `publications/${props.user.id}/${file.name}`;
+      Storage.remove(path)
+        .then((result) => console.log(result))
+        .catch((err) => console.log(err));
+    },
+  };
+
   useEffect(() => {
     async function fetchPublications() {
       setpublications(await getPublications());
     }
     fetchPublications();
   }, []);
+
+  const cleanData = (data) => {
+    Object.keys(data).forEach((key) => {
+      if (!data[key]) {
+        delete data[key];
+      }
+    });
+    return data;
+  };
+
+  const editPublication = () => {
+    const values = cleanData(form.getFieldsValue());
+    delete values.image;
+    values["images"] = [...imgKeys, ...edit["images"]];
+    console.log(values);
+
+    updatePublication(edit["publicationID"], { ...edit, ...values })
+      .then(async () => {
+        message.success("La puclicación se ha editado exitosamente");
+        form.resetFields();
+        setpublications(await getPublications());
+      })
+      .catch(() => {
+        message.error("Ha ocurrido un error");
+      });
+
+    setedit(null);
+  };
+
   return (
     <Fragment>
       <Row>
+        <Modal
+          visible={edit !== null}
+          title={"Editar publicación"}
+          onOk={editPublication}
+          onCancel={() => {
+            setedit(null);
+          }}
+        >
+          <Form
+            form={form}
+            name="post"
+            layout="vertical"
+            {...formItemLayout}
+            size="large"
+          >
+            <Form.Item
+              name="name"
+              label="Nombre"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "Nombre de la mascota",
+                },
+              ]}
+            >
+              <Input placeholder="Nombre"></Input>
+            </Form.Item>
+
+            {filters.map((filter) => {
+              return buildFilters(filter);
+            })}
+
+            <Form.Item label="Edad" hasFeedback>
+              <Form.Item name="age" noStyle>
+                <InputNumber min={0} max={20} />
+              </Form.Item>
+              <span className="ant-form-text"> Años </span>
+            </Form.Item>
+            <Form.Item
+              name="location"
+              label="Lugar"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "¿Donde esta la mascota?",
+                },
+              ]}
+            >
+              <Input placeholder="Lugar donde esta la mascota"></Input>
+            </Form.Item>
+            <Form.Item
+              name="description"
+              label="Descripcion"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "Ingrese una breve descripción",
+                },
+              ]}
+            >
+              <Input.TextArea
+                placeholder="Ingrese una breve descripción acerca de la mascota"
+                rows="4"
+              ></Input.TextArea>
+            </Form.Item>
+            <Form.Item name="goodWith" label="Cualidades" hasFeedback>
+              <Input.TextArea
+                placeholder="Escriba todos sus atributos, por ejemplo si es perfecto para
+            niños pequeños, o tal vez sea bueno para parejas sin hijos..."
+                rows="4"
+              ></Input.TextArea>
+            </Form.Item>
+            <Form.Item
+              name="preferences"
+              label="Preferencias y tratos especiales"
+              hasFeedback
+            >
+              <Input.TextArea
+                placeholder="Escriba cualquier enfermedad, dsicapacidad o capricho por el cual el animalito
+            requiera de trato especial"
+                rows="4"
+              ></Input.TextArea>
+            </Form.Item>
+
+            <Form.Item label="Imagen">
+              <Form.Item name="image" noStyle>
+                <div>
+                  <Upload {...uploadProps}>
+                    <Button>
+                      <UploadOutlined />
+                      Elegir Archivo
+                    </Button>
+                  </Upload>
+                </div>
+              </Form.Item>
+            </Form.Item>
+          </Form>
+        </Modal>
         {publications.map((publication) => {
           return (
             <Col key={publication.name}>
@@ -234,19 +393,42 @@ export function Posts(form) {
                     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
                   />
                 }
-                actions={
-                  [
-                    // <SettingOutlined key="setting" />,
-                    // <EditOutlined key="edit" />,
-                    // <EllipsisOutlined key="ellipsis" />,
-                  ]
-                }
+                actions={[
+                  // <SettingOutlined key="setting" />,
+                  <Popconfirm
+                    cancelText={"Cancelar"}
+                    okText={"Eliminar"}
+                    okButtonProps={{
+                      type: "danger",
+                    }}
+                    cancelButtonProps={{
+                      danger: true,
+                    }}
+                    title="Esta seguro que desea eliminar?"
+                    icon={<DeleteOutlined style={{ color: "red" }} />}
+                  >
+                    <DeleteOutlined
+                      key="delete"
+                      onClick={() => console.log("Delete")}
+                    />
+                  </Popconfirm>,
+                  <EditOutlined
+                    key="edit"
+                    onClick={() => {
+                      setedit(publication);
+                      form.setFieldsValue(publication);
+                    }}
+                  />,
+                  // <Button><</Button>
+                  // <EllipsisOutlined key="ellipsis" />,
+                ]}
               >
                 <Meta
                   title={publication.name}
-                  description={`${publication.animal.toUpperCase()} | ${
-                    publication.publicationDate ||
-                    new Date().toLocaleDateString()
+                  description={`${publication.animal?.toUpperCase() || ""} | ${
+                    new Date(
+                      publication.publicationDate
+                    ).toLocaleDateString() || new Date()
                   }`}
                 />
               </Card>
@@ -264,7 +446,7 @@ export function Inbox(props) {
 }
 
 function buildFilters(filter) {
-  return filter.mode == "options" ? (
+  return filter.mode === "options" ? (
     <Form.Item
       key={filter.name}
       name={filter.name}
@@ -302,7 +484,11 @@ function buildFilters(filter) {
         },
       ]}
     >
-      <Select mode={filter.mode} tokenSeparators={[',']} placeholder={filter.label}></Select>
+      <Select
+        mode={filter.mode}
+        tokenSeparators={[","]}
+        placeholder={filter.label}
+      ></Select>
     </Form.Item>
   );
 }

@@ -8,7 +8,7 @@ export default function DetailHero(props) {
   const { pet } = props;
 
   if (pet?.publicationID) {
-    updatePublication(pet.publicationID, {...pet, views: (++pet.views || 1)});
+    updatePublication(pet.publicationID, { ...pet, views: ++pet.views || 1 });
   }
   return (
     <div className="hero-container">

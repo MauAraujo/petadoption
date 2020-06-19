@@ -1,5 +1,4 @@
 import API from "@aws-amplify/api";
-import filters from "../data/filters.json";
 
 API.configure();
 const apiName = "api024fb227";
