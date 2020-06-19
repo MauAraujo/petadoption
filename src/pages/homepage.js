@@ -15,8 +15,10 @@ export default function Homepage() {
 
     useEffect(() => {
         console.log('Mounted')
-    async function fetchPublications() {
-      setpublications(await getPublications());
+        async function fetchPublications() {
+            let publications = await getPublications()
+            publications = publications.slice(publications.length - 6, publications.length)
+            setpublications(publications);
     }
     fetchPublications();
     console.log(publications);

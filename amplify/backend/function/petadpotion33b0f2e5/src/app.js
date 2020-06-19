@@ -53,7 +53,8 @@ app.use(awsServerlessExpressMiddleware.eventContext())
 // Enable CORS for all methods
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "*")
+    res.header("Access-Control-Allow-Headers", "*")
+    res.header("Access-Control-Allow-Methods", "*")
   next()
 });
 
@@ -241,30 +242,30 @@ app.post(path, function(req, res) {
 ***************************************/
 
 app.delete(path + '/object', function(req, res) {
-  //  var params = {};
-  // if (userIdPresent && req.apiGateway) {
-  //   params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
-  // } else {
-  //   params[partitionKeyName] = req.query[partitionKeyName];
-  //    try {
-  //     params[partitionKeyName] = convertUrlType(req.query[partitionKeyName], partitionKeyType);
-  //   } catch(err) {
-  //     res.statusCode = 500;
-  //     res.json({error: 'Wrong column type ' + err});
-  //   }
-  // }
-  // if (hasSortKey) {
-  //   try {
-  //     params[sortKeyName] = convertUrlType(req.query[sortKeyName], sortKeyType);
-  //   } catch(err) {
-  //     res.statusCode = 500;
-  //     res.json({error: 'Wrong column type ' + err});
-  //   }
-  // }
+   var params = {};
+  if (userIdPresent && req.apiGateway) {
+    params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+  } else {
+    params[partitionKeyName] = req.query[partitionKeyName];
+     try {
+      params[partitionKeyName] = convertUrlType(req.query[partitionKeyName], partitionKeyType);
+    } catch(err) {
+      res.statusCode = 500;
+      res.json({error: 'Wrong column type ' + err});
+    }
+  }
+  if (hasSortKey) {
+    try {
+      params[sortKeyName] = convertUrlType(req.query[sortKeyName], sortKeyType);
+    } catch(err) {
+      res.statusCode = 500;
+      res.json({error: 'Wrong column type ' + err});
+    }
+  }
 
   let removeItemParams = {
     TableName: tableName,
-    Key: paramsreq.body.publicationID
+    Key: params
   }
   dynamodb.delete(removeItemParams, (err, data)=> {
     if(err) {
@@ -273,7 +274,7 @@ app.delete(path + '/object', function(req, res) {
     } else {
       res.json({url: req.url, data: data});
     }
-  });
+    });
 });
 
 

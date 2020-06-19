@@ -101,11 +101,15 @@ export function updatePublication(publicationID , data){
 }
 
 export async function removePublication(publicationID) {
-    console.log("remove", publicationID)
-    const init = {
-        body: {
-            partitionKeyName: publicationID
-        }
+    try {
+        let res = await API.del(
+            apiName,
+            "/publications/object?publicationID=" + publicationID
+        );
+        console.log(res);
+        return res;
+    } catch (error) {
+        console.error(error);
+        return null;
     }
-    return API.del(apiName, "/publications/object", init).then(msg => console.log(msg)).catch(err => console.error("Error en update", err))
 }

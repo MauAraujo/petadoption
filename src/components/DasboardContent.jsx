@@ -284,7 +284,6 @@ export function Posts(props) {
 
   return (
     <Fragment>
-      <Row>
         <Modal
           visible={edit !== null}
           title={"Editar publicación"}
@@ -386,9 +385,10 @@ export function Posts(props) {
             </Form.Item>
           </Form>
         </Modal>
+        <Row>
         {publications.map((publication) => {
-          return (
-              <Col key={publication.name}>
+            return (
+             <Col key={publication.name}>
               <Card
                 cover={
                   <img
@@ -440,7 +440,7 @@ export function Posts(props) {
                   } | ${publication.views || 0} Visualizaciones`}
                 />
               </Card>
-            </Col>
+                </Col>
           );
         })}
       </Row>
