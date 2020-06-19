@@ -34,7 +34,7 @@ export default function Detail() {
             <DetailCard className="col" />
           </div>
           <div id="action-card-container" className="col">
-            <ActionCard className="col" />
+            <ActionCard pet={publication || {}} className="col" />
           </div>
         </div>
       </div>

@@ -429,7 +429,7 @@ export function Posts(props) {
                     new Date(
                       publication.publicationDate
                     ).toLocaleDateString() || new Date()
-                  }`}
+                  } | ${publication.views || 0} Visualizaciones`}
                 />
               </Card>
             </Col>
