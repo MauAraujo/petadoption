@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Col } from "react-bootstrap";
 import "./styles/contact.scss";
-import { Form, Input, Alert, Button } from "antd";
+import { Form, Input, Alert, Button, InputNumber, Select } from "antd";
 // import { Button } from "../Components/Buttons";
 import TextArea from "antd/lib/input/TextArea";
 import { sendEmail } from "../services/email.service";
-
 
 export default function ContactForm() {
   const [emailSent, setemailSent] = useState({});
@@ -39,7 +38,12 @@ export default function ContactForm() {
 
       {emailSent.sent ? (
         emailSent.ok ? (
-          <Alert className="m-2" message="Correo enviado" type="success" showIcon />
+          <Alert
+            className="m-2"
+            message="Correo enviado"
+            type="success"
+            showIcon
+          />
         ) : (
           <Alert
             className="m-2"
@@ -51,7 +55,6 @@ export default function ContactForm() {
       ) : null}
       <Form
         form={contactForm}
-
         // labelCol={{ span: 4 }}
         // wrapperCol={{ span: 14 }}
         layout="vertical"
@@ -60,13 +63,13 @@ export default function ContactForm() {
         onFinish={onFinish}
       >
         <Form.Item
-          label="Nombre del solicitante"
+          label="Nombre Completo"
           name="user_name"
           hasFeedback
           rules={[
             {
               required: true,
-              message: "Por favor ingrese su nombre",
+              message: "No ha ingresado su nombre",
             },
           ]}
         >
@@ -87,6 +90,79 @@ export default function ContactForm() {
           <Input type="email" placeholder="email@example.com"></Input>
         </Form.Item>
         <Form.Item
+          label="Dirección"
+          name="user_addr"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "No ha ingresado su dirección",
+            },
+          ]}
+        >
+          <Input placeholder="Dirección"></Input>
+        </Form.Item>
+        <Form.Item
+          label="Teléfono fijo"
+          name="user_phone"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "No ha ingresado su Teléfono fijo",
+            },
+          ]}
+        >
+          <InputNumber placeholder="Teléfono fijo"></InputNumber>
+
+          {/* <Input placeholder="Teléfono celular"></Input> */}
+        </Form.Item>
+        <Form.Item
+          label="Teléfono celular"
+          name="user_cellphone"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "No ha ingresado su Teléfono celular",
+            },
+          ]}
+        >
+          {/* <Input placeholder="Teléfono celular"></Input> */}
+          <InputNumber placeholder="Teléfono celular"></InputNumber>
+        </Form.Item>
+        <Form.Item
+          label="Edad"
+          name="user_age"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "No ha ingresado su Edad",
+            },
+          ]}
+        >
+          <InputNumber placeholder="Edad"></InputNumber>
+        </Form.Item>
+
+        <Form.Item
+          label="Vivienda"
+          name="user_house"
+          hasFeedback
+          rules={[
+            {
+              required: true,
+              message: "No ha ingresado su vivienda",
+            },
+          ]}
+        >
+          <Select defaultValue="casa" style={{ width: 120 }} >
+            <Option value="casa">Casa</Option>
+            <Option value="departamento">Departamento</Option>
+          </Select>
+        </Form.Item>
+
+        <Form.Item
           name="message"
           label="Message"
           hasFeedback
@@ -97,7 +173,10 @@ export default function ContactForm() {
             },
           ]}
         >
-          <TextArea rows={4} placeholder="Por que le gustaria adoptar esta mascota?" />
+          <TextArea
+            rows={4}
+            placeholder="Por que le gustaria adoptar esta mascota?"
+          />
         </Form.Item>
         <Form.Item
 
@@ -106,7 +185,9 @@ export default function ContactForm() {
         //     offset: 6,
         //   }}
         >
-          <Button type="primary" htmlType="submit">Enviar</Button>
+          <Button type="primary" htmlType="submit">
+            Enviar
+          </Button>
         </Form.Item>
       </Form>
     </Col>

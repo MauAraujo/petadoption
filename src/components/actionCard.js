@@ -10,11 +10,11 @@ import { useState } from "react";
 import { Modal } from "antd";
 import { Col } from "react-bootstrap";
 import "./styles/contact.scss";
-import { Form, Input, Alert } from "antd";
+import { Form, Input, Alert, InputNumber, Select } from "antd";
 // import { Button } from "../Components/Buttons";
 import TextArea from "antd/lib/input/TextArea";
 import { sendEmail } from "../services/email.service";
-
+const { Option } = Select;
 export default function ActionCard(props) {
   const [adopt, setadopt] = useState(false);
   const [emailSent, setemailSent] = useState({});
@@ -23,7 +23,7 @@ export default function ActionCard(props) {
 
   const onFinish = () => {
     const values = contactForm.getFieldsValue();
-    values["pet_name"] = props.pet?.name || ""
+    values["pet_name"] = props.pet?.name || "";
     console.log(values);
 
     sendEmail(values).then(
@@ -33,9 +33,8 @@ export default function ActionCard(props) {
         console.log(result.text);
         setTimeout(() => {
           setemailSent({});
-
         }, 3000);
-        setadopt(false)
+        setadopt(false);
       },
       (error) => {
         setemailSent({ sent: true, ok: false });
@@ -43,7 +42,6 @@ export default function ActionCard(props) {
         setTimeout(() => {
           setemailSent({});
         }, 3000);
-
       }
     );
   };
@@ -94,13 +92,13 @@ export default function ActionCard(props) {
             onFinish={onFinish}
           >
             <Form.Item
-              label="Nombre del solicitante"
+              label="Nombre Completo"
               name="user_name"
               hasFeedback
               rules={[
                 {
                   required: true,
-                  message: "Por favor ingrese su nombre",
+                  message: "No ha ingresado su nombre",
                 },
               ]}
             >
@@ -121,6 +119,130 @@ export default function ActionCard(props) {
               <Input type="email" placeholder="email@example.com"></Input>
             </Form.Item>
             <Form.Item
+              label="Dirección"
+              name="user_dir"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado su dirección",
+                },
+              ]}
+            >
+              <Input placeholder="Dirección"></Input>
+            </Form.Item>
+            <Form.Item
+              label="Teléfono fijo"
+              name="user_phone"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado su Teléfono fijo",
+                },
+              ]}
+            >
+              <Input placeholder="Teléfono fijo"></Input>
+
+              {/* <Input placeholder="Teléfono celular"></Input> */}
+            </Form.Item>
+            <Form.Item
+              label="Teléfono celular"
+              name="user_cellphone"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado su Teléfono celular",
+                },
+              ]}
+            >
+              {/* <Input placeholder="Teléfono celular"></Input> */}
+              <Input placeholder="Teléfono celular"></Input>
+            </Form.Item>
+            <Form.Item
+              label="Edad"
+              name="user_age"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado su Edad",
+                },
+              ]}
+            >
+              <Input placeholder="Edad"></Input>
+            </Form.Item>
+
+            <Form.Item
+              label="Vivienda"
+              name="user_house"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado su vivienda",
+                },
+              ]}
+            >
+              <Select>
+                <Option value="Casa">Casa</Option>
+                <Option value="Departamento">Departamento</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              label="Arrendamiento"
+              name="user_rent"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado su tipo de arrendamiento vivienda",
+                },
+              ]}
+            >
+              <Select>
+                <Option value="Propia">Casa propia</Option>
+                <Option value="Renta">Renta</Option>
+              </Select>
+            </Form.Item>
+
+            <Form.Item
+              name="family_members"
+              label="¿Cuántos miembros de la familia son y de que edad?"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado cuantas personas viven en su casa",
+                },
+              ]}
+            >
+              <TextArea
+                rows={4}
+                placeholder="¿Cuántos miembros de la familia son y de que edad?"
+              />
+            </Form.Item>
+
+            <Form.Item
+              name="other_pets"
+              label="¿Tiene otras mascotas? ¿De que especie?"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: "No ha ingresado si tiene otras mascotas",
+                },
+              ]}
+            >
+              <TextArea
+                rows={4}
+                placeholder="¿Tiene otras mascotas? ¿De que especie?"
+              />
+            </Form.Item>
+
+            {/* <Form.Item
               name="message"
               label="Message"
               hasFeedback
@@ -135,16 +257,7 @@ export default function ActionCard(props) {
                 rows={4}
                 placeholder="Por que le gustaria adoptar esta mascota?"
               />
-            </Form.Item>
-            <Form.Item
-
-            //   wrapperCol={{
-            //     span: 12,
-            //     offset: 6,
-            //   }}
-            >
-              {/* <Button type="primary" htmlType="submit">Enviar</Button> */}
-            </Form.Item>
+            </Form.Item> */}
           </Form>
         </Col>
       </Modal>
@@ -160,9 +273,9 @@ export default function ActionCard(props) {
           >
             ¡Adóptame!
           </button>
-          <button type="button" className="btn btn-primary rounded-pill">
+          {/* <button type="button" className="btn btn-primary rounded-pill">
             Donativo
-          </button>
+          </button> */}
           <div className="social-banner">
             <FontAwesomeIcon className="social" icon={faFacebookF} />
             <FontAwesomeIcon className="social" icon={faTwitter} />
