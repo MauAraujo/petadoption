@@ -34,7 +34,7 @@ export default function ContactForm() {
   };
   return (
     <Col sm={12} lg={6}>
-      <h1 className="txt-primary">Contact</h1>
+      <h1 className="txt-primary">Formato de Adopción</h1>
 
       {emailSent.sent ? (
         emailSent.ok ? (
@@ -190,6 +190,7 @@ export default function ContactForm() {
           </Button>
         </Form.Item>
       </Form>
+    
     </Col>
   );
 }
