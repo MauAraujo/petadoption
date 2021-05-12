@@ -1,7 +1,6 @@
 import { Form, Input, Button, Checkbox, Card, Spin, Row, Col } from "antd";
 import "./styles/login.scss";
 import React from "react";
-import { Auth } from "aws-amplify";
 
 const ChallengeName = {
   SoftwareTokenMFA: "SOFTWARE_TOKEN_MFA",
@@ -37,12 +36,13 @@ class Login extends React.Component {
     try {
       const { requiredAttributes } = this.state.user.challengeParam;
       console.log(this.state.user);
-      console.log(requiredAttributes);
-      const user = await Auth.completeNewPassword(
-        this.state.user,
-        password,
-        requiredAttributes
-      );
+        console.log(requiredAttributes);
+        var user;
+      // const user = await Auth.completeNewPassword(
+      //   this.state.user,
+      //   password,
+      //   requiredAttributes
+      // );
 
       if (!user.challengeName) {
         this.finishAuth(user);
@@ -61,8 +61,9 @@ class Login extends React.Component {
   async SignIn({ username, password }) {
     this.setState({ isLoading: true });
     console.log(username, password);
-    try {
-      const user = await Auth.signIn(username, password);
+      try {
+          var user;
+      //const user = await Auth.signIn(username, password);
       console.log(user);
       this.setState({ user: user, isLoggedIn: true });
       if (

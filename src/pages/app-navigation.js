@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from 'react'
-import { Switch, Route } from "react-router-dom"
+import React, { Component, Fragment } from 'react';
+import { Switch, Route } from "react-router-dom";
 //Layout
-import Layout from '../components/layout'
+import Layout from '../components/layout';
 // Pages
-import Homepage from './homepage'
-import Detail from './detail'
-import Catalogo from './catalogo'
-import Dashboard from './dashboard'
-import Login from './login'
+import Homepage from './homepage';
+import Detail from './detail';
+import Catalogo from './catalogo';
+import Dashboard from './dashboard';
+import Login from './login';
 
 // Errors
 

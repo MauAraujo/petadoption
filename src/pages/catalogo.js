@@ -2,10 +2,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./styles/catalogo.scss";
 //components
 import SubHeader from "../components/subHeader";
-import {
-  getPublications,
-  getPublicationsFilter,
-} from "../services/publications.service";
+// import {
+//   getPublications,
+//   getPublicationsFilter,
+// } from "../services/publications.service";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Select, Input } from "antd";
@@ -21,16 +21,16 @@ export default function Catalogo() {
   const [selectedFilters, setSelectedFilters] = useState({});
 
   useEffect(() => {
-    async function fetchPublications() {
-      setpublications(await getPublications());
+    //async function fetchPublications() {
+      // setpublications(await getPublications());
 
-      await getPublicationsFilter({
-        name: "benito",
-        animal: "Gato",
-        colors: ["gris", "white"],
-      });
-    }
-    fetchPublications();
+      // await getPublicationsFilter({
+      //   name: "benito",
+      //   animal: "Gato",
+      //   colors: ["gris", "white"],
+      // });
+    //}
+    //fetchPublications();
   }, []);
 
   let card = (publication, index) => {
@@ -92,13 +92,13 @@ export default function Catalogo() {
   async function onDeselect(value, key) {
     delete selectedFilters[key];
     console.log(selectedFilters);
-    setSelectedFilters(selectedFilters);
-    setpublications(await getPublicationsFilter(selectedFilters));
+    //setSelectedFilters(selectedFilters);
+    //setpublications(await getPublicationsFilter(selectedFilters));
   }
 
   async function onBlur() {
-    console.log("Apply filters: ", selectedFilters);
-    setpublications(await getPublicationsFilter(selectedFilters));
+    //console.log("Apply filters: ", selectedFilters);
+    //setpublications(await getPublicationsFilter(selectedFilters));
   }
 
   return (

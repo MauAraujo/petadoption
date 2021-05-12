@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Fragment } from "react";
 import { Menu, Layout } from "antd";
-import { Auth } from "aws-amplify";
 import {
   MessageOutlined,
   PlusCircleOutlined,
@@ -26,7 +25,8 @@ const { Content, Sider } = Layout;
 
 export default function Dashboard() {
     // const media = window.matchMedia(" (max-width: 600px)")
-    const session = useRef(async () => await Auth.currentSession());
+    //const session = useRef(async () => await Auth.currentSession());
+    var session;
     const [content, setContent] = useState(<Posts user={session}/>);
 
   // media.addListener(() => {
@@ -36,13 +36,13 @@ export default function Dashboard() {
   // })
 
   useEffect(() => {
-    async function fetchSession() {
-      const currentSession = await Auth.currentSession();
-      const user = await Auth.currentUserInfo();
-      //   this.setState({ session: session, user: user });
-      session.current = { session: currentSession, user: user };
-    }
-    fetchSession();
+    // async function fetchSession() {
+    //   const currentSession = await Auth.currentSession();
+    //   const user = await Auth.currentUserInfo();
+    //   //   this.setState({ session: session, user: user });
+    //   session.current = { session: currentSession, user: user };
+    // }
+    // fetchSession();
   }, [session]);
   // async componentDidMount() {
 

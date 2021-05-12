@@ -1,6 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-import API from "@aws-amplify/api";
-import Storage from "@aws-amplify/storage";
 import "./styles/Dashboard.scss";
 import {
   Form,
@@ -17,18 +15,15 @@ import {
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { UploadOutlined } from "@ant-design/icons";
 import { Container, Col, Row } from "react-bootstrap";
-import {
-  uploadPublication,
-    updatePublication,
-    removePublication
-} from "../services/publications.service";
+// import {
+//   uploadPublication,
+//     updatePublication,
+//     removePublication
+// } from "../services/publications.service";
 import filters from "../data/filters.json";
-import { getPublications } from "../services/publications.service";
+//import { getPublications } from "../services/publications.service";
 import Meta from "antd/lib/card/Meta";
 import { Link } from "react-router-dom";
-
-/* AWS Config */
-API.configure();
 
 const { Option } = Select;
 
@@ -54,14 +49,14 @@ export function NewPost(props) {
     console.log(imgKeys);
     delete values.image;
     values["images"] = imgKeys;
-    uploadPublication(values)
-      .then(() => {
-        message.success("La publicación se ha guardado exitosamente");
-        form.resetFields();
-      })
-      .catch(() => {
-        message.error("Ha ocurrido un error");
-      });
+    // uploadPublication(values)
+    //   .then(() => {
+    //     message.success("La publicación se ha guardado exitosamente");
+    //     form.resetFields();
+    //   })
+    //   .catch(() => {
+    //     message.error("Ha ocurrido un error");
+    //   });
   };
 
   const uploadProps = {
@@ -248,10 +243,10 @@ export function Posts(props) {
   };
 
   useEffect(() => {
-    async function fetchPublications() {
-      setpublications(await getPublications());
-    }
-    fetchPublications();
+    // async function fetchPublications() {
+    //   setpublications(await getPublications());
+    // }
+    // fetchPublications();
   }, []);
 
   const cleanData = (data) => {
@@ -269,15 +264,15 @@ export function Posts(props) {
     values["images"] = [...imgKeys, ...edit["images"]];
     console.log(values);
 
-    updatePublication(edit["publicationID"], { ...edit, ...values })
-      .then(async () => {
-        message.success("La puclicación se ha editado exitosamente");
-        form.resetFields();
-        setpublications(await getPublications());
-      })
-      .catch(() => {
-        message.error("Ha ocurrido un error");
-      });
+    // updatePublication(edit["publicationID"], { ...edit, ...values })
+    //   .then(async () => {
+    //     message.success("La puclicación se ha editado exitosamente");
+    //     form.resetFields();
+    //     setpublications(await getPublications());
+    //   })
+    //   .catch(() => {
+    //     message.error("Ha ocurrido un error");
+    //   });
 
     setedit(null);
   };
@@ -410,7 +405,7 @@ export function Posts(props) {
                       </Link>,
                       <Popconfirm
                           onConfirm={() => {
-                              removePublication(publication.publicationID)
+                              //removePublication(publication.publicationID)
                           }}
                           cancelText={"Cancelar"}
                           okText={"Eliminar"}
