@@ -1,38 +1,20 @@
 const axios = require('axios');
 
-axios.get('http://127.0.0.1:8080/ping')
-    .then(response => {
-        console.log(response);
-    })
-    .catch(error => {
-        console.log(error);
+export async function getPublications(filter) {
+    //const path = filter ? `/publications${filter}` : '/publications';
+    const response = await axios.get('http://127.0.0.1:8080/publications').catch(err => {
+        console.log(err);
     });
-// export async function getPublications(filter) {
-//     //const path = filter ? `/publications${filter}` : '/publications';
+    return response.data;
+}
 
-//     let data = {};
-//     let content = data
-//         .filter((obj) => obj.name)
-//         .map((obj) => {
-//             return obj;
-//         });
-//     console.log(content);
-//     return content;
-// }
-
-// export async function getPublication(publicationID) {
-//   try {
-//     let res = await API.get(
-//       apiName,
-//       "/publications/object?publicationID=" + publicationID
-//     );
-//     console.log(res);
-//     return res;
-//   } catch (error) {
-//     console.error(error);
-//     return null;
-//   }
-// }
+export async function getPublication(publicationID) {
+    const data = await axios.get(`http://127.0.0.1:8080/publications?id=${publicationID}`).catch(err => {
+        console.log(err);
+    });
+    console.log(data);
+    return data;
+}
 
 // export async function getPublicationsFilter(selectedFilters) {
 //   let publications = await getPublications();

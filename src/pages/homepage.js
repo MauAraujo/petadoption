@@ -7,22 +7,21 @@ import Steps from "../components/steps";
 import Help from "../components/help";
 import DiscoverCard from "../components/discover-card";
 import "../services/publications.service";
-// import {
-//   getPublications,
-// } from "../services/publications.service";
+import {
+  getPublications,
+} from "../services/publications.service";
 
 export default function Homepage() {
   const [publications, setpublications] = useState([]);
 
     useEffect(() => {
-    //    console.log('Mounted')
-    //     async function fetchPublications() {
-    //         let publications = await getPublications()
-    //         publications = publications.slice(publications.length - 6, publications.length)
-    //         setpublications(publications);
-    // }
-    //fetchPublications();
-    //console.log(publications);
+        async function fetchPublications() {
+            let publications = await getPublications();
+            publications = publications.slice(publications.length - 6, publications.length);
+            setpublications(publications);
+    }
+    fetchPublications();
+    console.log(publications);
   }, []);
 
   return (
@@ -30,7 +29,7 @@ export default function Homepage() {
       <div className="container my-4">
         <Hero />
         <SearchBar />
-        {/* <Available publications={publications} /> */}
+        <Available publications={publications} />
       </div>
       <section className="bg-white">
         <div className="container my-3">

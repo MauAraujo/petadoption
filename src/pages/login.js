@@ -1,14 +1,7 @@
 import { Form, Input, Button, Checkbox, Card, Spin, Row, Col } from "antd";
 import "./styles/login.scss";
 import React from "react";
-
-const ChallengeName = {
-  SoftwareTokenMFA: "SOFTWARE_TOKEN_MFA",
-  SMSMFA: "SMS_MFA",
-  NewPasswordRequired: "NEW_PASSWORD_REQUIRED",
-  MFASetup: "MFA_SETUP",
-  CustomChallenge: "CUSTOM_CHALLENGE",
-};
+import { LogIn } from "../services/auth.service";
 
 class Login extends React.Component {
   constructor(props) {
@@ -62,41 +55,12 @@ class Login extends React.Component {
     this.setState({ isLoading: true });
     console.log(username, password);
       try {
-          var user;
-      //const user = await Auth.signIn(username, password);
-      console.log(user);
-      this.setState({ user: user, isLoggedIn: true });
-      if (
-        user.challengeName === ChallengeName.SMSMFA ||
-        user.challengeName === ChallengeName.SoftwareTokenMFA
-      ) {
-        console.debug("confirm user with " + user.challengeName);
-        // this.handleAuthStateChange(AuthState.ConfirmSignIn, user);
-      } else if (user.challengeName === ChallengeName.NewPasswordRequired) {
-        console.debug("require new password", user.challengeParam);
-        this.setState({ needsNewPassword: true, loading: false });
-        // this.handleAuthStateChange(AuthState.ResetPassword, user);
-      } else if (user.challengeName === ChallengeName.MFASetup) {
-        console.debug("TOTP setup", user.challengeParam);
-        // this.handleAuthStateChange(AuthState.TOTPSetup, user);
-      } else if (
-        user.challengeName === ChallengeName.CustomChallenge &&
-        user.challengeParam &&
-        user.challengeParam.trigger === "true"
-      ) {
-        console.debug("custom challenge", user.challengeParam);
-        // this.handleAuthStateChange(AuthState.CustomConfirmSignIn, user);
-      } else {
-        this.finishAuth(user);
-      }
-    } catch (error) {
-      switch (error.code) {
-        case "NotAuthorizedException":
-          break;
-        default:
-          console.error(error);
-          break;
-      }
+          const user = await LogIn(username, password);
+          if (user !== null) {
+              this.finishAuth(user);
+          }
+      } catch (error) {
+          console.log(error);
     }
   }
 
