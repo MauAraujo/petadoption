@@ -1,24 +1,24 @@
 package routes
 
 import (
-	"net/http"
 	"context"
 	"fmt"
+	"net/http"
+	"time"
 
 	"server/data"
+
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
 	"go.mongodb.org/mongo-driver/bson"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func AddAuthRoutes(rg *gin.RouterGroup) {
 	a := rg.Group("/auth")
 
 	a.POST("/login", func(c *gin.Context) {
-		var json struct {
-			Username string `json:"username" binding:"required"`
-			Password string `json:"password" binding:"required"`
-		}
+		var json data.UserJSON
 
 		if c.Bind(&json) == nil {
 			var user data.User
@@ -34,17 +34,30 @@ func AddAuthRoutes(rg *gin.RouterGroup) {
 			if err != nil {
 				c.JSON(http.StatusUnauthorized, gin.H{})
 			}
-			c.JSON(http.StatusOK, gin.H{"uid": user.ID, "username": user.Username, "fullName": user.FullName})
+
+			signature := []byte ("pet-adoption-secret")
+
+			claims := data.CustomClaims{
+				user.ID,
+				user.Username,
+				user.FullName,
+				jwt.StandardClaims{
+					ExpiresAt: time.Now().Add(time.Duration(time.Minute*5)).Unix(),
+				},
+			}
+
+			token := jwt.NewWithClaims(jwt.SigningMethodHS512, claims)
+			ss, err := token.SignedString(signature)
+
+
+			c.JSON(http.StatusOK, ss)
 		}
 	})
 
 
 	a.POST("/signup", func(c *gin.Context) {
-		var json struct {
-			Username string `json:"username" binding:"required"`
-			Password string `json:"password" binding:"required"`
-		}
-
+		var json data.UserJSON
+		
 		if c.Bind(&json) == nil {
 			var user data.User
 			username := json.Username

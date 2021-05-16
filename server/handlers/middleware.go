@@ -1,6 +1,10 @@
 package handlers
 
 import (
+	"net/http"
+	"server/data"
+
+	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,4 +21,27 @@ func CORSMiddleware() gin.HandlerFunc {
 		}
 		c.Next()
 	}
+}
+
+func JWTValidationMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		tokenString := c.Params.ByName("token")
+		parsed, err := jwt.ParseWithClaims(tokenString, &data.CustomClaims{}, func(token *jwt.Token) (interface{},
+			error) {
+			return []byte ("pet-adoption-secret"), nil
+		})
+
+		if err != nil {
+			c.AbortWithStatus(http.StatusBadRequest)
+		}
+
+		if _, ok := parsed.Claims.(*data.CustomClaims); ok && parsed.Valid {
+			c.JSON(http.StatusOK, parsed)
+		} else {
+			c.AbortWithStatus(http.StatusUnauthorized)
+			return
+		}
+		c.Next()
+	}
+
 }

@@ -15,11 +15,11 @@ import {
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { UploadOutlined } from "@ant-design/icons";
 import { Container, Col, Row } from "react-bootstrap";
-// import {
-//   uploadPublication,
+import {
+   uploadPublication,
 //     updatePublication,
 //     removePublication
-// } from "../services/publications.service";
+} from "../services/publications.service";
 import filters from "../data/filters.json";
 //import { getPublications } from "../services/publications.service";
 import Meta from "antd/lib/card/Meta";
@@ -48,15 +48,16 @@ export function NewPost(props) {
     console.log("Received values of form: ", values);
     console.log(imgKeys);
     delete values.image;
-    values["images"] = imgKeys;
-    // uploadPublication(values)
-    //   .then(() => {
-    //     message.success("La publicación se ha guardado exitosamente");
-    //     form.resetFields();
-    //   })
-    //   .catch(() => {
-    //     message.error("Ha ocurrido un error");
-    //   });
+      values["images"] = imgKeys;
+
+    uploadPublication(values)
+      .then(() => {
+        message.success("La publicación se ha guardado exitosamente");
+        form.resetFields();
+      })
+      .catch(() => {
+        message.error("Ha ocurrido un error");
+      });
   };
 
   const uploadProps = {

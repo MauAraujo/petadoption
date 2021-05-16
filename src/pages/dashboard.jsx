@@ -21,12 +21,12 @@ import {
 import "antd/dist/antd.css";
 import "../components/styles/Dashboard.scss";
 import { Posts, NewPost, Inbox } from "../components/DasboardContent";
+import { GetSession } from "../services/auth.service";
 const { Content, Sider } = Layout;
 
 export default function Dashboard() {
     // const media = window.matchMedia(" (max-width: 600px)")
-    //const session = useRef(async () => await Auth.currentSession());
-    var session;
+    const session = useRef(() => GetSession());
     const [content, setContent] = useState(<Posts user={session}/>);
 
   // media.addListener(() => {
@@ -36,13 +36,17 @@ export default function Dashboard() {
   // })
 
   useEffect(() => {
-    // async function fetchSession() {
-    //   const currentSession = await Auth.currentSession();
-    //   const user = await Auth.currentUserInfo();
-    //   //   this.setState({ session: session, user: user });
-    //   session.current = { session: currentSession, user: user };
-    // }
-    // fetchSession();
+    async function fetchSession() {
+        const currentSession = await GetSession();
+        const user = {
+            "id" : currentSession.uid,
+            "username": currentSession.username,
+            "fullname" : currentSession.fullname
+        };
+       //this.setState({ session: session, user: user });
+      session.current = { session: currentSession, user: user };
+    }
+    fetchSession();
   }, [session]);
   // async componentDidMount() {
 

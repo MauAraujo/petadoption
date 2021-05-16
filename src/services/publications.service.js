@@ -1,15 +1,17 @@
 const axios = require('axios');
 
+const api = 'http://127.0.0.1:8080';
+
 export async function getPublications(filter) {
     //const path = filter ? `/publications${filter}` : '/publications';
-    const response = await axios.get('http://127.0.0.1:8080/publications').catch(err => {
+    const response = await axios.get(api + '/publications').catch(err => {
         console.log(err);
     });
     return response.data;
 }
 
 export async function getPublication(publicationID) {
-    const data = await axios.get(`http://127.0.0.1:8080/publications?id=${publicationID}`).catch(err => {
+    const data = await axios.get(api + `/publications?id=${publicationID}`).catch(err => {
         console.log(err);
     });
     console.log(data);
@@ -67,15 +69,10 @@ export async function getPublication(publicationID) {
 //   return publications.filter(filter);
 // }
 
-// export function uploadPublication(data) {
-//   return API.post(apiName, "/publications", {
-//     body: {
-//       //   publicationID: "786tyghb8t",
-//       publicationID: `${new Date().getTime()}`,
-//       content: { publicationDate: new Date(), ...data },
-//     },
-//   });
-// }
+export function uploadPublication(data) {
+  data.date = new Date();
+  return axios.post(api + "/publications", data);
+}
 
 // export function updatePublication(publicationID , data){
 //   console.log("update", publicationID)
