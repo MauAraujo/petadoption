@@ -11,11 +11,10 @@ export async function getPublications(filter) {
 }
 
 export async function getPublication(publicationID) {
-    const data = await axios.get(api + `/publications?id=${publicationID}`).catch(err => {
+    const response = await axios.get(api + `/publications/${publicationID}`).catch(err => {
         console.log(err);
     });
-    console.log(data);
-    return data;
+    return response.data;
 }
 
 // export async function getPublicationsFilter(selectedFilters) {
@@ -70,8 +69,11 @@ export async function getPublication(publicationID) {
 // }
 
 export function uploadPublication(data) {
-  data.date = new Date();
-  return axios.post(api + "/publications", data);
+    data.date = new Date();
+    const response = axios.post(api + "/publications", data).catch(err => {
+        console.log(err);
+    });
+    return response;
 }
 
 // export function updatePublication(publicationID , data){

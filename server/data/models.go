@@ -7,31 +7,20 @@ import (
 
 type Publication struct {
 	ID           primitive.ObjectID  `bson:"_id,omitempty"`
-	Name         string              `bson:"name,omitempty"`
-	Animal       string              `bson:"animal,omitempty"`
-	Breed        string              `bson:"breed,omitempty"`
-	Gender       string              `bson:"gender,omitempty"`
-	Colors       []string            `bson:"colors,omitempty"`
-	Size         string              `bson:"size,omitempty"`
-	Age          string              `bson:"age,omitempty"`
-	Description  string              `bson:"description,omitempty"`
-	Location     string              `bson:"location,omitempty"`
-	Date         primitive.DateTime  `bson:"date,omitempty"`
-	Views        int                 `bson:"views,omitempty"`
-}
-
-type PublicationJSON struct {
-	Name         string   `json:"name"        binding:"required"`
-	Animal       string   `json:"animal"      binding:"required"`
-	Breed        []string `json:"breed"       binding:"required,dive"`
-	Gender       string   `json:"gender"      binding:"required"`
-	Colors       []string `json:"colors"      binding:"required,dive"`
-	Size         string   `json:"petSize"     binding:"required"`
-	Age          string   `json:"age"         binding:"required"`
-	Description  string   `json:"description" binding:"required"`
-	Location     string   `json:"location"    binding:"required"`
-	Date         string   `json:"date"        binding:"required"`
-	Images       []string `json:"images"      binding:"required,dive"`
+	Name         string              `bson:"name,omitempty" json:"name" binding:"required"`
+	Animal       string              `bson:"animal,omitempty" json:"animal" binding:"required"`
+	Breed        []string            `bson:"breed,omitempty" json:"breed" binding:"required"`
+	Gender       string              `bson:"gender,omitempty" json:"gender" binding:"required"`
+	Colors       []string            `bson:"colors,omitempty" json:"colors" binding:"required"`
+	Size         string              `bson:"size,omitempty" json:"petSize" binding:"required"`
+	Age          int                 `bson:"age,omitempty" json:"age"`
+	Description  string              `bson:"description,omitempty" json:"description" binding:"required"`
+	Location     string              `bson:"location,omitempty" json:"location" binding:"required"`
+	Date         primitive.DateTime  `bson:"date,omitempty" json:"date" binding:"required"`
+	Images       []string            `bson:"images,omitempty" json:"images"`
+	GoodWith     string              `bson:"goodWith,omitempty" json:"goodWith"`
+	Preferences  string              `bson:"preferences,omitempty" json:"preferences"`
+	Views        int                 `bson:"views,omitempty" json:"views"`
 }
 
 type User struct {

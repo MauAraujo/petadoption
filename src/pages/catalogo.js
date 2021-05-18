@@ -2,10 +2,10 @@ import React, { Fragment, useEffect, useState } from "react";
 import "./styles/catalogo.scss";
 //components
 import SubHeader from "../components/subHeader";
-// import {
-//   getPublications,
+ import {
+   getPublications,
 //   getPublicationsFilter,
-// } from "../services/publications.service";
+} from "../services/publications.service";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Select, Input } from "antd";
@@ -21,16 +21,15 @@ export default function Catalogo() {
   const [selectedFilters, setSelectedFilters] = useState({});
 
   useEffect(() => {
-    //async function fetchPublications() {
-      // setpublications(await getPublications());
-
+    async function fetchPublications() {
+      setpublications(await getPublications());
       // await getPublicationsFilter({
       //   name: "benito",
       //   animal: "Gato",
       //   colors: ["gris", "white"],
       // });
-    //}
-    //fetchPublications();
+    }
+    fetchPublications();
   }, []);
 
   let card = (publication, index) => {
@@ -38,9 +37,9 @@ export default function Catalogo() {
       <Col
         md={2}
         className="mb-5 publication-card"
-        key={publication.publicationID || index}
+        key={publication.ID || index}
       >
-        <Link to={"/detail/" + (publication.publicationID || index)}>
+        <Link to={"/detail/" + (publication.ID || index)}>
           <div className="img-container">
             <img
               className="contain"

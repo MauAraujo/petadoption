@@ -3,13 +3,13 @@ package routes
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 
 	"server/data"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func AddPublicationRoutes(rg *gin.RouterGroup) {
@@ -27,41 +27,39 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 		if err = cursor.All(context.TODO(), &publications); err != nil {
 		 	panic(err)
 		}
-
-		fmt.Println(publications)
 		c.JSON(http.StatusOK, publications)
 	})
 
-	p.GET(":publicationID", func(c *gin.Context) {
-		id := c.Params.ByName("id")
-
+	p.GET(":id", func(c *gin.Context) {
 		var publication data.Publication
 
-		collection := data.Client.Database("pet-adoption").Collection("publications")
-		cursor, err := collection.Find(context.TODO(), bson.M{"id": id})
+		id := c.Params.ByName("id")
+		objectID, err := primitive.ObjectIDFromHex(id)
 
 		if err != nil {
-		 	panic(err)
-		}
-		if err = cursor.All(context.TODO(), &publication); err != nil {
-		 	panic(err)
+			panic(err)
 		}
 
-		fmt.Println(publication)
+		collection := data.Client.Database("pet-adoption").Collection("publications")
+		publicationResult := collection.FindOne(context.TODO(), bson.M{"_id": objectID})
+
+		publicationResult.Decode(&publication)
+
 		c.JSON(http.StatusOK, publication)
 	})
 
 	p.POST("", func(c *gin.Context) {
-		var publication data.PublicationJSON
+		var publication data.Publication
 
-		data, _ := ioutil.ReadAll(c.Request.Body)
-		fmt.Printf("ctx.Request.body: %v", string(data))
+		err := c.Bind(&publication); if err == nil {
+			collection := data.Client.Database("pet-adoption").Collection("publications")
+			insertResult, err := collection.InsertOne(context.TODO(), publication)
 
-		if c.ShouldBind(&publication) == nil {
-			fmt.Println("Did bind")
-			fmt.Println(publication)
-			c.JSON(http.StatusOK, publication)
+			if err != nil {
+				panic(err)
+			}
+			c.JSON(http.StatusOK, insertResult)
 		}
-		fmt.Println("Did not bind")
+		fmt.Println(err)
 	})
 }

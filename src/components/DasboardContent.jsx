@@ -21,11 +21,20 @@ import {
 //     removePublication
 } from "../services/publications.service";
 import filters from "../data/filters.json";
-//import { getPublications } from "../services/publications.service";
+import { getPublications } from "../services/publications.service";
 import Meta from "antd/lib/card/Meta";
 import { Link } from "react-router-dom";
 
 const { Option } = Select;
+const Minio = require('minio');
+
+var minioClient = new Minio.Client({
+    endPoint: '127.0.0.1',
+    port: 9000,
+    useSSL: false,
+    accessKey: 'admin',
+    secretKey: 'password'
+});
 
 let dummy =
     "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
@@ -61,24 +70,40 @@ export function NewPost(props) {
   };
 
   const uploadProps = {
-    action:
-      "https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/image",
+      action: "",
     multiple: false,
     listType: "picture",
     className: "upload-list-inline",
-    beforeUpload: (file) => {
-      const path = `publications/${props.user.id}/${file.name}`;
-      console.log(path);
-      Storage.put(path, file, {
-        contentType: "image/png",
-      })
-        .then((result) => {
-          let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(
-            result.key
-          )}`;
-          return setImgKeys(imgKeys.concat([url]));
-        })
-        .catch((err) => console.log(err));
+      beforeUpload: async (file) => {
+          const metaData = {
+              'Content-Type': file.type,
+          };
+          const path = `publications/${props.user.id}/${file.name}`;
+          const buffer = Buffer.from(await file.arrayBuffer());
+          console.log(path);
+          console.log(buffer);
+
+          minioClient.putObject('pet-adoption', path, buffer, metaData, (err, objInfo) => {
+              console.log(err);
+          });
+
+
+          minioClient.presignedUrl('GET', 'pet-adoption', path, (err, presignedUrl) => {
+              if (err) return console.log(err);
+              console.log(presignedUrl);
+              setImgKeys(imgKeys.concat([presignedUrl]));
+          });
+
+      // Storage.put(path, file, {
+      //   contentType: "image/png",
+      // })
+      //   .then((result) => {
+      //     let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(
+      //       result.key
+      //     )}`;
+      //     return setImgKeys(imgKeys.concat([url]));
+      //   })
+      //   .catch((err) => console.log(err));
     },
     transformFile: () => {
       return "";
@@ -204,6 +229,7 @@ export function NewPost(props) {
     </Container>
   );
 }
+
 export function Posts(props) {
   const [publications, setpublications] = useState([]);
   const [edit, setedit] = useState(null);
@@ -244,10 +270,10 @@ export function Posts(props) {
   };
 
   useEffect(() => {
-    // async function fetchPublications() {
-    //   setpublications(await getPublications());
-    // }
-    // fetchPublications();
+    async function fetchPublications() {
+      setpublications(await getPublications());
+    }
+    fetchPublications();
   }, []);
 
   const cleanData = (data) => {
@@ -265,7 +291,7 @@ export function Posts(props) {
     values["images"] = [...imgKeys, ...edit["images"]];
     console.log(values);
 
-    // updatePublication(edit["publicationID"], { ...edit, ...values })
+    // updatePublication(edit["ID"], { ...edit, ...values })
     //   .then(async () => {
     //     message.success("La puclicación se ha editado exitosamente");
     //     form.resetFields();
@@ -401,12 +427,12 @@ export function Posts(props) {
                               form.setFieldsValue(publication);
                           }}
                       />,
-                      <Link to={"/detail/" + (publication.publicationID)}>
+                      <Link to={"/detail/" + (publication.ID)}>
                           <EyeOutlined />
                       </Link>,
                       <Popconfirm
                           onConfirm={() => {
-                              //removePublication(publication.publicationID)
+                              //removePublication(publication.ID)
                           }}
                           cancelText={"Cancelar"}
                           okText={"Eliminar"}

@@ -12,13 +12,13 @@ export default function Available(props) {
   let card = (publication, index) => {
     console.log(publication)
     return (
-      <Col md={2} className="mb-5 publication-card" key={publication.publicationID || index} >
-        <Link to={"/detail/"+(publication.publicationID || index)}>
+      <Col md={2} className="mb-5 publication-card" key={publication.ID || index} >
+        <Link to={"/detail/"+(publication.ID || index)}>
           <div className='img-container'>
               <img className='contain' src={publication.images ? publication.images[0] : dummy} alt={dummy} />
           </div>
           <div className='title-container'>
-            <h6 className='subtitle-pet text-center'>{publication.Name}</h6>
+            <h6 className='subtitle-pet text-center'>{publication.name}</h6>
           </div>
         </Link>
       </Col>
