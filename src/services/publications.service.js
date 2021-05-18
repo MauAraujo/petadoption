@@ -68,34 +68,24 @@ export async function getPublication(publicationID) {
 //   return publications.filter(filter);
 // }
 
-export function uploadPublication(data) {
+export async function uploadPublication(data) {
     data.date = new Date();
-    const response = axios.post(api + "/publications", data).catch(err => {
+    const response = await axios.post(api + "/publications", data).catch(err => {
         console.log(err);
     });
     return response;
 }
 
-// export function updatePublication(publicationID , data){
-//   console.log("update", publicationID)
-//   return API.post(apiName, "/publications", {
-//     body: {
-//       publicationID: publicationID,
-//       content: data
-//     }
-//   }).then(msg => console.log(msg)).catch(err => console.error("Error en update", err))
-// }
+export function updatePublication(publicationID , data){
+    const response = axios.put(api + `/publications/${publicationID}`, data).catch(err => {
+        console.log(err);
+    });
+    return response;
+}
 
-// export async function removePublication(publicationID) {
-//     try {
-//         let res = await API.del(
-//             apiName,
-//             "/publications/object?publicationID=" + publicationID
-//         );
-//         console.log(res);
-//         return res;
-//     } catch (error) {
-//         console.error(error);
-//         return null;
-//     }
-// }
+export async function removePublication(publicationID) {
+    const response = axios.delete(api + `/publications/${publicationID}`).catch(err => {
+        console.log(err);
+    });
+    return response;
+}

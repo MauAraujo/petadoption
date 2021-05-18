@@ -25,22 +25,28 @@ export default function Available(props) {
     )
   }
 
+    if(props.publications?.length > 0) {
+        return (
+            <div className="available-container">
+              <h2 className="subtitle">Mascotas disponibles</h2>
+              <div className="row mt-5 pb-3 available">
 
-  return (
-    <div className="available-container">
-      <h2 className="subtitle">Mascotas disponibles</h2>
-      <div className="row mt-5 pb-3 available">
+                {props.publications.map((publication, index) => {
 
-        {props.publications.map((publication, index) => {
-
-          return card(publication, index);
-        })}
-        {/* {}
-        {petCard()}
-        {petCard()}
-        {petCard()}
-        {petCard()} */}
-      </div>
-    </div>
-  );
+                    return card(publication, index);
+                })}
+                {/* {}
+                   {petCard()}
+                   {petCard()}
+                   {petCard()}
+                   {petCard()} */}
+              </div>
+            </div>
+        );
+    } else {
+        return (
+            <div>
+            </div>
+        );
+    }
 }

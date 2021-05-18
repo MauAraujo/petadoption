@@ -17,8 +17,8 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Container, Col, Row } from "react-bootstrap";
 import {
    uploadPublication,
-//     updatePublication,
-//     removePublication
+   updatePublication,
+   removePublication
 } from "../services/publications.service";
 import filters from "../data/filters.json";
 import { getPublications } from "../services/publications.service";
@@ -109,10 +109,10 @@ export function NewPost(props) {
       return "";
     },
     onRemove: (file) => {
-      const path = `publications/${props.user.id}/${file.name}`;
-      Storage.remove(path)
-        .then((result) => console.log(result))
-        .catch((err) => console.log(err));
+      // const path = `publications/${props.user.id}/${file.name}`;
+      // Storage.remove(path)
+      //   .then((result) => console.log(result))
+      //   .catch((err) => console.log(err));
     },
   };
 
@@ -240,32 +240,52 @@ export function Posts(props) {
 
   const uploadProps = {
     action:
-      "https://u4uekrsanj.execute-api.us-east-2.amazonaws.com/dev/publications/image",
+      "",
     multiple: false,
     listType: "picture",
     className: "upload-list-inline",
-    beforeUpload: (file) => {
-      const path = `publications/${props.user.id}/${file.name}`;
-      console.log(path);
-      Storage.put(path, file, {
-        contentType: "image/png",
-      })
-        .then((result) => {
-          let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(
-            result.key
-          )}`;
-          return setImgKeys(imgKeys.concat([url]));
-        })
-        .catch((err) => console.log(err));
+      beforeUpload: async (file) => {
+          const metaData = {
+              'Content-Type': file.type,
+          };
+          const user = props.user.current.user;
+          const path = `publications/${user.id}/${file.name}`;
+          const buffer = Buffer.from(await file.arrayBuffer());
+          console.log(path);
+          console.log(buffer);
+
+          minioClient.putObject('pet-adoption', path, buffer, metaData, (err, objInfo) => {
+              console.log(err);
+          });
+
+
+          minioClient.presignedUrl('GET', 'pet-adoption', path, (err, presignedUrl) => {
+              if (err) return console.log(err);
+              console.log(presignedUrl);
+              setImgKeys(imgKeys.concat([presignedUrl]));
+          });
+
+      // const path = `publications/${props.user.id}/${file.name}`;
+      // console.log(path);
+      // Storage.put(path, file, {
+      //   contentType: "image/png",
+      // })
+      //   .then((result) => {
+      //     let url = `https://petadpotionecdd85be9d38496a923a980f5f978930153255-dev.s3.us-east-2.amazonaws.com/public/${encodeURIComponent(
+      //       result.key
+      //     )}`;
+      //     return setImgKeys(imgKeys.concat([url]));
+      //   })
+      //   .catch((err) => console.log(err));
     },
     transformFile: () => {
       return "";
     },
     onRemove: (file) => {
       const path = `publications/${props.user.id}/${file.name}`;
-      Storage.remove(path)
-        .then((result) => console.log(result))
-        .catch((err) => console.log(err));
+      // Storage.remove(path)
+      //   .then((result) => console.log(result))
+      //   .catch((err) => console.log(err));
     },
   };
 
@@ -285,21 +305,16 @@ export function Posts(props) {
     return data;
   };
 
-  const editPublication = () => {
+  const editPublication = async () => {
     const values = cleanData(form.getFieldsValue());
     delete values.image;
     values["images"] = [...imgKeys, ...edit["images"]];
     console.log(values);
 
-    // updatePublication(edit["ID"], { ...edit, ...values })
-    //   .then(async () => {
-    //     message.success("La puclicación se ha editado exitosamente");
-    //     form.resetFields();
-    //     setpublications(await getPublications());
-    //   })
-    //   .catch(() => {
-    //     message.error("Ha ocurrido un error");
-    //   });
+    await updatePublication(edit["ID"], { ...edit, ...values });
+    message.success("La publicación se ha editado exitosamente");
+    form.resetFields();
+    setpublications(await getPublications());
 
     setedit(null);
   };
@@ -408,7 +423,7 @@ export function Posts(props) {
           </Form>
         </Modal>
         <Row>
-        {publications.map((publication) => {
+        {publications?.map((publication) => {
             return (
              <Col key={publication.name}>
               <Card
@@ -422,7 +437,8 @@ export function Posts(props) {
                       // <SettingOutlined key="setting" />,
                       <EditOutlined
                           key="edit"
-                          onClick={() => {
+                        onClick={() => {
+                            console.log(props);
                               setedit(publication);
                               form.setFieldsValue(publication);
                           }}
@@ -431,8 +447,10 @@ export function Posts(props) {
                           <EyeOutlined />
                       </Link>,
                       <Popconfirm
-                          onConfirm={() => {
-                              //removePublication(publication.ID)
+                          onConfirm={async () => {
+                              await removePublication(publication.ID);
+                              message.success("La publicación se ha eliminado exitosamente");
+                              setpublications(await getPublications());
                           }}
                           cancelText={"Cancelar"}
                           okText={"Eliminar"}
