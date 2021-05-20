@@ -1,8 +1,8 @@
 @import "./variables.scss";
 
 body {
-  background: $gray;
-  color: #2d2d2d;
+  // background: $gray;
+  // color: #2d2d2d;
 
   //Utils
 
@@ -13,22 +13,17 @@ body {
     overflow: hidden;
   }
 
-  .bg-white {
-    background: white !important;
-    min-height: 25vh;
+  .catalog {
+      background: $background !important;
+      min-height: 85vh;
   }
-
-  .bg-yellow {
-    background: $yellow !important;
-    min-height: 85vh;
-  }
-
   //typography
   .title {
     font-size: 4.2em;
     font-weight: bold;
     text-transform: uppercase;
-    color: $pink;
+    //color: $pink;
+    color: $headline;
 
     @media screen and (max-width: 414px) {
       font-size: 2em;
@@ -39,24 +34,31 @@ body {
     font-size: 2.4em;
     font-weight: bold;
     text-transform: uppercase;
-    color: $green;
+    //color: $green;
+    color: $headline;
 
     &-pet {
-      color: $pink;
+        //color: $pink;
+        color: $headline;
       text-align: center;
       font-size: 2.6em;
     }
   }
 
   .txt {
-    font-weight: 1.1em;
-    font-weight: lighter;
+    color: $paragraph;
+    font-size: 1.2em;
   }
 
+  svg {
+      color: $stroke;
+  }
   //buttoms
   .button {
-    background: $purple;
-    color: $yellow;
+    //background: $purple;
+      //color: $yellow;
+      background: $button;
+      color: $buttontext;
     font-weight: bold;
     font-size: 1.2em;
     padding: 0.4em 1em;
@@ -67,7 +69,7 @@ body {
     transition: ease 0.4s;
 
     &:hover {
-      background: darken($color: $purple, $amount: 30%);
+      //background: darken($color: $pink, $amount: 30%);
       color: whitesmoke;
     }
 
@@ -77,10 +79,10 @@ body {
 
     &-aux {
       @extend .button;
-      background: $pink;
+      background: $button;
 
       &:hover {
-        background: darken($color: $pink, $amount: 10%);
+        //background: darken($color: $pink, $amount: 10%);
         color: whitesmoke;
       }
     }
@@ -88,10 +90,11 @@ body {
 
   //forms
   .input {
-    border: none;
-    border-radius: 0.5em;
-    background: $gray;
-    color: $purple;
+    //border: none;
+      border-radius: 0.5em;
+      border-color: $stroke;
+    background: $main;
+    color: $paragraph;
     font-size: 1.4em;
     font-weight: bold;
     padding: 1.2em 0.8em;
@@ -99,26 +102,31 @@ body {
 
   .input-outline {
     background-color: transparent !important;
-    color: white !important;
+    //color: white !important;
+    color: $stroke !important;
     border-radius: 0;
-    border-color: white;
+    //border-color: white;
+    border-color: $stroke;
   }
 }
 
-:root {
+#root {
   //   $pink: #f397B0;
   // $yellow: #FDFFD5;
   // $purple: #966FBF;
   // $gray: #EBEBEB;
   // $green: #76D9D2;
 
-  --amplify-primary-color: #966fbf;
-  --amplify-primary-tint: #f397b0;
-  --amplify-primary-shade: #f397b0;
+
+    background-color: $background;
+
+  // --amplify-primary-color: #966fbf;
+  // --amplify-primary-tint: #f397b0;
+  // --amplify-primary-shade: #f397b0;
 }
 
 .label {
-  color: $purple;
+  color: $headline;
   font-family: inherit;
   font-size: larger;
   font-weight: 800;

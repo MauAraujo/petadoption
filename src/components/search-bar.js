@@ -5,16 +5,16 @@ import './styles/search-bar.scss'
 
 export default function SearchBar(props) {
   return (
-    <div className='search-container mt-4'>
-      <div className='input-group'>
+    <div className='search-container row'>
+      <div className='input-group col-lg-7 col-md-10 col-sm-12'>
         <input
           type='text'
           className='form-control input'
-          placeholder="Puebla Puebla"
+          placeholder="Mi ubicación"
         />
         <div className='input-group-append'>
           <button className='btn button' type='button' id='button-addon2'>
-            <span className='mr-2'>Buscar ubicación</span>
+            <span className='mr-2'>Buscar</span>
             <FontAwesomeIcon icon={faLocationArrow} />
           </button>
         </div>

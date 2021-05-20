@@ -1,5 +1,8 @@
-.hero-container {
-    background-color: #FDFFD59E;
+@import '../../assets/scss/variables.scss';
+
+.hero-container-detail {
+    //background-color: #FDFFD59E;
+    background-color: $main;
     border-radius: 1em;
     min-height: 20vh;
     overflow: hidden;

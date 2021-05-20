@@ -23,7 +23,7 @@ export default function Available(props) {
         </Link>
       </Col>
     )
-  }
+    }
 
     if(props.publications?.length > 0) {
         return (

@@ -26,24 +26,19 @@ export default function Homepage() {
 
   return (
     <Fragment>
-      <div className="container my-4">
+      <div>
         <Hero />
         <SearchBar />
         <Available publications={publications} />
       </div>
-      <section className="bg-white">
-        <div className="container my-3">
+      <section>
+        <div>
           <Steps />
         </div>
       </section>
-      <div className="container my-4">
+      <div className="discovery-container">
         <DiscoverCard />
       </div>
-      <section className="bg-white">
-        <div className="container my-3">
-          <Help />
-        </div>
-      </section>
     </Fragment>
   );
 }

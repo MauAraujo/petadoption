@@ -1,7 +1,10 @@
+@import '../../assets/scss/variables.scss';
+
 .hero-container {
-    background-color: #FDFFD5;
-    border-radius: 1em;
-    min-height: 20vh;
+    background-color: $background;
+    //border-radius: 1em;
+    height: 70vh;
+    padding: 3em;
     overflow: hidden;
 
     .title, .subtitle, .txt {
@@ -15,5 +18,9 @@
     .subtitle {
         font-size: 1.4em !important;
         font-weight: normal;
+    }
+
+    img {
+        border-radius: 1em;
     }
 }

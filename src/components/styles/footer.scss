@@ -1,8 +1,10 @@
 @import '../../assets/scss/variables.scss';
 
 .footer-container {
-  background: #404040;
-  color: white;
+    //background: #404040;
+    //color: white;
+    background: $main;
+    color: $paragraph;
   padding: 1em;
   min-height: 25vh;
 
@@ -11,7 +13,8 @@
   }
 
   .subtitle {
-    color: white;
+      //color: white;
+      color: $headline;
     font-size: 1.2em;
     margin-bottom: 0;
     padding-bottom: .4em;
@@ -27,23 +30,29 @@
 }
 
 .legal-container {
-  background: darken($color:#404040, $amount: 10%);
-  color: $pink;
+  //background: darken($color:#404040, $amount: 10%);
+    //color: $pink;
+    background: $main;
+    color: $paragraph;
   min-height: 5vh;
 
   .navbar {
-    background-color: darken($color:#404040, $amount: 10%) !important;
+      //background-color: darken($color:#404040, $amount: 10%) !important;
+      background-color: $main;
     .nav-item {
         padding: .2em .5em;
-        color: $pink;
+        //color: $pink;
+        color: $paragraph;
 
         a {
-            color: $pink;
+            //color: $pink;
+            color: $paragraph;
             font-weight: light;
             transition: ease .4s;
             font-size: .8em;
             &:hover {
-                color: $purple;
+                //color: $purple;
+                color: $highlight;
                 text-decoration: none;
             }
         }

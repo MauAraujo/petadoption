@@ -8,11 +8,14 @@
     border-radius: .4em;
 
     &::placeholder {
-      color: white;
+      color: $paragraph;
     }
   }
 
-  
+  button {
+      background-color: $button;
+      color: $buttontext;
+  }
 
   .btn-outline.search {
     border: solid 1px white;

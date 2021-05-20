@@ -1,3 +1,5 @@
+@import '../../assets/scss/variables.scss';
+
 #action-card-container {
   display: flex;
   flex-direction: row;
@@ -9,7 +11,8 @@
   margin-top: 30px;
 
   #action {
-    background-color: #966fbf;
+      //background-color: #966fbf;
+      background-color: $main;
     width: 25em;
     height: 15em;
   }
@@ -24,8 +27,8 @@
   .btn {
     width: 75%;
     margin-bottom: 20px;
-    background-color: white;
-    color: black;
+    background-color: $button;
+    color: $buttontext;
     font-weight: bold;
     border-color: transparent;
   }
@@ -41,7 +44,8 @@
     font-size: 3em;
 
     path {
-      fill: white;
+        //fill: white;
+        fill: $stroke;
     }
   }
 }

@@ -1,18 +1,22 @@
 @import '../../assets/scss/variables.scss';
 
 .navbar {
-    background-color: $pink !important;
+    //background-color: $pink !important;
+    background-color: $background;
 
     .nav-item {
         padding: .3em .5em;
-        color: $yellow;
+        //color: $yellow;
+        color: $headline;
 
         a {
-            color: $yellow;
+            //color: $yellow;
+            color: $headline;
             font-weight: light;
             transition: ease .4s;
             &:hover {
-                color: $purple;
+                //color: $purple;
+                color: $highlight;
                 text-decoration: none;
             }
         }
@@ -26,9 +30,9 @@
 }
 
 .sub-header{
-    background-color: $purple;
+    background-color: $background;
     // margin: 0px;
-    color: white;
+    color: $paragraph;
     // height: 50px;
     padding: 15px;
     
@@ -36,7 +40,7 @@
 
 .search{
     background-color: transparent;
-    color: white;
+    color: $paragraph;
 }
 
 .logo{
@@ -45,6 +49,7 @@
 
 .brand-name{
     font-weight: 700;
-    color: $yellow;
+    //color: $yellow;
+    color: $headline;
     font-size: 1.3rem;
 }

@@ -1,8 +1,8 @@
 @import '../../assets/scss/variables.scss';
 
 .available-container {
-  background: $yellow;
-  padding: 2em;
+    background: $main;
+    padding: 2em;
 
   .img-container {
       max-height: 60vh !important;
@@ -19,14 +19,13 @@
 }
 
 .available {
-
   .title-container {
       background: white;
       padding: .8em;
       margin-top: -10%;
       position: absolute;
       bottom: -5%;
-      width: 85%;
+      width: 91%;
       -webkit-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.28);
       -moz-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.28);
       box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.28);
@@ -49,10 +48,12 @@
   .subtitle {
     &-pet {
       font-size: 1.2em;
-      color: $purple;
+      //color: $purple;
+      color: $paragraph;
     }
   }
 
-  
-
+  .publication-card {
+      height: 240px;
+  }
 }

@@ -425,8 +425,9 @@ export function Posts(props) {
         <Row>
         {publications?.map((publication) => {
             return (
-             <Col key={publication.name}>
-              <Card
+               <Card
+                 key={publication.name}
+                 className="col-3"
                 cover={
                   <img
                       alt="example"
@@ -480,7 +481,6 @@ export function Posts(props) {
                   } | ${publication.views || 0} Visualizaciones`}
                 />
               </Card>
-                </Col>
           );
         })}
       </Row>

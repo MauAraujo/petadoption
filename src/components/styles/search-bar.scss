@@ -1,9 +1,13 @@
+@import '../../assets/scss/variables.scss';
+
 .search-container {
-  background: white;
-  padding: 2.5em 2em;
+    justify-content: center;
+    background: $background;
+    padding: 2.5em 2em;
+    margin: 2.5em;
 
   .button {
-    color: white;
+    //color: white;
     text-transform: uppercase;
   }
 }

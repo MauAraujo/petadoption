@@ -11,7 +11,7 @@ export default function DetailHero(props) {
     //updatePublication(pet.publicationID, { ...pet, views: ++pet.views || 1 });
   }
   return (
-    <div className="hero-container">
+    <div className="hero-container-detail">
       {!pet.name ? (
         <Space size="large">
           <Spin size="large" />
