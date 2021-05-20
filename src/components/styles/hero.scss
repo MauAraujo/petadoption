@@ -20,6 +20,16 @@
         font-weight: normal;
     }
 
+    .subtitle-container {
+        width: 80%;
+        margin: 2em 0.5em 1em 0.5em;
+
+
+        @media screen and (max-width: 414px) {
+            max-width: 100%;
+        }
+    }
+
     img {
         border-radius: 1em;
     }

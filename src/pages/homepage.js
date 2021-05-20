@@ -15,13 +15,13 @@ export default function Homepage() {
   const [publications, setpublications] = useState([]);
 
     useEffect(() => {
-        async function fetchPublications() {
-            let publications = await getPublications();
-            publications = publications?.slice(publications.length - 6, publications.length);
-            setpublications(publications);
-    }
-    fetchPublications();
-    console.log(publications);
+    //     async function fetchPublications() {
+    //         let publications = await getPublications();
+    //         publications = publications?.slice(publications.length - 6, publications.length);
+    //         setpublications(publications);
+    // }
+    // fetchPublications();
+    // console.log(publications);
   }, []);
 
   return (

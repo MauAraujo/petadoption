@@ -1,9 +1,8 @@
 @import "./variables.scss";
 
 body {
-  // background: $gray;
+  background-color: $background !important;
   // color: #2d2d2d;
-
   //Utils
 
   .contain {
@@ -117,7 +116,8 @@ body {
   // $gray: #EBEBEB;
   // $green: #76D9D2;
 
-
+    margin-left: 5em;
+    margin-right: 5em;
     background-color: $background;
 
   // --amplify-primary-color: #966fbf;

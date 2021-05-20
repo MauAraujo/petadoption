@@ -36,7 +36,7 @@ export default function Catalogo() {
     return (
       <Col
         md={2}
-        className="mb-5 publication-card"
+        className="publication-card"
         key={publication.ID || index}
       >
         <Link to={"/detail/" + (publication.ID || index)}>
@@ -197,7 +197,7 @@ export default function Catalogo() {
                 />
               </Input.Group>
             </Col>
-            <Col md={8}>
+            <Col md={10}>
               <h2 className="subtitle">Mascotas</h2>
               <Row className="catalogo">
                 {publications.map((publication, index) => {
