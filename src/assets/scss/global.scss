@@ -13,8 +13,8 @@ body {
   }
 
   .catalog {
-      background: $background !important;
-      min-height: 85vh;
+    background: $background !important;
+    min-height: 85vh;
   }
   //typography
   .title {
@@ -37,8 +37,8 @@ body {
     color: $headline;
 
     &-pet {
-        //color: $pink;
-        color: $headline;
+      //color: $pink;
+      color: $headline;
       text-align: center;
       font-size: 2.6em;
     }
@@ -50,14 +50,14 @@ body {
   }
 
   svg {
-      color: $stroke;
+    color: $stroke;
   }
   //buttoms
   .button {
     //background: $purple;
-      //color: $yellow;
-      background: $button;
-      color: $buttontext;
+    //color: $yellow;
+    background: $button;
+    color: $buttontext;
     font-weight: bold;
     font-size: 1.2em;
     padding: 0.4em 1em;
@@ -90,8 +90,8 @@ body {
   //forms
   .input {
     //border: none;
-      border-radius: 0.5em;
-      border-color: $stroke;
+    border-radius: 0.5em;
+    border-color: $stroke;
     background: $main;
     color: $paragraph;
     font-size: 1.4em;
@@ -110,15 +110,15 @@ body {
 }
 
 #root {
-  //   $pink: #f397B0;
+  // $pink: #f397B0;
   // $yellow: #FDFFD5;
   // $purple: #966FBF;
   // $gray: #EBEBEB;
   // $green: #76D9D2;
 
-    margin-left: 5em;
-    margin-right: 5em;
-    background-color: $background;
+  // margin-left: 5em;
+  // margin-right: 5em;
+  background-color: $background;
 
   // --amplify-primary-color: #966fbf;
   // --amplify-primary-tint: #f397b0;
@@ -131,4 +131,33 @@ body {
   font-size: larger;
   font-weight: 800;
   margin: 0.5rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 5em 1fr 5em;
+  grid-template-rows: repeat(1, 1fr);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". hero ."
+    ". searchBar ."
+    ". available ."
+    ". steps ."
+    "discovery discovery discovery";
+}
+
+.hero {
+  grid-area: hero;
+}
+.searchBar {
+  grid-area: searchBar;
+}
+.available {
+  grid-area: available;
+}
+.steps {
+  grid-area: steps;
+}
+.discovery {
+  grid-area: discovery;
 }

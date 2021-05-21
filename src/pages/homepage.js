@@ -7,14 +7,12 @@ import Steps from "../components/steps";
 import Help from "../components/help";
 import DiscoverCard from "../components/discover-card";
 import "../services/publications.service";
-import {
-  getPublications,
-} from "../services/publications.service";
+import { getPublications } from "../services/publications.service";
 
 export default function Homepage() {
   const [publications, setpublications] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
     //     async function fetchPublications() {
     //         let publications = await getPublications();
     //         publications = publications?.slice(publications.length - 6, publications.length);
@@ -25,20 +23,19 @@ export default function Homepage() {
   }, []);
 
   return (
-    <Fragment>
-      <div>
-        <Hero />
-        <SearchBar />
-        <Available publications={publications} />
-      </div>
-      <section>
+    <div className="grid-container">
+      <Hero />
+      <SearchBar />
+      <Available publications={publications} />
+
+      <section className="steps">
         <div>
           <Steps />
         </div>
       </section>
-      <div className="discovery-container">
+      <div className="discovery-container discovery">
         <DiscoverCard />
       </div>
-    </Fragment>
+    </div>
   );
 }
