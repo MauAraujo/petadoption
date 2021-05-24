@@ -10,7 +10,7 @@ export default function SearchBar(props) {
         <input
           type="text"
           className="form-control input"
-          placeholder="Mi ubicación"
+          placeholder=""
         />
         <div className="input-group-append">
           <button className="btn button" type="button" id="button-addon2">

@@ -1,4 +1,6 @@
 @import "./variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 body {
   background-color: $background !important;
@@ -18,6 +20,7 @@ body {
   }
   //typography
   .title {
+    font-family: 'Montserrat', sans-serif;
     font-size: 4.2em;
     font-weight: bold;
     text-transform: uppercase;
@@ -30,21 +33,16 @@ body {
   }
 
   .subtitle {
+      font-family: 'Montserrat', sans-serif;
     font-size: 2.4em;
     font-weight: bold;
     text-transform: uppercase;
     //color: $green;
     color: $headline;
-
-    &-pet {
-      //color: $pink;
-      color: $headline;
-      text-align: center;
-      font-size: 2.6em;
-    }
   }
 
   .txt {
+      font-family: 'Open Sans', sans-serif;
     color: $paragraph;
     font-size: 1.2em;
   }
@@ -55,7 +53,8 @@ body {
   //buttoms
   .button {
     //background: $purple;
-    //color: $yellow;
+      //color: $yellow;
+      font-family: 'Montserrat', sans-serif;
     background: $button;
     color: $buttontext;
     font-weight: bold;
@@ -135,15 +134,15 @@ body {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 5em 1fr 5em;
+  grid-template-columns: 15% 1fr 15%;
   grid-template-rows: repeat(1, 1fr);
   gap: 0px 0px;
   grid-template-areas:
     ". hero ."
     ". searchBar ."
-    ". available ."
+    "available available available"
     ". steps ."
-    "discovery discovery discovery";
+    ". discovery .";
 }
 
 .hero {
@@ -156,7 +155,7 @@ body {
   grid-area: available;
 }
 .steps {
-  grid-area: steps;
+    grid-area: steps;
 }
 .discovery {
   grid-area: discovery;

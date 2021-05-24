@@ -1,21 +1,20 @@
 @import '../../assets/scss/variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .navbar {
-    //background-color: $pink !important;
     background-color: $background;
 
     .nav-item {
         padding: .3em .5em;
-        //color: $yellow;
         color: $headline;
 
         a {
-            //color: $yellow;
             color: $headline;
+            font-family: "Montserrat", sans-serif;
             font-weight: light;
             transition: ease .4s;
             &:hover {
-                //color: $purple;
                 color: $highlight;
                 text-decoration: none;
             }
@@ -31,11 +30,8 @@
 
 .sub-header{
     background-color: $background;
-    // margin: 0px;
     color: $paragraph;
-    // height: 50px;
     padding: 15px;
-    
 }
 
 .search{
@@ -48,8 +44,8 @@
 }
 
 .brand-name{
+    font-family: "Montserrat", sans-serif;
     font-weight: 700;
-    //color: $yellow;
     color: $headline;
     font-size: 1.3rem;
 }

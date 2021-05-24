@@ -1,8 +1,9 @@
 @import '../../assets/scss/variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
 .available-container {
     background: $main;
-    padding: 2em;
+    padding: 2em 15% 2em 15%;
 
   .img-container {
       max-height: 60vh !important;
@@ -18,7 +19,6 @@
 }
 
 .available {
-    padding: 0 3em 0 3em;
   .title-container {
       background: white;
       padding: .8em;
@@ -45,7 +45,8 @@
   }
 
   .subtitle {
-    &-pet {
+      &-pet {
+          font-family: "open Sans", sans-serif;
       font-size: 1.2em;
       //color: $purple;
       color: $paragraph;
@@ -53,7 +54,7 @@
   }
 
   .publication-card {
-      width: 120px;
-      height: 280px;
+      min-width: 220px;
+      min-height: 240px;
   }
 }

@@ -13,13 +13,13 @@ export default function Homepage() {
   const [publications, setpublications] = useState([]);
 
   useEffect(() => {
-    //     async function fetchPublications() {
-    //         let publications = await getPublications();
-    //         publications = publications?.slice(publications.length - 6, publications.length);
-    //         setpublications(publications);
-    // }
-    // fetchPublications();
-    // console.log(publications);
+        async function fetchPublications() {
+            let publications = await getPublications();
+            publications = publications?.slice(publications.length - 6, publications.length);
+            setpublications(publications);
+    }
+    fetchPublications();
+    console.log(publications);
   }, []);
 
   return (
@@ -29,9 +29,7 @@ export default function Homepage() {
       <Available publications={publications} />
 
       <section className="steps">
-        <div>
           <Steps />
-        </div>
       </section>
       <div className="discovery-container discovery">
         <DiscoverCard />
