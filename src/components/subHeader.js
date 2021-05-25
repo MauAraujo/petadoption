@@ -12,7 +12,7 @@ export default function SubHeader() {
                 <div className="row pt-4 pb-2">
                     <div className="col-12 col-md-1">
                         <FontAwesomeIcon icon={faPaw} size='2x' />
-                        <span className='ml-2'>{mascota}</span>
+                        {/* <span className='ml-2'>{mascota}</span> */}
                     </div>
                     <div className="col-12 col-md-3 offset-md-8">
                         <div className="input-group">

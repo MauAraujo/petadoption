@@ -62,7 +62,8 @@ export function NewPost(props) {
     uploadPublication(values)
       .then(() => {
         message.success("La publicación se ha guardado exitosamente");
-        form.resetFields();
+          form.resetFields();
+          setImgKeys([]);
       })
       .catch(() => {
         message.error("Ha ocurrido un error");
