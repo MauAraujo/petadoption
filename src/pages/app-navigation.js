@@ -1,5 +1,8 @@
-import React, { Component, Fragment } from "react";
-import { Switch, Route } from "react-router-dom";
+import React, { Fragment } from "react";
+import {
+    Switch,
+    Route,
+} from "react-router-dom";
 //Layout
 import Layout from "../components/layout";
 // Pages
@@ -8,17 +11,16 @@ import Detail from "./detail";
 import Catalogo from "./catalogo";
 import Dashboard from "./dashboard";
 import Login from "./login";
+import Articles from "./articles";
 
-// Errors
-
-export default class AppNavigation extends Component {
-  render() {
+export default function AppNavigation(){
     return (
       <Fragment>
         {/* <Legal/> */}
         <Layout>
           <Switch>
             <Route path="/" exact component={Homepage} />
+            <Route path="/articulos" component={Articles}/>
             <Route path="/about" exact component={Homepage} />
             <Route path="/detail" exact component={Detail} />
             <Route path="/detail/:id" exact component={Detail} />
@@ -30,5 +32,4 @@ export default class AppNavigation extends Component {
         </Layout>
       </Fragment>
     );
-  }
 }

@@ -8,6 +8,7 @@ import Help from "../components/help";
 import DiscoverCard from "../components/discover-card";
 import "../services/publications.service";
 import { getPublications } from "../services/publications.service";
+import { useHistory } from "react-router-dom";
 
 export default function Homepage() {
   const [publications, setpublications] = useState([]);
@@ -19,13 +20,13 @@ export default function Homepage() {
             setpublications(publications);
     }
     fetchPublications();
-    console.log(publications);
+      console.log(publications);
   }, []);
 
   return (
     <div className="grid-container">
       <Hero />
-      <SearchBar />
+      <SearchBar history={useHistory()}_/>
       <Available publications={publications} />
 
       <section className="steps">

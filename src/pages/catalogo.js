@@ -5,11 +5,29 @@ import SubHeader from "../components/subHeader";
  import {
    getPublications,
    getPublicationsFilter,
-} from "../services/publications.service";
+ } from "../services/publications.service";
+import {
+    InstantSearch,
+    Hits,
+    SearchBox,
+    Pagination,
+    Highlight,
+    ClearRefinements,
+    RefinementList,
+    Configure,
+    Snippet
+} from "react-instantsearch-dom";
+import qs from 'qs';
 import { Col, Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import { Select, Input } from "antd";
 import filters from "../data/filters.json";
+import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
+import "instantsearch.css/themes/algolia-min.css";
+
+const searchClient = instantMeiliSearch(
+    "http://localhost:7700"
+);
 
 const { Option } = Select;
 
@@ -17,6 +35,23 @@ let dummy =
   "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
 
 export default function Catalogo() {
+    const urlToSearchState = (query) => qs.parse(query.replace('/articulos/', ''));
+    const query = useLocation().pathname;
+    //var searchState = urlToSearchState(query);
+    // let init = {
+    //     refinementList: {
+    //         animal: ['perro'],
+    //         "target-age": ['cachorro', 'adolescente']
+    //     },
+    //     menu: {
+    //         animal: 'perro',
+    //         "target-age": 'cachorro',
+    //     },
+    //     query: 'juguetes',
+    //     page: 1,
+    // }
+
+  const [searchState, setSearchState] = useState(urlToSearchState(query));
   const [publications, setpublications] = useState([]);
   const [selectedFilters, setSelectedFilters] = useState({});
 
@@ -69,39 +104,13 @@ export default function Catalogo() {
     //     getPublications(queryString)
     // }
 
-  function onChange(value, key) {
-    if (value) {
-      selectedFilters[key] = value;
-    }
-    setSelectedFilters(selectedFilters);
-    console.log(value, key);
-  }
-
-  function saveAge(value, key) {
-    if (!selectedFilters["age"]) {
-      selectedFilters["age"] = {};
-    }
-    if (value) {
-      selectedFilters["age"][key] = parseInt(value);
-    }
-    setSelectedFilters(selectedFilters);
-    console.log(selectedFilters["age"]);
-  }
-
-  async function onDeselect(value, key) {
-    delete selectedFilters[key];
-    console.log(selectedFilters);
-    setSelectedFilters(selectedFilters);
-    setpublications(await getPublicationsFilter(selectedFilters));
-  }
-
-  async function onBlur() {
-    console.log("Apply filters: ", selectedFilters);
-    setpublications(await getPublicationsFilter(selectedFilters));
-  }
-
   return (
-    <Fragment>
+      <Fragment>
+      <InstantSearch indexName="pet-articles"
+      searchClient={searchClient}
+      searchState={searchState}
+      onSearchStateChange={search => setSearchState(search)}
+      >
       <SubHeader />
       <section className="catalog">
         <Container fluid>
@@ -114,8 +123,6 @@ export default function Catalogo() {
                     <Select
                       showSearch
                       mode="options"
-                      onBlur={onBlur}
-                      onChange={(value) => onChange(value, filter.name)}
                       style={{ width: "100%", margin: "0.5rem" }}
                       placeholder={filter.label}
                       optionFilterProp="children"
@@ -141,9 +148,6 @@ export default function Catalogo() {
                       showSearch
                       mode={filter.mode}
                       tokenSeparators={[","]}
-                      onBlur={onBlur}
-                      onChange={(value) => onChange(value, filter.name)}
-                      onDeselect={(value) => onDeselect(value, filter.name)}
                       style={{ width: "100%", margin: "0.5rem" }}
                       placeholder={filter.label}
                       optionFilterProp="children"
@@ -168,8 +172,6 @@ export default function Catalogo() {
                   style={{ width: 80, textAlign: "center" }}
                   placeholder="Min"
                   type="number"
-                  onChange={(e) => saveAge(e.target.value, "min")}
-                  onBlur={onBlur}
                 />
                 <Input
                   className="site-input-split"
@@ -192,8 +194,6 @@ export default function Catalogo() {
                   }}
                   placeholder="Max"
                   type="number"
-                  onBlur={onBlur}
-                  onChange={(e) => saveAge(e.target.value, "max")}
                 />
               </Input.Group>
             </Col>
@@ -208,6 +208,7 @@ export default function Catalogo() {
           </Row>
         </Container>
       </section>
+      </InstantSearch>
     </Fragment>
   );
 }

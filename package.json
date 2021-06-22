@@ -9,6 +9,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@material/elevation": "^6.0.0",
+    "@meilisearch/instant-meilisearch": "^0.5.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
@@ -17,12 +18,15 @@
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "emailjs-com": "^2.4.1",
+    "instantsearch.css": "^7.4.5",
     "jwt-decode": "^3.1.2",
     "minio": "^7.0.18",
     "node-sass": "^4.13.1",
+    "qs": "^6.10.1",
     "react": "^16.12.0",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.12.0",
+    "react-instantsearch-dom": "^6.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "typeface-montserrat": "0.0.75",
@@ -50,6 +54,8 @@
     ]
   },
   "devDependencies": {
+    "css-loader": "^5.2.6",
+    "style-loader": "^2.0.0",
     "typescript": "^4.2.4",
     "typescript-deno-plugin": "^1.31.0"
   }
