@@ -8,7 +8,8 @@ import {
 } from "react-instantsearch-dom";
 import MenuSelect from "../components/MenuSelect";
 import {
-    useLocation
+    useLocation,
+    useHistory
 } from "react-router-dom";
 import qs from 'qs';
 import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
@@ -23,6 +24,7 @@ const searchClient = instantMeiliSearch(
 export default function Articles() {
     const urlToSearchState = (query) => qs.parse(query.replace('/articulos/', ''));
     const query = useLocation().pathname;
+    const history = useHistory();
     //var searchState = urlToSearchState(query);
     // let init = {
     //     refinementList: {
@@ -38,7 +40,6 @@ export default function Articles() {
     // }
 
     const [searchState, setSearchState] = useState(urlToSearchState(query));
-
     return (
         <Fragment>
           <InstantSearch indexName="pet-articles"
@@ -58,7 +59,7 @@ export default function Articles() {
                   </Col>
                   <Col md={10}>
                     <h2 className="subtitle">Articulos</h2>
-                    <CustomHits />
+                    <CustomHits location={query} history={history}/>
                   </Col>
                 </Row>
               </Container>
@@ -91,15 +92,18 @@ export default function Articles() {
     );
 }
 
-const Hits = ({ hits }) => (
+const Hits = ({ hits, location, history}) => (
     <Row className="catalogo">
       {hits.map(hit => (
           <Card
             className="publication-card"
             key={hit.objectID}
             hoverable
-            style={{ width: 240 }}
-
+            style={{ width: 320 }}
+            cover={<img alt="example" src={hit.cover}/>}
+            onClick={e => {
+                history.push(location + '/' + hit.id);
+            }}
           >
             <Meta title={hit.title}/>
           </Card>

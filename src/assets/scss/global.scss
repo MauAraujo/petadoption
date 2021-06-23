@@ -145,6 +145,13 @@ body {
     ". discovery .";
 }
 
+.ant-card-meta-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em !important;
+    font-weight: bold;
+    //color: $green;
+    color: $headline;
+}
 .hero {
   grid-area: hero;
 }
