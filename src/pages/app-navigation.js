@@ -25,8 +25,8 @@ export default function AppNavigation(){
             <Route path="/detail" exact component={Detail} />
             <Route path="/detail/:id" exact component={Detail} />
             <Route path="/catalogo" exact component={Catalogo} />
-            <Route path="/articulos" exact component={Articles}/>
-            <Route path="/articulos/:id" exact component={ArticleDetail}/>
+            <Route path="/articulos" component={Articles}/>
+            <Route path="/articulo/:id" component={ArticleDetail}/>
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/login" exact component={Login} />
             <Route component={Homepage} />

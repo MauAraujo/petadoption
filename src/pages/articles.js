@@ -17,35 +17,42 @@ import "instantsearch.css/themes/algolia-min.css";
 import { Card } from 'antd';
 
 const { Meta } = Card;
+const DEBOUNCE_TIME = 400;
 const searchClient = instantMeiliSearch(
     "http://localhost:7700"
 );
 
 export default function Articles() {
-    const urlToSearchState = (query) => qs.parse(query.replace('/articulos/', ''));
-    const query = useLocation().pathname;
     const history = useHistory();
-    //var searchState = urlToSearchState(query);
-    // let init = {
-    //     refinementList: {
-    //         animal: ['perro'],
-    //         "target-age": ['cachorro', 'adolescente']
-    //     },
-    //     menu: {
-    //         animal: 'perro',
-    //         "target-age": 'cachorro',
-    //     },
-    //     query: 'juguetes',
-    //     page: 1,
-    // }
+    const location = useLocation().pathname;
+    const createURL = state => `?${qs.stringify(state)}`;
+    const searchStateToUrl = searchState =>
+          searchState ? `${location}${createURL(searchState)}` : '';
+    const urlToSearchState = (location) => qs.parse(location.replace('/articulos/', ''));
 
-    const [searchState, setSearchState] = useState(urlToSearchState(query));
+    const [searchState, setSearchState] = useState(urlToSearchState(location));
+    const [debouncedSetState, setDebouncedSetState] = useState(null);
+
+    const onSearchStateChange = updatedSearchState => {
+        clearTimeout(debouncedSetState);
+
+        setDebouncedSetState(
+            setTimeout(() => {
+                history.push(
+                    searchStateToUrl(updatedSearchState),
+                    updatedSearchState,
+                );
+            }, DEBOUNCE_TIME)
+        );
+        setSearchState(updatedSearchState);
+    };
     return (
         <Fragment>
           <InstantSearch indexName="pet-articles"
                          searchClient={searchClient}
                          searchState={searchState}
-                         onSearchStateChange={search => setSearchState(search)}
+                         onSearchStateChange={onSearchStateChange}
+                         createURL={createURL}
           >
             <SubHeader />
             <section className="catalog">
@@ -59,7 +66,7 @@ export default function Articles() {
                   </Col>
                   <Col md={10}>
                     <h2 className="subtitle">Articulos</h2>
-                    <CustomHits location={query} history={history}/>
+                    <CustomHits history={history}/>
                   </Col>
                 </Row>
               </Container>
@@ -92,7 +99,7 @@ export default function Articles() {
     );
 }
 
-const Hits = ({ hits, location, history}) => (
+const Hits = ({ hits, history}) => (
     <Row className="catalogo">
       {hits.map(hit => (
           <Card
@@ -102,7 +109,7 @@ const Hits = ({ hits, location, history}) => (
             style={{ width: 320 }}
             cover={<img alt="example" src={hit.cover}/>}
             onClick={e => {
-                history.push(location + '/' + hit.id);
+                history.push('/articulo/' + hit.id);
             }}
           >
             <Meta title={hit.title}/>
