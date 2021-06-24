@@ -24,13 +24,14 @@ const searchClient = instantMeiliSearch(
 
 export default function Articles() {
     const history = useHistory();
-    const location = useLocation().pathname;
+    const location = useLocation();
     const createURL = state => `?${qs.stringify(state)}`;
     const searchStateToUrl = searchState =>
-          searchState ? `${location}${createURL(searchState)}` : '';
-    const urlToSearchState = (location) => qs.parse(location.replace('/articulos/', ''));
+          searchState ? `${location.pathname}${createURL(searchState)}` : '';
+    const urlToSearchState = ({ search }) => qs.parse(search.slice(1));
 
-    const [searchState, setSearchState] = useState(urlToSearchState(location));
+    const searchQuery = urlToSearchState(location);
+    const [searchState, setSearchState] = useState(searchQuery);
     const [debouncedSetState, setDebouncedSetState] = useState(null);
 
     const onSearchStateChange = updatedSearchState => {
@@ -46,6 +47,7 @@ export default function Articles() {
         );
         setSearchState(updatedSearchState);
     };
+
     return (
         <Fragment>
           <InstantSearch indexName="pet-articles"

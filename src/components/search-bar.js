@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationArrow } from "@fortawesome/free-solid-svg-icons";
 import {
     InstantSearch,
-    SearchBox,
+    connectSearchBox
 } from "react-instantsearch-dom";
+import {
+    useHistory
+} from 'react-router-dom';
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import "./styles/search-bar.scss";
 import MenuSelect from './MenuSelect';
@@ -15,60 +18,63 @@ const searchClient = instantMeiliSearch(
     "7807a8dcffdfc5e8400074eafe451e9aab4c9864"
 );
 
-export default class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {search: {}};
-    }
+export default function SearchBar() {
+    const [searchState, setSearchState] = useState({});
 
-    createURL(state) {
-        return `${qs.stringify(state)}`;
-    }
-
-    searchStateToUrl(searchState) {
-        return searchState ? `articulos/${this.createURL(searchState)}` : '';
-    }
-
-    render() {
         return (
-    // <div className="search-container row searchBar">
-    //   <div className="input-group col-lg-7 col-md-10 col-sm-12">
-    //     <input
-    //       type="text"
-    //       className="form-control input"
-    //       placeholder=""
-    //     />
-    //     <div className="input-group-append">
-    //       <button className="btn button" type="button" id="button-addon2">
-    //         <span className="mr-2">Buscar</span>
-    //         <FontAwesomeIcon icon={faLocationArrow} />
-    //       </button>
-    //     </div>
-    //   </div>
-      // </div>
             <div className="search-container row searchBar">
-              <InstantSearch indexName="pet-articles"
-                             searchClient={searchClient}
-                             onSearchStateChange={searchState => {
-                                 this.setState({search: searchState});
-                             }}
-              >
-                <div>
-                  <span>Animal</span>
-                  <MenuSelect attribute="animal" />
-                </div>
-                <div>
-                  <span>Edad</span>
-                  <MenuSelect attribute="target-age" />
-                </div>
-                <SearchBox onSubmit={event => {
-                    event.preventDefault();
-                    const search = this.state.search;
-                    const url = this.searchStateToUrl(search);
-                    this.props.history.push(url);
-                }}/>
-              </InstantSearch>
-            </div>
+               <InstantSearch indexName="pet-adoption"
+                              searchClient={searchClient}
+                              onSearchStateChange={setSearchState}
+               >
+                {/* <div> */}
+                {/*   <span>Animal</span> */}
+                {/*   <MenuSelect attribute="animal" /> */}
+                {/* </div> */}
+                {/* <div> */}
+                {/*   <span>Edad</span> */}
+                {/*   <MenuSelect attribute="target-age" /> */}
+                 {/* </div> */}
+                 <CustomSearchBox searchState={searchState}/>
+               </InstantSearch>
+             </div>
         );
-    }
 }
+
+const SearchBox = ({ currentRefinement, isSearchStalled, refine, searchState }) => {
+    const createURL = state => `?${qs.stringify(state)}`;
+    const searchStateToUrl = searchState =>
+          searchState ? `catalogo/${createURL(searchState)}` : '';
+    const history = useHistory();
+
+    return (
+        <form noValidate action="" role="search" className="input-group col-lg-7 col-md-10 col-sm-12"
+              onSubmit={event => {
+                  event.preventDefault();
+                  const url = searchStateToUrl(searchState);
+                  history.push(url);
+              }}>
+          <input
+            type="search"
+            className="form-control input"
+            value={currentRefinement}
+            onChange={event => refine(event.currentTarget.value)}
+          />
+          <div className="input-group-append">
+            <button className="btn button" type="submit" id="button-addon2">
+              <span className="mr-2">Buscar</span>
+              <FontAwesomeIcon icon={faLocationArrow} />
+            </button>
+          </div>
+        </form>
+        // <input
+      //   type="search"
+      //   className="forn-control input"
+      //   value={currentRefinement}
+      //   onChange={event => refine(event.currentTarget.value)}
+      // />
+      // <button onClick={() => refine('')}>Reset query</button>
+      // {isSearchStalled ? 'My search is stalled' : ''}
+)};
+
+const CustomSearchBox = connectSearchBox(SearchBox);
