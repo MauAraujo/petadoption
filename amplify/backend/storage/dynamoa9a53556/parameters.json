@@ -1,5 +1,0 @@
-{
-    "tableName": "pets",
-    "partitionKeyName": "petID",
-    "partitionKeyType": "S"
-}
