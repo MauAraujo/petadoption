@@ -1,3 +1,4 @@
+// package routes contiene las rutas del servidor
 package routes
 
 import (
@@ -14,6 +15,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// AddAuthRoutes agrega las rutas bajo /auth que se 
+// encargan de la autenticacion
 func AddAuthRoutes(rg *gin.RouterGroup) {
 	a := rg.Group("/auth")
 

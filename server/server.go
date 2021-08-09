@@ -1,3 +1,4 @@
+//Package main es el paquete principal del servidor. Es el mas alto en la jerarquia. 
 package main
 
 import (
@@ -10,6 +11,7 @@ import (
 
 var r = gin.Default()
 
+// setupRouter prepara las rutas de acceso al servidor y la autenticacion.
 func setupRouter()  {
 	r.Use(handlers.CORSMiddleware())
 	p := r.Group("/")
@@ -18,6 +20,7 @@ func setupRouter()  {
 	routes.AddPublicationRoutes(p)
 }
 
+// main inicia el servidor y la base de datos.
 func main() {
 	data.InitDB()
 	setupRouter()

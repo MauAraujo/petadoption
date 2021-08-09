@@ -1,3 +1,5 @@
+// package data contiene los modelos de las estructuras
+// utilizadas para la base de datos y peticiones API
 package data
 
 import (
@@ -5,6 +7,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
+// Publication representa un anuncio de adopcion de mascota
 type Publication struct {
 	ID           primitive.ObjectID  `bson:"_id,omitempty"`
 	Name         string              `bson:"name,omitempty" json:"name" binding:"required"`
@@ -23,6 +26,7 @@ type Publication struct {
 	Views        int                 `bson:"views,omitempty" json:"views"`
 }
 
+// User representa un usuario dentro de la aplicacion
 type User struct {
 	ID        primitive.ObjectID `bson:"_id,omitempty"`
 	FullName  string             `bson:"fullname,omitempty"`
@@ -30,11 +34,14 @@ type User struct {
 	Hash      []byte             `bson:"hash,omitempty"`
 }
 
+// UserJSON representa un documento json con la informacion de usuario
+// se utiliza para comunicarse mediante cliente y servidor
 type UserJSON struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
+// CustomClaims representa el rol del usuario
 type CustomClaims struct {
 	ID       primitive.ObjectID `json:"uid"`
 	Username string             `json:"username"`

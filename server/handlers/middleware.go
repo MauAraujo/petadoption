@@ -1,3 +1,5 @@
+// package handlers contiene el middleware que utiliza el
+// servidor
 package handlers
 
 import (
@@ -8,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// CORSMiddleware agrega los headers de CORS a las peticiones
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
@@ -23,6 +26,8 @@ func CORSMiddleware() gin.HandlerFunc {
 	}
 }
 
+// JWTValidationMiddleware se encarga de validar el token de 
+// autenticacion en las peticiones restringidas
 func JWTValidationMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenString := c.Params.ByName("token")

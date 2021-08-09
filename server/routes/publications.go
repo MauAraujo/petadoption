@@ -1,3 +1,4 @@
+// package routes contiene las rutas del servidor
 package routes
 
 import (
@@ -12,6 +13,8 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// AddPublicationRoutes agrega las rutas bajo /publications que
+// representan el CRUD a las publicaciones en la base de datos
 func AddPublicationRoutes(rg *gin.RouterGroup) {
 	p := rg.Group("/publications")
 

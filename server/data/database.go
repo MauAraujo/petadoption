@@ -1,3 +1,5 @@
+// package data se encarga de configurar la base de datos
+// y preparar el cliente para interactuar con ella
 package data
 
 import (
@@ -10,6 +12,8 @@ import (
 
 var Client *mongo.Client
 
+//InitDB inicializa la conexion con la base de datos
+// y crea una instancia
 func InitDB() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
