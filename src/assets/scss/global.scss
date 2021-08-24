@@ -167,3 +167,11 @@ body {
 .discovery {
   grid-area: discovery;
 }
+.rw-header, .rw-client, .rw-launcher, .rw-title {
+  background-color: $stroke !important;
+  color: white !important;
+}
+.rw-response {
+  background-color: $button !important;
+  color: $buttontext !important;
+}
