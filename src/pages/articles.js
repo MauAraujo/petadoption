@@ -63,8 +63,6 @@ export default function Articles() {
                   <Col md={2} className="side">
                     <span className="label">Animal</span>
                     <MenuSelect attribute="animal"/>
-                    <span className="label">Edad</span>
-                    <MenuSelect attribute="target-age" />
                   </Col>
                   <Col md={10}>
                     <h2 className="subtitle">Articulos</h2>

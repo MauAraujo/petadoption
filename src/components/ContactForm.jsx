@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Col } from "react-bootstrap";
 import "./styles/contact.scss";
 import { Form, Input, Alert, Button, InputNumber, Select } from "antd";
-// import { Button } from "../Components/Buttons";
 import TextArea from "antd/lib/input/TextArea";
 import { sendEmail } from "../services/email.service";
 
@@ -55,8 +54,6 @@ export default function ContactForm() {
       ) : null}
       <Form
         form={contactForm}
-        // labelCol={{ span: 4 }}
-        // wrapperCol={{ span: 14 }}
         layout="vertical"
         initialValues={{ size: "large" }}
         size={"large"}
@@ -114,8 +111,6 @@ export default function ContactForm() {
           ]}
         >
           <InputNumber placeholder="Teléfono fijo"></InputNumber>
-
-          {/* <Input placeholder="Teléfono celular"></Input> */}
         </Form.Item>
         <Form.Item
           label="Teléfono celular"
@@ -128,7 +123,6 @@ export default function ContactForm() {
             },
           ]}
         >
-          {/* <Input placeholder="Teléfono celular"></Input> */}
           <InputNumber placeholder="Teléfono celular"></InputNumber>
         </Form.Item>
         <Form.Item
@@ -178,19 +172,13 @@ export default function ContactForm() {
             placeholder="Por que le gustaria adoptar esta mascota?"
           />
         </Form.Item>
-        <Form.Item
-
-        //   wrapperCol={{
-        //     span: 12,
-        //     offset: 6,
-        //   }}
-        >
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             Enviar
           </Button>
         </Form.Item>
       </Form>
-    
+
     </Col>
   );
 }

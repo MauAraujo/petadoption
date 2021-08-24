@@ -18,6 +18,7 @@ import (
 // AddAuthRoutes agrega las rutas bajo /auth que se 
 // encargan de la autenticacion
 func AddAuthRoutes(rg *gin.RouterGroup) {
+	dbName := "petadoption"
 	a := rg.Group("/auth")
 
 	a.POST("/login", func(c *gin.Context) {
@@ -28,7 +29,7 @@ func AddAuthRoutes(rg *gin.RouterGroup) {
 			username := json.Username
 			password := json.Password
 
-			collection := data.Client.Database("pet-adoption").Collection("users")
+			collection := data.Client.Database(dbName).Collection("users")
 			if err := collection.FindOne(context.TODO(), bson.M{"username": username}).Decode(&user); err != nil {
 				panic(err)
 			}
@@ -75,7 +76,7 @@ func AddAuthRoutes(rg *gin.RouterGroup) {
 			user.FullName = "Mauricio Araujo"
 			user.Hash = hash
 
-			collection := data.Client.Database("pet-adoption").Collection("users")
+			collection := data.Client.Database(dbName).Collection("users")
 			result, err := collection.InsertOne(context.TODO(), user)
 			if err != nil {
 				panic(err)

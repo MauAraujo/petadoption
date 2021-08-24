@@ -10,7 +10,7 @@ import { useState } from "react";
 import { Modal } from "antd";
 import { Col } from "react-bootstrap";
 import "./styles/contact.scss";
-import { Form, Input, Alert, InputNumber, Select } from "antd";
+import { Form, Input, Alert, Select } from "antd";
 // import { Button } from "../Components/Buttons";
 import TextArea from "antd/lib/input/TextArea";
 import { sendEmail } from "../services/email.service";

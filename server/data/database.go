@@ -18,7 +18,7 @@ func InitDB() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	uri := "mongodb://127.0.0.1:27017"
+	uri := "mongodb://root:admin@mongo:27017/"
 	mclient, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
 
 	if err != nil {

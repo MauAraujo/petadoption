@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import "./styles/search-bar.scss";
-import MenuSelect from './MenuSelect';
+// import MenuSelect from './MenuSelect';
 import qs from 'qs';
 
 const searchClient = instantMeiliSearch(

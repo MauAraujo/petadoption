@@ -14,13 +14,12 @@ import {
 } from "antd";
 import { EyeOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { UploadOutlined } from "@ant-design/icons";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import {
    uploadPublication,
    updatePublication,
    removePublication
 } from "../services/publications.service";
-import filters from "../data/filters.json";
 import { getPublications } from "../services/publications.service";
 import Meta from "antd/lib/card/Meta";
 import { Link } from "react-router-dom";
@@ -127,9 +126,7 @@ export function NewPost(props) {
         size="large"
         initialValues={{
           age: 1,
-          size: "middle",
-          // 'checkbox-group': ['A', 'B'],
-          // rate: 3.5,
+          size: "middle"
         }}
       >
         <Form.Item
@@ -145,11 +142,6 @@ export function NewPost(props) {
         >
           <Input placeholder="Nombre"></Input>
         </Form.Item>
-
-        {filters.map((filter) => {
-          return buildFilters(filter);
-        })}
-
         <Form.Item label="Edad" hasFeedback>
           <Form.Item name="age" noStyle>
             <InputNumber min={0} max={20} />
@@ -283,7 +275,7 @@ export function Posts(props) {
       return "";
     },
     onRemove: (file) => {
-      const path = `publications/${props.user.id}/${file.name}`;
+      // const path = `publications/${props.user.id}/${file.name}`;
       // Storage.remove(path)
       //   .then((result) => console.log(result))
       //   .catch((err) => console.log(err));
@@ -350,11 +342,6 @@ export function Posts(props) {
             >
               <Input placeholder="Nombre"></Input>
             </Form.Item>
-
-            {filters.map((filter) => {
-              return buildFilters(filter);
-            })}
-
             <Form.Item label="Edad" hasFeedback>
               <Form.Item name="age" noStyle>
                 <InputNumber min={0} max={20} />
@@ -436,7 +423,6 @@ export function Posts(props) {
                   />
                 }
                 actions={[
-                      // <SettingOutlined key="setting" />,
                       <EditOutlined
                           key="edit"
                         onClick={() => {
@@ -469,8 +455,6 @@ export function Posts(props) {
                               key="delete"
                           />
                       </Popconfirm>,
-                  // <Button><</Button>
-                  // <EllipsisOutlined key="ellipsis" />,
                 ]}
               >
                 <Meta

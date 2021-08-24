@@ -16,12 +16,13 @@ import (
 // AddPublicationRoutes agrega las rutas bajo /publications que
 // representan el CRUD a las publicaciones en la base de datos
 func AddPublicationRoutes(rg *gin.RouterGroup) {
+	dbName := "petadoption"
 	p := rg.Group("/publications")
 
 	p.GET("", func(c *gin.Context) {
 		var publications []data.Publication
 
-		collection := data.Client.Database("pet-adoption").Collection("publications")
+		collection := data.Client.Database(dbName).Collection("publications")
 		cursor, err := collection.Find(context.TODO(), bson.M{})
 
 		if err != nil {
@@ -37,7 +38,7 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 		var publication data.Publication
 
 		err := c.Bind(&publication); if err == nil {
-			collection := data.Client.Database("pet-adoption").Collection("publications")
+			collection := data.Client.Database(dbName).Collection("publications")
 			insertResult, err := collection.InsertOne(context.TODO(), publication)
 
 			if err != nil {
@@ -58,7 +59,7 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 			panic(err)
 		}
 
-		collection := data.Client.Database("pet-adoption").Collection("publications")
+		collection := data.Client.Database(dbName).Collection("publications")
 		publicationResult := collection.FindOne(context.TODO(), bson.M{"_id": objectID})
 
 		publicationResult.Decode(&publication)
@@ -80,7 +81,7 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 			update := bson.M{
 				"$set": publication,
 			}
-			collection := data.Client.Database("pet-adoption").Collection("publications")
+			collection := data.Client.Database(dbName).Collection("publications")
 			updateResult, err := collection.UpdateOne(context.TODO(), bson.M{"_id": objectID}, update)
 
 			if err != nil {
@@ -99,7 +100,7 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 			panic(err)
 		}
 
-		collection := data.Client.Database("pet-adoption").Collection("publications")
+		collection := data.Client.Database(dbName).Collection("publications")
 		deleteResult, err := collection.DeleteOne(context.TODO(), bson.M{"_id": objectID})
 
 		if err != nil {

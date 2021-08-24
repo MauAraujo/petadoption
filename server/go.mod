@@ -3,7 +3,7 @@ module server
 go 1.16
 
 require (
-	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.7.1
 	github.com/minio/minio-go/v7 v7.0.10 // indirect
 	go.mongodb.org/mongo-driver v1.5.2
