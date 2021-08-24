@@ -5,7 +5,6 @@ import SearchBar from "../components/search-bar";
 import Available from "../components/available";
 import Steps from "../components/steps";
 import DiscoverCard from "../components/discover-card";
-import Widget from 'rasa-webchat';
 import "../services/publications.service";
 import { getPublications } from "../services/publications.service";
 import { useHistory } from "react-router-dom";
