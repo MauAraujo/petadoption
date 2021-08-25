@@ -1,14 +1,88 @@
 version: "2.0"
-
 nlu:
-- intent: greet
+- intent: get_started
   examples: |
-    - hey
-    - hello
+    - inicia
+- intent: chitchat/greet
+  examples: |
     - hola
-
-- intent: goodbye
+    - cómo estás?
+    - hey
+    - saludos
+    - buenas
+- intent: ask_topics
   examples: |
-    - adiós
-    - hasta luego
-    - bye
+    - que temas conoces?
+    - que me puedes decir?
+    - que sabes?
+    - sobre qué te puedo preguntar?
+- intent: faq
+  examples: |
+    - /faq
+- intent: faq_common
+  examples: |
+    - /faq_common
+- intent: faq_custom
+  examples: |
+    - /faq_custom
+- intent: fill_slot
+  examples: |
+    - /fill_slot{"animal":"perro"}
+- intent: ask_age
+  examples: |
+    - Tiene 10 años
+- intent: ask_breed
+  examples: |
+    - Es un Golden Retriever
+- intent: ask_question
+  examples: |
+    - Cúal es la mejor comida para darle?
+- intent: faq/ask_cat_diseases
+  examples: |
+    - De que se enferman los gatos?
+- intent: faq/ask_dog_diseases
+  examples: |
+    - De que se enferman los perros?
+- intent: faq/ask_cat_nutrition
+  examples: |
+    - Que le doy de comer a mi gato?
+- intent: faq/ask_dog_nutrition
+  examples: |
+    - Que le doy de comer a mi perro?
+    - que le doy de comer a mi perro?
+- intent: faq/ask_cat_grooming
+  examples: |
+    - Como limpio a mi gato?
+- intent: faq/ask_dog_grooming
+  examples: |
+    - Como limpio a mi perro?
+- intent: faq/ask_cat_supplies
+  examples: |
+    - Que necesito para cuidar a mi gato?
+- intent: faq/ask_dog_supplies
+  examples: |
+    - Que necesito para cuidar a mi perro?
+- intent: faq/ask_dog_exercise
+  examples: |
+    - Cuanto ejercicio necesita mi perro?
+- intent: faq/ask_cat_housing
+  examples: |
+    - Donde puedo tener a mi gato?
+- intent: faq/ask_dog_housing
+  examples: |
+    - Donde puedo tener a mi perro?
+- intent: faq/ask_cat_sterilization
+  examples: |
+    - Deberia esterilizar a mi gato?
+- intent: faq/ask_dog_sterilization
+  examples: |
+    - Deberia esterilizar a mi perro?
+- intent: faq/ask_cat_litter
+  examples: |
+    - Necesito comprar una caja de arena?
+- intent: faq/ask_dog_poisonous
+  examples: |
+    - Que comida le hace mal a mi perro?
+- intent: faq/ask_cat_poisonous
+  examples: |
+    - Que comida le hace mal a mi gato?

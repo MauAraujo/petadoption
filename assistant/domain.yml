@@ -5,27 +5,106 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- greet:
+- get_started:
     use_entities: true
-- goodbye:
+- faq:
     use_entities: true
-- bot_challenge:
+- chitchat:
     use_entities: true
-- deny:
+- faq_custom:
     use_entities: true
-- affirm:
+- ask_topics:
     use_entities: true
-- mood_unhappy:
+- faq_common:
     use_entities: true
-- mood_great:
+- fill_slot:
     use_entities: true
-entities: []
-slots: {}
+- ask_age:
+    use_entities: true
+- ask_breed:
+    use_entities: true
+- ask_question:
+    use_entities: true
+entities:
+- animal
+- age
+slots:
+  animal:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  age:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
 responses:
-  utter_greet:
-  - text: Hey! How are you?
-  utter_goodbye:
-  - text: Bye
-actions: []
-forms: {}
+  utter_ask_animal:
+  - buttons:
+    - payload: /fill_slot{"animal":"perro"}
+      title: Perro
+    - payload: /fill_slot{"animal":"gato"}
+      title: Gato
+    text: ¿Sobre qué animal te interesa saber?
+  utter_ask_question:
+  - text: ¿Sobre qué tema necesitas saber?
+  utter_offer_help:
+  - buttons:
+    - payload: /faq_common
+      title: Preguntas frecuentes
+    - payload: /faq_custom
+      title: Búsqueda personalizada
+    - payload: /articles
+      title: Buscar artículos
+    text: ¡Hola! Te puedo ayudar a encontrar información acerca del cuidado de mascotas. Elige una de las siguientes opciones.
+  utter_chitchat/greet:
+  - text: ¡Hola!
+  utter_ask_topics:
+  - text: Conozco acerca de temas como alimentación, nutrición, higiene, cuidado y salud de perros y gatos.
+  utter_ask_age:
+  - text: Bien. ¿Qué edad tiene tu mascota?
+  utter_faq/ask_cat_diseases:
+  - text: e
+  utter_faq/ask_dog_diseases:
+  - text: e
+  utter_faq/ask_cat_nutrition:
+  - text: e
+  utter_faq/ask_dog_nutrition:
+  - text: e
+  utter_faq/ask_cat_grooming:
+  - text: e
+  utter_faq/ask_dog_grooming:
+  - text: e
+  utter_faq/ask_cat_supplies:
+  - text: e
+  utter_faq/ask_dog_supplies:
+  - text: e
+  utter_faq/ask_dog_exercise:
+  - text: e
+  utter_faq/ask_cat_housing:
+  - text: e
+  utter_faq/ask_dog_housing:
+  - text: e
+  utter_faq/ask_cat_sterilization:
+  - text: e
+  utter_faq/ask_dog_sterilization:
+  - text: e
+  utter_faq/ask_cat_litter:
+  - text: e
+  utter_faq/ask_dog_poisonous:
+  - text: e
+actions:
+- faq_form
+forms:
+  faq_form:
+    ignored_intents:
+    - chitchat
+    required_slots:
+      age:
+      - entity: age
+        type: from_entity
+      animal:
+      - entity: animal
+        type: from_text
 e2e_actions: []

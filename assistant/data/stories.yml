@@ -1,1 +1,8 @@
 version: "2.0"
+stories:
+- story: faq common
+  steps:
+  - intent: get_started
+  - action: utter_offer_help
+  - intent: faq_common
+  - action: utter_ask_question
