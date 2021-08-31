@@ -6,3 +6,21 @@ stories:
   - action: utter_offer_help
   - intent: faq_common
   - action: utter_ask_question
+- story: faq custom
+  steps:
+  - intent: get_started
+  - action: utter_offer_help
+  - intent: faq_custom
+  - action: utter_ask_animal
+  - intent: fill_slot
+    entities:
+    - animal: perro
+  - action: utter_ask_age
+  - intent: fill_slot
+    entities:
+    - age: adolescent
+  - action: utter_ask_breed
+  - intent: ask_breed
+    entities:
+    - breed: samoyed
+  - action: action_breed_api

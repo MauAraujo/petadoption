@@ -28,6 +28,7 @@ intents:
 entities:
 - animal
 - age
+- breed
 slots:
   animal:
     type: rasa.shared.core.slots.TextSlot
@@ -35,6 +36,11 @@ slots:
     auto_fill: true
     influence_conversation: true
   age:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  breed:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
@@ -63,39 +69,115 @@ responses:
   utter_ask_topics:
   - text: Conozco acerca de temas como alimentación, nutrición, higiene, cuidado y salud de perros y gatos.
   utter_ask_age:
-  - text: Bien. ¿Qué edad tiene tu mascota?
+  - buttons:
+    - payload: /fill_slot{"age":"baby"}
+      title: Bebé
+    - payload: /fill_slot{"age":"adolescent"}
+      title: Adolescente
+    - payload: /fill_slot{"age":"adult"}
+      title: Adulto
+    - payload: /fill_slot{"age":"senior"}
+      title: Mayor
+    text: Bien. ¿Qué edad tiene tu mascota?
   utter_faq/ask_cat_diseases:
-  - text: e
+  - text: |-
+      Éstas son algunas de las enfermedades más comúnes en los gatos: 
+      * Cáncer 
+      * Diabetes 
+      * Virus de inmunodeficiencia felina (VIF) 
+      * Virus de la leucemia felina (FelV) 
+      * Gusano del corazón 
+      * Síndrome de gran altura 
+      * Rabia 
+      * Tiña 
+      * Infecciones de las vías respiratorias superiores 
+      * Gusanos
   utter_faq/ask_dog_diseases:
-  - text: e
+  - text: |-
+      Éstas son algunas de las enfermedades más comúnes en los perros:  
+      * Cáncer  
+      * Diabetes  
+      * Gusano del corazón  
+      * Tos de las perreras  
+      * Parvovirus  
+      * Rabia 
+      * Tiña
   utter_faq/ask_cat_nutrition:
-  - text: e
+  - text: |-
+      Recomendamos comprar comida para gatos o gatitos de marca y de alta calidad.
+      Su veterinario podrá evaluar a su nuevo gato o gatito y determinar la mejor
+      dieta. Factores como la edad, el nivel de actividad y la salud marcan la
+      diferencia en qué y cuánto debe comer un gato.
+
+      * Los gatos necesitan taurina, un aminoácido esencial, para la salud del corazón y los ojos. La comida que elija debe estar equilibrada para la etapa de la vida de su gato o gatito. Los alimentos debidamente equilibrados contendrán taurina.
+      * Deberá proporcionar agua limpia y fresca en todo momento, y lavar y volver a llenar los tazones de agua de su gato a diario.
+      * Las golosinas no deben representar más del 5-10% de la dieta.
+      * Muchas personas le dan comida para bebés a un gato o gatito que se niega a comer o no se siente bien. Lea las etiquetas con atención: Si la comida para bebé contiene cebolla o ajo en polvo, su mascota podría estar envenenada.
+      * Lleve a su mascota a su veterinario si los signos de anorexia, diarrea, vómitos o letargo continúan durante más de dos días.
   utter_faq/ask_dog_nutrition:
-  - text: e
+  - text: |-
+      * Los cachorros de ocho a 12 semanas necesitan cuatro comidas al día.
+      * Alimente a los cachorros de tres a seis meses de edad con tres comidas al día.
+      * Alimente a los cachorros de seis meses a un año con dos comidas al día.
+      * Cuando su perro llega a su primer cumpleaños, una comida al día suele ser suficiente.
+      * Para algunos perros, incluidos los caninos más grandes o los que son propensos a hincharse, es mejor alimentarlos con dos comidas más pequeñas.
+
+      El alimento seco de primera calidad proporciona una dieta bien equilibrada para perros adultos y se puede mezclar con agua, caldo o comida enlatada. Su perro puede disfrutar del requesón, huevo cocido o frutas y verduras, pero estas adiciones no deben sumar más del diez por ciento de su ingesta diaria de alimentos.
+
+      Los cachorros deben ser alimentados con un alimento para cachorros de marca de alta calidad (alimentos para cachorros de razas grandes para razas grandes). Sin embargo, limite la "comida de la gente", ya que puede provocar desequilibrios de vitaminas y minerales, problemas de huesos y dientes y puede causar hábitos alimenticios muy exigentes y obesidad. Debe haber agua limpia y fresca disponible en todo momento, y asegúrese de lavar los platos de comida y agua con frecuencia.
   utter_faq/ask_cat_grooming:
-  - text: e
+  - text: La mayoría de los gatos se mantienen relativamente limpios y rara vez necesitan un baño, pero debes cepillar o peinar a tu gato con regularidad. El cepillado frecuente ayuda a mantener limpio el pelaje de su gato, reduce la cantidad de muda y reduce la incidencia de bolas de pelo.
   utter_faq/ask_dog_grooming:
-  - text: e
+  - text: Ayude a mantener a su perro limpio y reduzca la muda con un cepillado frecuente. Busque pulgas y garrapatas todos los días durante el clima cálido. La mayoría de los perros no necesitan ser bañados más de unas pocas veces al año. Antes de bañarse, peine o corte todos los tapetes del abrigo. Enjuague con cuidado todo el jabón de la capa o la suciedad se adherirá a los residuos de jabón.
   utter_faq/ask_cat_supplies:
-  - text: e
+  - text: |-
+      Esta es una lista de cosas básicas para cuidar a un gato: 
+      * Comida para gatos de marca premium 
+      * Plato de comida 
+      * Tazón de agua * Juguetes interactivos
+      * Cepillo 
+      * Peine 
+      * Collar de seguridad para gatos con etiqueta de identificación 
+      * Poste para rascar o almohadilla para rascar 
+      * Caja de arena y arena. 
+      * Transportín para gatos 
+      * Cama o caja para gatos con manta o toalla caliente
   utter_faq/ask_dog_supplies:
-  - text: e
+  - text: |-
+      Esta es una lista de cosas básicas para cuidar a un perro: 
+
+      * Alimentos y golosinas para perros de primera calidad 
+      * Plato de comida 
+      * Tazón de agua 
+      * Juguetes, juguetes y más juguetes, incluidos juguetes para masticar seguros 
+      * Cepillo y peine para el aseo, incluido el peine antipulgas
+      * Collar con licencia y etiqueta de identificación 
+      * Correa 
+      * Transportín (para perros más pequeños) 
+      * Caja de entrenamiento 
+      * Cama o caja para perros con manta o toalla abrigada
+      * Cepillo de dientes para perros
   utter_faq/ask_dog_exercise:
-  - text: e
+  - text: Los perros necesitan ejercicio para quemar calorías, estimular su mente y mantenerse saludables. Las necesidades individuales de ejercicio varían según la raza o la mezcla de razas, el sexo, la edad y el nivel de salud. El ejercicio también tiende a ayudar a los perros a evitar el aburrimiento, que puede conducir a comportamientos destructivos. La diversión y los juegos supervisados ​​satisfarán muchos de los impulsos instintivos de su mascota de cavar, arrear, masticar, recuperar y perseguir.
   utter_faq/ask_cat_housing:
-  - text: e
+  - text: Su mascota debe tener su propio lugar limpio y seco en su casa para dormir y descansar. Cubra la cama de su gato con una manta o toalla suave y cálida. Asegúrese de lavar la ropa de cama con frecuencia. Mantenga a su gato adentro. Los gatos de exterior no viven tanto como los de interior. Los gatos al aire libre corren el riesgo de sufrir traumas causados ​​por los automóviles o por peleas con otros gatos, mapaches y perros vagabundos. Se sabe que los coyotes comen gatos. Los gatos que viven al aire libre son más propensos a infectarse con pulgas o garrapatas, así como a contraer enfermedades infecciosas.
   utter_faq/ask_dog_housing:
-  - text: e
+  - text: Su mascota necesita un lugar cálido y tranquilo para descansar, lejos de las corrientes de aire y del suelo. Lo ideal es una jaula de adiestramiento o una cama para perros, con una manta limpia o una almohada adentro. Lave la ropa de cama del perro con frecuencia. Si su perro pasará mucho tiempo al aire libre, asegúrese de que tenga acceso a la sombra y mucha agua fría cuando hace calor, y un refugio cálido, seco y cubierto cuando hace frío.
   utter_faq/ask_cat_sterilization:
-  - text: e
+  - text: Las gatas deben ser esterilizadas y los gatos machos deben ser castrados a los cinco meses de edad.
   utter_faq/ask_dog_sterilization:
-  - text: e
+  - text: Las hembras deben ser esterilizadas y los machos deben ser castrados a los seis meses de edad.
   utter_faq/ask_cat_litter:
-  - text: e
+  - text: Todos los gatos de interior necesitan una caja de arena, que debe colocarse en un lugar tranquilo y accesible. En una casa de varios niveles, se recomienda una caja por piso. Evite mover la caja a menos que sea absolutamente necesario, pero si debe hacerlo, mueva la caja solo unos centímetros por día. Tenga en cuenta que los gatos no usarán una caja de arena sucia y maloliente, así que saque los desechos sólidos de la caja al menos una vez al día. Vacíe todo, lave con un detergente suave y vuelva a llenar al menos una vez a la semana; puede hacer esto con menos frecuencia si usa arena aglomerante. No use amoníaco, desodorantes o aromas, especialmente limón, al limpiar la caja de arena. Si su gato no usa una caja de arena, consulte con su veterinario. A veces, la negativa a usar una caja de arena se basa en una afección médica que requirió tratamiento.
   utter_faq/ask_dog_poisonous:
   - text: e
+  utter_faq/ask_cat_bathing:
+  - text: e
+  utter_ask_breed:
+  - text: ¿Qué raza es tu mascota?
 actions:
 - faq_form
+- action_breed_api
 forms:
   faq_form:
     ignored_intents:
@@ -106,5 +188,8 @@ forms:
         type: from_entity
       animal:
       - entity: animal
-        type: from_text
+        type: from_entity
+      breed:
+      - entity: breed
+        type: from_entity
 e2e_actions: []

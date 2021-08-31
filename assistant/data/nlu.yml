@@ -28,12 +28,6 @@ nlu:
 - intent: fill_slot
   examples: |
     - /fill_slot{"animal":"perro"}
-- intent: ask_age
-  examples: |
-    - Tiene 10 años
-- intent: ask_breed
-  examples: |
-    - Es un Golden Retriever
 - intent: ask_question
   examples: |
     - Cúal es la mejor comida para darle?
@@ -86,3 +80,22 @@ nlu:
 - intent: faq/ask_cat_poisonous
   examples: |
     - Que comida le hace mal a mi gato?
+- intent: ask_breed
+  examples: |
+    - Mi mascota es un [golden retriever](breed)
+    - Es un [akita](breed)
+    - Tengo un [Highlander](breed)
+    - Un [Burmese](breed)
+    - [vizsla](breed)
+    - Es un [shiba](breed)
+    - Es un [golden retriever](breed)
+    - es un [akita](breed)
+    - Mi mascota es un [dingo](breed)
+    - Es un [Maine Coon](breed)
+    - Tengo un [fox terrier](breed)
+    - Un [Bombay](breed)
+    - [pug](breed)
+    - Es un [Munchkin](breed)
+    - Es un [chihuahua](breed)
+    - es un [Sphynx](breed)
+    - husky
