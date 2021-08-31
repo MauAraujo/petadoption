@@ -61,8 +61,6 @@ responses:
       title: Preguntas frecuentes
     - payload: /faq_custom
       title: Búsqueda personalizada
-    - payload: /articles
-      title: Buscar artículos
     text: ¡Hola! Te puedo ayudar a encontrar información acerca del cuidado de mascotas. Elige una de las siguientes opciones.
   utter_chitchat/greet:
   - text: ¡Hola!
@@ -72,8 +70,6 @@ responses:
   - buttons:
     - payload: /fill_slot{"age":"baby"}
       title: Bebé
-    - payload: /fill_slot{"age":"adolescent"}
-      title: Adolescente
     - payload: /fill_slot{"age":"adult"}
       title: Adulto
     - payload: /fill_slot{"age":"senior"}

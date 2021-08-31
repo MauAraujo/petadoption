@@ -99,3 +99,16 @@ nlu:
     - Es un [chihuahua](breed)
     - es un [Sphynx](breed)
     - husky
+    - [golden retriever](breed)[golden retriever](breed)
+    - Es un [pomeranian](breed)
+    - Es un [pitbull](breed)
+    - tengo un [cocker spaniel](breed)
+    - tengo un [samoyed](breed)
+    - es [husky](breed)
+    - [schnauzer](breed) miniature
+    - [schnauzer](breed) miniatura
+    - Es un [havanese](breed)
+    - es un [pomeranian](breed)
+- intent: chitchat
+  examples: |
+    - [boston bulldog](breed)[bulldog](breed)
