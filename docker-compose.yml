@@ -1,8 +1,81 @@
 version: '3.9'
 
+# x-database-credentials: &database-credentials
+#   DB_HOST: "db"
+#   DB_PORT: "5432"
+#   DB_USER: "${DB_USER:-admin}"
+#   DB_PASSWORD: "${DB_PASSWORD}"
+#   DB_LOGIN_DB: "${DB_LOGIN_DB:-rasa}"
+
+# x-rabbitmq-credentials: &rabbitmq-credentials
+#   RABBITMQ_HOST: "rabbit"
+#   RABBITMQ_USERNAME: "user"
+#   RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+
+# x-redis-credentials: &redis-credentials
+#   REDIS_HOST: "redis"
+#   REDIS_PORT: "6379"
+#   REDIS_PASSWORD: ${REDIS_PASSWORD}
+#   REDIS_DB: "1"
+#   REDIS_CACHE_DB: "2"
+#   ACCEPTABLE_QUERY_COUNT_NUMBER: "50000"
+  
+# x-duckling-credentials: &duckling-credentials
+#   RASA_DUCKLING_HTTP_URL: "http://duckling:8000"
+
+# x-nginx-host-variables: &nginx-host-variables
+#   RASA_X_HOST: "rasa-x:5002"
+#   RASA_USER_APP: "app:5055"
+#   RASA_PRODUCTION_HOST: "rasa-production:5005"
+
+# x-rasax-credentials: &rasax-credentials
+#   RASA_X_HOST: "http://rasa-x:5002"
+#   RASA_X_USERNAME: ${RASA_X_USERNAME:-admin}
+#   RASA_X_PASSWORD: ${RASA_X_PASSWORD:-}
+#   RASA_X_TOKEN: ${RASA_X_TOKEN}
+#   JWT_SECRET: ${JWT_SECRET}
+#   RASA_USER_APP: "http://app:5055"
+#   RASA_PRODUCTION_HOST: "http://rasa-production:5005"
+#   RASA_WORKER_HOST: "http://rasa-worker:5005"
+#   RASA_TOKEN: ${RASA_TOKEN}
+
+# x-rasa-credentials: &rasa-credentials
+#   <<: *rabbitmq-credentials
+#   <<: *rasax-credentials
+#   <<: *database-credentials
+#   <<: *redis-credentials
+#   <<: *duckling-credentials
+#   RASA_TOKEN: ${RASA_TOKEN}
+#   RASA_MODEL_PULL_INTERVAL: 10
+#   RABBITMQ_QUEUE: "rasa_production_events"
+#   RASA_TELEMETRY_ENABLED: ${RASA_TELEMETRY_ENABLED:-true}
+
+
+# x-rasa-services: &default-rasa-service
+#   restart: always
+#   image: "rasa/rasa:${RASA_VERSION}-full"
+#   volumes:
+#       - ./.config:/.config
+#   expose:
+#     - "5005"
+#   command: >
+#     x
+#     --no-prompt
+#     --production
+#     --config-endpoint http://rasa-x:5002/api/config?token=${RASA_X_TOKEN}
+#     --port 5005
+#     --jwt-method HS256
+#     --jwt-secret ${JWT_SECRET}
+#     --auth-token '${RASA_TOKEN}'
+#     --cors "*"
+#   depends_on:
+#     - rasa-x
+#     - rabbit
+#     - redis
+
 x-minio-common: &minio-common
-  image: minio/minio:RELEASE.2021-08-20T18-32-01Z
-  command: server --console-address ":9001" http://minio1/data{1...2}
+  image: minio/minio:RELEASE.2021-08-31T05-46-54Z
+  command: server --console-address ":9001" http://minio{1...4}/data{1...2}
   expose:
     - "9000"
     - "9001"
@@ -16,24 +89,133 @@ x-minio-common: &minio-common
     retries: 3
 
 services:
-    # web:
-    #     build: .
-    #     ports:
-    #         - '3000:3000'
-    #     depends_on:
-    #         - server
-    #         - meilisearch
-    #         - nginx
+    web:
+        build: .
+        ports:
+            - '3000:3000'
+        depends_on:
+            - server
+            - meilisearch
+            - nginx-minio
 
     server:
         image: golang:1.17.0-alpine
         build: server
         ports:
-            - '8080:8080'
+            - '8080:8082'
         depends_on:
             - mongo
             - meilisearch
-            - nginx
+            - nginx-minio
+
+    # rasa-x:
+    #     restart: always
+    #     image: "rasa/rasa-x:${RASA_X_VERSION}"
+    #     expose:
+    #     - "5002"
+    #     volumes:
+    #     - ./assistant/models:/app/models
+    #     - ./assistant/environments.yml:/app/environments.yml
+    #     - ./assistant/credentials.yml:/app/credentials.yml
+    #     - ./assistant/domain.yml:/app/domain.yml
+    #     - ./assistant/config.yml:/app/config.yml
+    #     - ./assistant/data:/app/data
+    #     - ./assistant/endpoints.yml:/app/endpoints.yml
+    #     - ./assistant/logs:/logs
+    #     - ./assistant/auth:/app/auth
+    #     environment:
+    #       <<: *database-credentials
+    #       <<: *rasa-credentials
+    #       SELF_PORT: "5002"
+    #       DB_DATABASE: "${DB_DATABASE:-rasa}"
+    #       RASA_MODEL_DIR: "/app/models"
+    #       PASSWORD_SALT: ${PASSWORD_SALT}
+    #       RABBITMQ_QUEUE: "rasa_production_events"
+    #       RASA_X_USER_ANALYTICS: "0"
+    #       SANIC_RESPONSE_TIMEOUT: "3600"
+    #       RUN_DATABASE_MIGRATION_AS_SEPARATE_SERVICE: "true"
+    #     depends_on:
+    #     - db
+    #     - rasa-custom-actions
+        
+    # rasa-custom-actions:
+    #     build: ./assistant
+
+    # db-migration:
+    #   entrypoint: ["python"]
+    #   command: ["-m", "rasax.community.services.db_migration_service"]
+    #   restart: always
+    #   image: "rasa/rasa-x:${RASA_X_VERSION}"
+    #   healthcheck:
+    #     test: ["CMD-SHELL", "curl -f http://localhost:8000/health || kill 1"]
+    #     interval: 5s
+    #     timeout: 1s
+    #     retries: 3
+    #     start_period: 2s
+    #   expose:
+    #     - "8000"
+    #   environment:
+    #     <<: *database-credentials
+    #     RUN_DATABASE_MIGRATION_AS_SEPARATE_SERVICE: "true"
+    #     MPLCONFIGDIR: "/tmp/.matplotlib"
+    #   depends_on:
+    #     - db
+
+    # rasa-production:
+    #     <<: *default-rasa-service
+    #     environment:
+    #       <<: *rasa-credentials
+    #       RASA_ENVIRONMENT: "production"
+    #       DB_DATABASE: "tracker"
+    #       MPLCONFIGDIR: "/tmp/.matplotlib"
+    #       RASA_MODEL_SERVER: "http://rasa-x:5002/api/projects/default/models/tags/production"
+
+    # rasa-worker:
+    #     <<: *default-rasa-service
+    #     environment:
+    #       <<: *rasa-credentials
+    #       RASA_ENVIRONMENT: "worker"
+    #       DB_DATABASE: "worker_tracker"
+    #       MPLCONFIGDIR: "/tmp/.matplotlib"
+    #       RASA_MODEL_SERVER: "http://rasa-x:5002/api/projects/default/models/tags/production"
+
+    # app:
+    #     restart: always
+    #     image: "rasa/rasa-x-demo:${RASA_X_DEMO_VERSION}"
+    #     expose:
+    #     - "5055"
+    #     depends_on:
+    #     - rasa-production
+
+    # db:
+    #     restart: always
+    #     image: "bitnami/postgresql:13.4.0"
+    #     expose:
+    #     - "5432"
+    #     environment:
+    #       POSTGRESQL_USERNAME: "${DB_USER:-admin}"
+    #       POSTGRESQL_PASSWORD: "${DB_PASSWORD}"
+    #       POSTGRESQL_DATABASE: "${DB_DATABASE:-rasa}"
+    #     # volumes:
+    #     # - ./assistant/db:/bitnami/postgresql
+
+    # rabbit:
+    #     restart: always
+    #     image: "bitnami/rabbitmq:3.8.17"
+    #     environment:
+    #       RABBITMQ_HOST: "rabbit"
+    #       RABBITMQ_USERNAME: "user"
+    #       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
+    #       RABBITMQ_DISK_FREE_RELATIVE_LIMIT: "0.1"
+    #     expose:
+    #     - "5672"
+
+    # duckling:
+    #     restart: always
+    #     image: "rasa/duckling:0.1.6.5-r2"
+    #     expose:
+    #     - "8000"
+    #     command: ["duckling-example-exe", "--no-access-log", "--no-error-log"]
 
     mongo:
         image: mongo
@@ -41,6 +223,8 @@ services:
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: admin
+        volumes: 
+          - '/data/db:/data/db'
         ports:
             - '27017:27017'
 
@@ -56,29 +240,85 @@ services:
         depends_on:
             - mongo
 
-    minio1:
-        <<: *minio-common
-        hostname: minio1
-        volumes:
-            - data1-1:/data1
-            - data1-2:/data2
+    # nginx:
+    #   restart: always
+    #   image: "nginx:1.19"
+    #   ports:
+    #     - "80:8080"
+    #     - "443:8443"
+    #   volumes:
+    #     - ./assistant/certs:/etc/certs
+    #     - ./assistant/nginx-config-files/nginx.conf:/etc/nginx/nginx.conf
+    #     - ./assistant/nginx-config-files/ssl.conf.template:/etc/nginx/templates/ssl.conf.template
+    #     - ./assistant/nginx-config-files/rasax.nginx.template:/etc/nginx/templates/rasax.nginx.template
+    #   environment:
+    #     <<: *nginx-host-variables
+    #   depends_on:
+    #     - rasa-x
+    #     - rasa-production
+    #     - app
 
-    nginx:
-        image: 'nginx:1.19.2-alpine'
-        hostname: nginx
-        volumes:
-            - './nginx.conf:/etc/nginx/nginx.conf:ro'
-        ports:
-            - '9000:9000'
-            - '9001:9001'
-        depends_on:
-            - minio1
+    # redis:
+    #     restart: always
+    #     image: "bitnami/redis:6.2.4"
+    #     environment:
+    #       REDIS_PASSWORD: ${REDIS_PASSWORD}
+    #     expose:
+    #     - "6379"
 
     meilisearch:
         image: getmeili/meilisearch
         ports:
             - '7700:7700'
 
+    minio1:
+      <<: *minio-common
+      hostname: minio1
+      volumes:
+        - data1-1:/data1
+        - data1-2:/data2
+
+    minio2:
+      <<: *minio-common
+      hostname: minio2
+      volumes:
+        - data2-1:/data1
+        - data2-2:/data2
+
+    minio3:
+      <<: *minio-common
+      hostname: minio3
+      volumes:
+        - data3-1:/data1
+        - data3-2:/data2
+
+    minio4:
+      <<: *minio-common
+      hostname: minio4
+      volumes:
+        - data4-1:/data1
+        - data4-2:/data2
+
+    nginx-minio:
+      image: nginx:1.19.2-alpine
+      hostname: nginx
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+        - "9000:9000"
+        - "9001:9001"
+      depends_on:
+        - minio1
+        - minio2
+        - minio3
+        - minio4
+
 volumes:
     data1-1:
     data1-2:
+    data2-1:
+    data2-2:
+    data3-1:
+    data3-2:
+    data4-1:
+    data4-2:

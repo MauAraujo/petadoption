@@ -7,8 +7,9 @@ export async function getPublications(filter) {
     const response = await axios.get(api + '/publications').catch(err => {
         console.log(err);
     });
-    if (response.data === null) {
-        response.data = [];
+    if (typeof response === "undefined") {
+      response = {}
+      response.data = [];
     }
     return response.data;
 }

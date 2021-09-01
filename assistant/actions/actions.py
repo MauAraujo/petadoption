@@ -9,9 +9,13 @@
 
 import pet_info
 import requests
+from pymongo import MongoClient
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+
+client = MongoClient("mongodb://root:admin@127.0.0.1:27017/")
+db = client.petadoption
 
 
 class Action_Breed_Api(Action):
@@ -29,13 +33,15 @@ class Action_Breed_Api(Action):
 
         if animal == "perro":
             image = retrieve_dog_image(breed)
-            recommendations = retrieve_dog_recommendations(age)
+            recommendations = retrieve_dog_recommendations(age, breed)
         else:
             image = retrieve_cat_image(breed)
             recommendations = retrieve_cat_recommendations(age)
 
         dispatcher.utter_message(image=image)
-        dispatcher.utter_message(text=recommendations)
+
+        for rec in recommendations:
+            dispatcher.utter_message(text=rec)
 
         return []
 
@@ -57,13 +63,31 @@ def retrieve_dog_image(breed):
     return r.json()["message"]
 
 
-def retrieve_dog_recommendations(age):
+def retrieve_dog_recommendations(age, breed):
+    dog = db.breeds.find_one(({"breed": breed}))
+    recommendations = []
+
+    recommendations.append(pet_info.general_nutrition_statement)
+
     if age == "baby":
-        recommendations = pet_info.puppy_nutrition
+        recommendations.append(pet_info.puppy_nutrition)
     elif age == "adult":
-        recommendations = pet_info.adult_dog_nutrition
+        recommendations.append(pet_info.adult_nutrition)
     elif age == "senior":
-        recommendations = pet_info.senior_dog_nutrition
+        recommendations.append(pet_info.senior_nutrition)
+
+
+    if dog["brachycephalic"]:
+        recommendations.append(pet_info.brachycephalic_nutrition)
+    if dog["sensitive_stomach"]:
+        recommendations.append(pet_info.dental_disease_nutrition)
+    if dog["obesity_prone"]:
+        recommendations.append(pet_info.obesity_nutrition)
+    if dog["dental_disease_prone"]:
+        recommendations.append(pet_info.dental_disease_nutrition)
+    if dog["skin_problem_prone"]:
+        recommendations.append(pet_info.skin_problem_nutrition)
+
     return recommendations
 
 
