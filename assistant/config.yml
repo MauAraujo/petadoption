@@ -26,9 +26,11 @@ pipeline:
     ambiguity_threshold: 0.1
   - name: ResponseSelector
     epochs: 100
+    constrain_similarities: True
     retrieval_intent: faq
   - name: ResponseSelector
     epochs: 100
+    constrain_similarities: True
     retrieval_intent: chitchat
 
 

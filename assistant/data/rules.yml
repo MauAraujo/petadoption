@@ -1,9 +1,5 @@
 version: "2.0"
 rules:
-- rule: FAQ Common
-  steps:
-  - intent: get_started
-  - action: utter_offer_help
 - rule: respond to FAQs
   steps:
   - intent: faq
@@ -12,3 +8,11 @@ rules:
   steps:
   - intent: chitchat
   - action: utter_chitchat
+- rule: respond to common FAQ
+  steps:
+  - intent: faq_common
+  - action: utter_ask_question
+- rule: respond to custom FAQ
+  steps:
+  - intent: faq_custom
+  - action: utter_ask_animal

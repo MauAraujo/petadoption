@@ -36,11 +36,21 @@ export default function Homepage() {
         <DiscoverCard />
       </div>
       <Widget
-        initPayload={"/utter_greet"}
+        initPayload={"/get_started"}
         socketUrl={"http://localhost:5005"}
         socketPath={"/socket.io/"}
-        customData={{ "language": "es" }} // arbitrary custom data. Stay minimal as this will be added to the socket
-        title={"Ayuda"}
+        customData={{ "language": "es" }}
+        title={"Información sobre mascotas"}
+        customMessageDelay={(message) => {
+          let delay = message.length * 30;
+          if (delay > 2 * 1000) delay = 3 * 1000;
+          if (delay < 400) delay = 1000;
+          return delay;
+        }}
+        showMessageDate={true}
+        params={{
+          storage: "session"
+        }}
         inputTextFieldHint={'Escribe un mensaje'}
         showFullScreenButton={true}
         displayUnreadCount={true}

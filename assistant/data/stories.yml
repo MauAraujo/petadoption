@@ -6,7 +6,7 @@ stories:
   - action: utter_offer_help
   - intent: faq_common
   - action: utter_ask_question
-- story: faq custom
+- story: faq custom affirmativve
   steps:
   - intent: get_started
   - action: utter_offer_help
@@ -24,3 +24,25 @@ stories:
     entities:
     - breed: samoyed
   - action: action_breed_api
+  - intent: affirm
+  - action: utter_offer_help
+- story: faq custom negative
+  steps:
+  - intent: get_started
+  - action: utter_offer_help
+  - intent: faq_custom
+  - action: utter_ask_animal
+  - intent: fill_slot
+    entities:
+    - animal: perro
+  - action: utter_ask_age
+  - intent: fill_slot
+    entities:
+    - age: adolescent
+  - action: utter_ask_breed
+  - intent: ask_breed
+    entities:
+    - breed: samoyed
+  - action: action_breed_api
+  - intent: deny
+  - action: utter_chitchat/farewell

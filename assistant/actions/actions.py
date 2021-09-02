@@ -34,14 +34,17 @@ class Action_Breed_Api(Action):
         if animal == "perro":
             image = retrieve_dog_image(breed)
             recommendations = retrieve_dog_recommendations(age, breed)
-        else:
-            image = retrieve_cat_image(breed)
-            recommendations = retrieve_cat_recommendations(age)
+        elif animal == "gato":
+            image, id = retrieve_cat_image(breed)
+            recommendations = retrieve_cat_recommendations(age, id)
 
         dispatcher.utter_message(image=image)
 
         for rec in recommendations:
             dispatcher.utter_message(text=rec)
+        dispatcher.utter_message(
+            text="Espero mis recomendaciones puedan ayudarte en darle una mejor dieta a tu mascota.")
+        dispatcher.utter_message(text="¿Te puedo ayudar con otra cosa?")
 
         return []
 
@@ -67,15 +70,14 @@ def retrieve_dog_recommendations(age, breed):
     dog = db.breeds.find_one(({"breed": breed}))
     recommendations = []
 
-    recommendations.append(pet_info.general_nutrition_statement)
+    recommendations.append(pet_info.general_dog_nutrition_statement)
 
     if age == "baby":
         recommendations.append(pet_info.puppy_nutrition)
     elif age == "adult":
-        recommendations.append(pet_info.adult_nutrition)
+        recommendations.append(pet_info.adult_dog_nutrition)
     elif age == "senior":
-        recommendations.append(pet_info.senior_nutrition)
-
+        recommendations.append(pet_info.senior_dog_nutrition)
 
     if dog["brachycephalic"]:
         recommendations.append(pet_info.brachycephalic_nutrition)
@@ -102,14 +104,25 @@ def retrieve_cat_image(breed):
     res = r.json()[0]
     image = res["url"]
 
-    return image
+    return image, id
 
 
-def retrieve_cat_recommendations(age):
+def retrieve_cat_recommendations(age, id):
+    cat = db.breeds.find_one({"breed": id})
+    recommendations = []
+
+    recommendations.append(pet_info.general_cat_nutrition_statement)
+
     if age == "baby":
-        recommendations = pet_info.kitten_nutrition
+        recommendations.append(pet_info.kitten_nutrition)
     elif age == "adult":
-        recommendations = pet_info.adult_cat_nutrition
+        recommendations.append(pet_info.adult_cat_nutrition)
     elif age == "senior":
-        recommendations = pet_info.senior_cat_nutrition
+        recommendations.append(pet_info.senior_cat_nutrition)
+
+    if cat is None:
+        recommendations.append(pet_info.cat_general_nutrition)
+    else:
+        recommendations.append(cat["recommendation"])
+
     return recommendations

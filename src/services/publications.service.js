@@ -4,7 +4,7 @@ const api = 'http://127.0.0.1:8080';
 
 export async function getPublications(filter) {
     //const path = filter ? `/publications${filter}` : '/publications';
-    const response = await axios.get(api + '/publications').catch(err => {
+    var response = await axios.get(api + '/publications').catch(err => {
         console.log(err);
     });
     if (typeof response === "undefined") {
