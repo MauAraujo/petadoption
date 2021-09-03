@@ -10,4 +10,14 @@
     //color: white;
     text-transform: uppercase;
   }
+
+  form {
+    width: 75%;
+
+    input {
+      margin-right: 2.5em;
+      padding: 0.2em 0.8em !important;
+      border-radius: 0.5em !important;
+    }
+  }
 }

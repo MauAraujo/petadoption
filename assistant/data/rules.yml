@@ -16,3 +16,7 @@ rules:
   steps:
   - intent: faq_custom
   - action: utter_ask_animal
+- rule: respond to breed nutrition
+  steps:
+  - intent: ask_breed_nutrition
+  - action: utter_ask_breed_nutrition

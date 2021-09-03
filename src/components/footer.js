@@ -36,7 +36,7 @@ export default function Footer(props) {
               </div>
             </div>
 
-            <div className='col-12 col-md-4 offset-md-2'>
+            {/* <div className='col-12 col-md-4 offset-md-2'>
               <h2 className='subtitle'>Mantenos informados</h2>
               <p className='txt'>
                 ¿Quieres actualizaciones y noticias en tu correo?
@@ -64,7 +64,7 @@ export default function Footer(props) {
                   Aceptar
                 </button>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

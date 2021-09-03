@@ -29,6 +29,8 @@ intents:
     use_entities: true
 - affirm:
     use_entities: true
+- ask_breed_nutrition:
+    use_entities: true
 entities:
 - animal
 - age
@@ -213,6 +215,8 @@ responses:
       7. Alimento para perros
   utter_ask_breed:
   - text: ¿Qué raza es tu mascota?
+  utter_ask_breed_nutrition:
+  - text: 'Si quieres consultar una dieta específica para esta raza, di: "Quiero que me recomiendes una dieta"'
 actions:
 - faq_form
 - action_breed_api

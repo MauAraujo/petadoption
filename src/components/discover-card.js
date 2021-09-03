@@ -28,7 +28,7 @@ export default function DiscoverCard(props) {
               </div>
             </div>
           </div>
-          <div className="col card-container">
+          {/* <div className="col card-container">
             <div className="card h-100">
               <img src={parrot} className="card-img-top" alt="..."></img>
               <div className="card-body">
@@ -45,7 +45,7 @@ export default function DiscoverCard(props) {
                 <a href="#" className="button">Aprende mas</a>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
     )
 }

@@ -32,6 +32,7 @@ class Action_Breed_Api(Action):
         breed = tracker.get_slot("breed")
 
         if animal == "perro":
+            breed.lower()
             image = retrieve_dog_image(breed)
             recommendations = retrieve_dog_recommendations(age, breed)
         elif animal == "gato":
@@ -79,6 +80,8 @@ def retrieve_dog_recommendations(age, breed):
     elif age == "senior":
         recommendations.append(pet_info.senior_dog_nutrition)
 
+    if dog is None:
+        return recommendations
     if dog["brachycephalic"]:
         recommendations.append(pet_info.brachycephalic_nutrition)
     if dog["sensitive_stomach"]:

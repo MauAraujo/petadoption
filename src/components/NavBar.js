@@ -36,8 +36,8 @@ export default function NavBar() {
               <span>|</span>
             </Nav.Item>
             <Nav.Item className="nav-item-capital">
-              <NavLink exact activeClassName="active" to="/catalogo">
-                Adopciones
+              <NavLink exact activeClassName="active" to="/articulos">
+                Artículos
               </NavLink>
             </Nav.Item>
           </Nav>
@@ -55,11 +55,11 @@ export default function NavBar() {
                 Ingresar
               </NavLink>
             </Nav.Item>
-            <Nav.Item>
+            {/* <Nav.Item>
               <NavLink exact activeClassName="active" to="/">
                 <FontAwesomeIcon icon={faBars} />
               </NavLink>
-            </Nav.Item>
+            </Nav.Item> */}
           </Nav>
         </Navbar.Collapse>
         {/* <button

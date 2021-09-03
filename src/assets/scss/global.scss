@@ -14,6 +14,10 @@ body {
     overflow: hidden;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .catalog {
     background: $background !important;
     min-height: 85vh;
@@ -54,7 +58,7 @@ body {
   .button {
     //background: $purple;
       //color: $yellow;
-      font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     background: $button;
     color: $buttontext;
     font-weight: bold;
@@ -65,6 +69,7 @@ body {
     text-align: center;
     cursor: pointer;
     transition: ease 0.4s;
+    text-decoration: none;
 
     &:hover {
       //background: darken($color: $pink, $amount: 30%);

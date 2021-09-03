@@ -22,11 +22,13 @@ export default function Hero() {
             </p>
             <div className="row no-gutters mt-5">
               <div className="col-12 col-md-6">
-                <div className="btn button">¿Qué compañero busco?</div>
+              <Link to={"/catalogo/"}>
+                  <div className="btn button-aux">Explora</div>
+                </Link>
               </div>
               <div className="col-12 col-md-6">
-                <Link to={"/catalogo/"}>
-                  <div className="btn button-aux">Explorar</div>
+                <Link to={"/articulos/"}>
+                  <div className="btn button-aux">Aprende</div>
                 </Link>
               </div>
             </div>

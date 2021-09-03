@@ -9,9 +9,14 @@ nlu:
     - que puedes hacer?
     - hola?
     - ?
+    - Ayuda
+    - Inicia
+    - Inicio
+    - Ayúdame
 - intent: chitchat
   examples: |
     - hola
+    - [boston bulldog](breed)[bulldog](breed)
 - intent: chitchat/greet
   examples: |
     - cómo estás?
@@ -51,6 +56,7 @@ nlu:
     - absolutamente
     - me gustaría
     - sería bueno
+    - Si
 - intent: deny
   examples: |
     - no
@@ -81,20 +87,35 @@ nlu:
     - De que se enferman los gatos?
     - mi gatito esta enfermo
     - de que se enferman los gatos?
+    - Enfermedades comunes en gatos
 - intent: faq/ask_dog_diseases
   examples: |
     - De que se enferman los perros?
     - mi perrito esta enfermo
+    - Enfermedades comunes en perros
+    - De que se enferma mi perro
 - intent: faq/ask_cat_nutrition
   examples: |
     - Que le doy de comer a mi gato?
     - que le doy a mi gato de comer?
     - que comen los gatos?
+    - alimentos aptos para gato
+    - alimentos de gatito
+    - que come mi gato
+    - alimento para gato
+    - calorías para perro
+    - Que comen los gatos
+    - cuidados de gato
 - intent: faq/ask_dog_nutrition
   examples: |
     - Que le doy de comer a mi perro?
     - que le doy de comer a mi perro?
     - Cúal es la mejor comida para darle?
+    - Dieta de un perro
+    - Alimentos aptos para mi perro
+    - que comen los perros
+    - Que le doy de comer a mi perro
+    - Cuál es la dieta de un perro
 - intent: faq/ask_cat_grooming
   examples: |
     - Como limpio a mi gato?
@@ -107,35 +128,50 @@ nlu:
 - intent: faq/ask_dog_supplies
   examples: |
     - Que necesito para cuidar a mi perro?
+    - Suministros para cuidar perros
+    - objetos necesarios para cuidado de perros
 - intent: faq/ask_dog_exercise
   examples: |
     - Cuanto ejercicio necesita mi perro?
     - cuanto ejercicio necesita mi perro?
+    - ejercicio para Perro
+    - ejercicio diario para un perro
+    - Cuánto ejercicio hace un perro
 - intent: faq/ask_cat_housing
   examples: |
     - Donde puedo tener a mi gato?
+    - espacio adecuado para tener un gato
 - intent: faq/ask_dog_housing
   examples: |
     - Donde puedo tener a mi perro?
     - Donde tengo a mi perro?
+    - Dónde puedo tener a mi perro
 - intent: faq/ask_cat_sterilization
   examples: |
     - Deberia esterilizar a mi gato?
     - esterilizo a mi gatito?
+    - Esterilización de gatos
 - intent: faq/ask_dog_sterilization
   examples: |
     - Deberia esterilizar a mi perro?
     - sobre la esterilizacion de perros
     - esterilizo a mi perrita?
+    - Esterilización de perros
 - intent: faq/ask_cat_litter
   examples: |
     - Necesito comprar una caja de arena?
+    - Información sobre la caja de arena
+    - caja de arena
 - intent: faq/ask_dog_poisonous
   examples: |
     - Que comida le hace mal a mi perro?
+    - Alimentos dañinos para perros
+    - Que comidas les hacen daño a los perros
+    - que le hace daño a mi perrito
 - intent: faq/ask_cat_poisonous
   examples: |
     - Que comida le hace mal a mi gato?
+    - alimentos seguros para mi gato
 - intent: ask_breed
   examples: |
     - Mi mascota es un [golden retriever](breed)
@@ -176,9 +212,20 @@ nlu:
     - es [pomeranian](breed)
     - [boston bulldog](breed)[bulldog](breed)
     - Es un [Golden](breed) [Retriever](breed)
+    - [Shiba](breed)[Shiba](breed)
+    - [chihuahua](breed)[chihuahua](breed)
+    - [Golden retriever](breed)[Golden retriever](breed)
+    - [Chihuahua](breed)[Chihuahua](breed)
+    - [Vizsla](breed)[Vizsla](breed)
 - intent: ask_age
   examples: |
     - 12
+- intent: ask_breed_nutrition
+  examples: |
+    - Cuál es la dieta de un chihuahua
+    - qué come un chihuahua
+    - Que comen los [golden retriever](breed)[golden retriever](breed)
+    - que comen los [shiba](breed)[shiba](breed)?
 - lookup: animal
   examples: |
     - perro
