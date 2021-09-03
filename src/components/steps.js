@@ -1,8 +1,7 @@
 import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import doggie from "../assets/images/open-doodles/png/DoogieDoodle.png";
-import resting from "../assets/images/open-doodles/png/LayingDoodle.png";
-import playing from "../assets/images/open-doodles/png/DogJumpDoodle.png"
+import doggie from "../assets/images/DoogieDoodle.webp";
+import resting from "../assets/images/LayingDoodle.webp";
+import playing from "../assets/images/DogJumpDoodle.webp"
 ;import "./styles/steps.scss";
 
 export default function Steps(props) {

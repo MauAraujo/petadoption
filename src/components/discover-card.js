@@ -1,9 +1,9 @@
 import React from 'react';
 import './styles/discoverd.scss';
-import dog from "../assets/images/puppy-portrait.jpg";
-import cat from "../assets/images/cat-portrait.jpg";
-import parrot from "../assets/images/parrot-landscape-portrait.jpg";
-import turtle from "../assets/images/turtle-portrait.jpg";
+import dog from "../assets/images/puppy-portrait.webp";
+import cat from "../assets/images/cat-portrait.webp";
+// import parrot from "../assets/images/parrot-landscape-portrait.webp";
+// import turtle from "../assets/images/turtle-portrait.webp";
 
 const articleLocation = 'http://localhost:3000/articulos';
 
