@@ -87,13 +87,13 @@ const Hits = ({ hits, history }) => (
           <Col
             md={2}
             className="publication-card"
-            key={hit.objectID}
+            key={hit.id}
           >
-            <Link to={"/detail/" + (hit._id)}>
+            <Link to={"/detail/" + (hit.id)}>
               <div className="img-container">
                 <img
                   className="contain"
-                  src={hit.images[0]}
+                  src={`http://127.0.0.1:8000/unsafe/fit-in/x360/${encodeURIComponent(hit.images[0])}`}
                   alt=""
                 />
               </div>

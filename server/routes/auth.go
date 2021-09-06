@@ -73,7 +73,7 @@ func AddAuthRoutes(rg *gin.RouterGroup) {
 			}
 
 			user.Username = username
-			user.FullName = "Mauricio Araujo"
+			user.FullName = ""
 			user.Hash = hash
 
 			collection := data.Client.Database(dbName).Collection("users")

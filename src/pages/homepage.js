@@ -47,6 +47,7 @@ export default function Homepage() {
           if (delay < 400) delay = 1000;
           return delay;
         }}
+        hideWhenNotConnected={true}
         showMessageDate={true}
         params={{
           storage: "session"

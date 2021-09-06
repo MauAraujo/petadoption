@@ -18,7 +18,6 @@ import {
 //     ContainerOutlined,
 //     MailOutlined,
 // } from '@ant-design/icons';
-import "antd/dist/antd.css";
 import "../components/styles/Dashboard.scss";
 import { Posts, NewPost, Inbox } from "../components/DasboardContent";
 import { GetSession } from "../services/auth.service";

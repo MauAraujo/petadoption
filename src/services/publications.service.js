@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const api = 'http://127.0.0.1:8080';
+const api = 'http://127.0.0.1:8082';
 
 export async function getPublications(filter) {
     //const path = filter ? `/publications${filter}` : '/publications';

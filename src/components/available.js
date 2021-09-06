@@ -21,7 +21,7 @@ export default function Available(props) {
           <div className="img-container">
             <img
               className="contain"
-              src={publication.images ? publication.images[0] : dummy}
+              src={publication.images ? `http://127.0.0.1:8000/unsafe/fit-in/x340/${encodeURIComponent(publication.images[0])}` : dummy}
               alt={dummy}
             />
           </div>

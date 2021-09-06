@@ -95,18 +95,17 @@ services:
             - '3000:3000'
         depends_on:
             - server
-            - meilisearch
-            - nginx-minio
 
     server:
         image: golang:1.17.0-alpine
         build: server
         ports:
-            - '8080:8082'
+            - '8082:8082'
         depends_on:
             - mongo
             - meilisearch
             - nginx-minio
+            - thumbor
 
     # rasa-x:
     #     restart: always
@@ -272,6 +271,11 @@ services:
             - '7700:7700'
         volumes:
           - /data/meilisearch/data.ms:/data.ms
+
+    thumbor:
+      image: apsl/thumbor:latest
+      ports:
+        - '8000:8000'
 
     minio1:
       <<: *minio-common
