@@ -25,7 +25,7 @@ export default function DiscoverCard(props) {
             alt="Retrato de cachorros en el pasto">
           </img>
           <div className="card-body">
-            <h5 className="card-title">Cuidado de perros</h5>
+            <h2 className="card-title">Cuidado de perros</h2>
             <a href={articleLocation + "?menu%5Banimal%5D=perro&page=1"} className="button">Aprende mas</a>
           </div>
         </div>
@@ -39,7 +39,7 @@ export default function DiscoverCard(props) {
             alt="Retrato de un gato">
           </img>
           <div className="card-body">
-            <h5 className="card-title">Cuidado de gatos</h5>
+            <h2 className="card-title">Cuidado de gatos</h2>
             <a href="#" className="button">Aprende mas</a>
           </div>
         </div>

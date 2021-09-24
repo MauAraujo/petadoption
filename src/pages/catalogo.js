@@ -93,7 +93,7 @@ const Hits = ({ hits, history }) => (
               <div className="img-container">
                 <img
                   className="contain"
-                  src={`http://127.0.0.1:8000/unsafe/fit-in/x360/${encodeURIComponent(hit.images[0])}`}
+                  src={`http://127.0.0.1:8000/unsafe/fit-in/x360/filters:format(webp)/${encodeURIComponent(hit.images[0])}`}
                   alt=""
                 />
               </div>

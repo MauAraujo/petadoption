@@ -7,7 +7,7 @@
     overflow: hidden;
 
     .title, .subtitle, .txt {
-        max-width: 80%;
+        max-width: 80% !important;
 
         @media screen and (max-width: 414px) {
             max-width: 100%;

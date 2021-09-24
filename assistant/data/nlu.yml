@@ -82,6 +82,7 @@ nlu:
     - recomiendame algo para mi mascota
     - recomienda para mi mascota
     - que le doy a mi mascota?
+    - quiero que me recomiendes una dieta
 - intent: faq/ask_cat_diseases
   examples: |
     - De que se enferman los gatos?
@@ -122,9 +123,17 @@ nlu:
 - intent: faq/ask_dog_grooming
   examples: |
     - Como limpio a mi perro?
+    - Cómo limpio a mi perro?
+    - Tengo que cepillar a mi perro?
+    - Qué tan seguido se baña un perro?
+    - Que tan seguido lavo a mi perro?
 - intent: faq/ask_cat_supplies
   examples: |
     - Que necesito para cuidar a mi gato?
+    - Qué necesito para cuidar de un gato?
+    - Qué cosas necesito comprarle a mi gato?
+    - Qué compro para tener a un gato?
+    - Qué necesito para adoptar un gato?
 - intent: faq/ask_dog_supplies
   examples: |
     - Que necesito para cuidar a mi perro?
@@ -172,6 +181,9 @@ nlu:
   examples: |
     - Que comida le hace mal a mi gato?
     - alimentos seguros para mi gato
+    - Qué le hace daño a mi gato?
+    - Qué comidas le hacen daño a mi gato?
+    - Comidas adecuadas para un gato
 - intent: ask_breed
   examples: |
     - Mi mascota es un [golden retriever](breed)
@@ -213,7 +225,6 @@ nlu:
     - [boston bulldog](breed)[bulldog](breed)
     - Es un [Golden](breed) [Retriever](breed)
     - [Shiba](breed)[Shiba](breed)
-    - [chihuahua](breed)[chihuahua](breed)
     - [Golden retriever](breed)[Golden retriever](breed)
     - [Chihuahua](breed)[Chihuahua](breed)
     - [Vizsla](breed)[Vizsla](breed)
@@ -226,6 +237,7 @@ nlu:
     - qué come un chihuahua
     - Que comen los [golden retriever](breed)[golden retriever](breed)
     - que comen los [shiba](breed)[shiba](breed)?
+    - que comen los [labrador](breed)[labrador](breed)?
 - lookup: animal
   examples: |
     - perro

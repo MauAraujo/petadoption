@@ -24,7 +24,7 @@ export default function DetailHero(props) {
                 <Carousel.Item key={pet.images.indexOf(elem)}>
                   <img
                     className="d-block w-100"
-                    src={`http://127.0.0.1:8000/unsafe/fit-in/x560/${encodeURIComponent(elem)}`}
+                    src={`http://127.0.0.1:8000/unsafe/fit-in/x560/filters:format(webp)/${encodeURIComponent(elem)}`}
                     alt={pet.images.indexOf(elem)}
                   />
                 </Carousel.Item>
