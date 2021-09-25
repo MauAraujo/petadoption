@@ -21,6 +21,7 @@
     "emailjs-com": "^3.2.0",
     "instantsearch.css": "^7.4.5",
     "jwt-decode": "^3.1.2",
+    "meilisearch": "^0.20.2",
     "minio": "^7.0.19",
     "node-sass": "^6.0.1",
     "qs": "^6.10.1",

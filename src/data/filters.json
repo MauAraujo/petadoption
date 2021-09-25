@@ -1,0 +1,40 @@
+[
+  {
+    "name": "animal",
+    "label": "Animal",
+    "message": "Ingrese que animal es",
+    "mode": "options",
+    "options": ["Perro", "Gato", "Conejo", "Tortuga", "Ave"],
+    "ruleType": "string"
+  },
+  {
+    "name": "breed",
+    "label": "Raza",
+    "message": "Ingrese la raza de la mascota",
+    "mode": "tags",
+    "ruleType": "array"
+  },
+  {
+    "name": "gender",
+    "label": "Genero",
+    "message": "Ingrese los colores de la mascota",
+    "mode": "options",
+    "options": ["Hembra", "Macho"],
+    "ruleType": "string"
+  },
+  {
+    "name": "colors",
+    "label": "Colores",
+    "message": "Ingrese los colores de la mascota",
+    "mode": "tags",
+    "ruleType": "array"
+  },
+  {
+    "name": "petSize",
+    "label": "Tamaño",
+    "message": "Ingrese tamaño de la mascota",
+    "mode": "options",
+    "options": ["Muy pequeño", "Pequeño", "Mediano", "Grande", "Venti"],
+    "ruleType": "string"
+  }
+]

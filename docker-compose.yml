@@ -89,12 +89,12 @@ x-minio-common: &minio-common
     retries: 3
 
 services:
-    web:
-        build: .
-        ports:
-            - '3000:3000'
-        depends_on:
-            - server
+    # web:
+    #     build: .
+    #     ports:
+    #         - '3000:3000'
+    #     depends_on:
+    #         - server
 
     server:
         image: golang:1.17.0-alpine

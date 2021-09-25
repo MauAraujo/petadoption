@@ -26,10 +26,10 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 		cursor, err := collection.Find(context.TODO(), bson.M{})
 
 		if err != nil {
-		 	panic(err)
+			panic(err)
 		}
 		if err = cursor.All(context.TODO(), &publications); err != nil {
-		 	panic(err)
+			panic(err)
 		}
 		c.JSON(http.StatusOK, publications)
 	})
@@ -37,7 +37,8 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 	p.POST("", func(c *gin.Context) {
 		var publication data.Publication
 
-		err := c.Bind(&publication); if err == nil {
+		err := c.Bind(&publication)
+		if err == nil {
 			collection := data.Client.Database(dbName).Collection("publications")
 			insertResult, err := collection.InsertOne(context.TODO(), publication)
 
@@ -77,7 +78,8 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 			panic(err)
 		}
 
-		err = c.Bind(&publication); if err == nil {
+		err = c.Bind(&publication)
+		if err == nil {
 			update := bson.M{
 				"$set": publication,
 			}
@@ -108,5 +110,10 @@ func AddPublicationRoutes(rg *gin.RouterGroup) {
 		}
 		c.JSON(http.StatusOK, deleteResult)
 
+	})
+
+	p.POST("/image", func(c *gin.Context) {
+		var res interface{}
+		c.JSON(http.StatusOK, res)
 	})
 }

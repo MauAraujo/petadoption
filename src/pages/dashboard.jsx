@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Fragment } from "react";
 import { Menu, Layout } from "antd";
 import {
-  MessageOutlined,
   PlusCircleOutlined,
   TagOutlined,
 } from "@ant-design/icons";
@@ -19,14 +18,14 @@ import {
 //     MailOutlined,
 // } from '@ant-design/icons';
 import "../components/styles/Dashboard.scss";
-import { Posts, NewPost, Inbox } from "../components/DasboardContent";
+import { Posts, NewPost } from "../components/DasboardContent";
 import { GetSession } from "../services/auth.service";
 const { Content, Sider } = Layout;
 
 export default function Dashboard() {
-    // const media = window.matchMedia(" (max-width: 600px)")
-    const session = useRef(() => GetSession());
-    const [content, setContent] = useState(<Posts user={session}/>);
+  // const media = window.matchMedia(" (max-width: 600px)")
+  const session = useRef(() => GetSession());
+  const [content, setContent] = useState(<Posts user={session} />);
 
   // media.addListener(() => {
   //     if (media.matches !== menuClosed) {
@@ -36,13 +35,13 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function fetchSession() {
-        const currentSession = await GetSession();
-        const user = {
-            "id" : currentSession.uid,
-            "username": currentSession.username,
-            "fullname" : currentSession.fullname
-        };
-       //this.setState({ session: session, user: user });
+      const currentSession = await GetSession();
+      const user = {
+        "id": currentSession.uid,
+        "username": currentSession.username,
+        "fullname": currentSession.fullname
+      };
+      //this.setState({ session: session, user: user });
       session.current = { session: currentSession, user: user };
     }
     fetchSession();
@@ -52,16 +51,13 @@ export default function Dashboard() {
   //   }
 
   let handleContent = (e) => {
-      console.log("click ", e.key);
-      switch (e.key) {
+    console.log("click ", e.key);
+    switch (e.key) {
       case "new":
         setContent(<NewPost user={session.current.user} />);
         break;
       case "posts":
-          setContent(<Posts user={session.current.user} />);
-        break;
-      case "inbox":
-          setContent(<Inbox user={session.current.user} />);
+        setContent(<Posts user={session.current.user} />);
         break;
       default:
         break;
@@ -97,10 +93,6 @@ export default function Dashboard() {
             <Menu.Item className="menu-item" key="posts">
               <TagOutlined />
               <span className="nav-text">Publicaciones</span>
-            </Menu.Item>
-            <Menu.Item className="menu-item" key="inbox">
-              <MessageOutlined />
-              <span className="nav-text">Inbox</span>
             </Menu.Item>
           </Menu>
         </Sider>
