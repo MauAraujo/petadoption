@@ -38,6 +38,11 @@ export default function Hero() {
                 </Link>
               </div>
             </div>
+            <div className="row no-gutters mt-5" style={{ maxWidth: 360 }}>
+              <Link to={"/dieta/"}>
+                <div className="btn button-aux">Obtener una dieta</div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

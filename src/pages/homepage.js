@@ -8,7 +8,8 @@ import DiscoverCard from "../components/discover-card";
 import Widget from 'rasa-webchat';
 import "../services/publications.service";
 import { getPublications } from "../services/publications.service";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+
 
 export default function Homepage() {
   const [publications, setpublications] = useState([]);

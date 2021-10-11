@@ -1,10 +1,10 @@
-//Package main es el paquete principal del servidor. Es el mas alto en la jerarquia. 
+//Package main es el paquete principal del servidor. Es el mas alto en la jerarquia.
 package main
 
 import (
 	"server/data"
-	"server/routes"
 	"server/handlers"
+	"server/routes"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,12 +12,13 @@ import (
 var r = gin.Default()
 
 // setupRouter prepara las rutas de acceso al servidor y la autenticacion.
-func setupRouter()  {
+func setupRouter() {
 	r.Use(handlers.CORSMiddleware())
 	p := r.Group("/")
 
 	routes.AddAuthRoutes(p)
 	routes.AddPublicationRoutes(p)
+	routes.AddRecommendationRoutes(p)
 }
 
 // main inicia el servidor y la base de datos.

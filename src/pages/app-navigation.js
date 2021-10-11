@@ -13,6 +13,8 @@ const Dashboard = lazy(() => import("./dashboard"));
 const Login = lazy(() => import("./login"));
 const Articles = lazy(() => import("./articles"));
 const ArticleDetail = lazy(() => import("./article-detail"));
+const Diet = lazy(() => import("./diet"));
+const DietDetail = lazy(() => import("./diet-detail"));
 
 export default function AppNavigation() {
   return (
@@ -28,6 +30,8 @@ export default function AppNavigation() {
             <Route path="/catalogo" exact component={Catalogo} />
             <Route path="/articulos" component={Articles} />
             <Route path="/articulo/:id" component={ArticleDetail} />
+            <Route path="/dieta" exact component={Diet} />
+            <Route path="/dieta/:animal/:age/:breed/" component={DietDetail} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/login" exact component={Login} />
             <Route component={Homepage} />
