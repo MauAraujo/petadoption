@@ -116,7 +116,7 @@ services:
       ports:
         - 5005:5005
       volumes:
-        - assistant/:/app
+        - /assistant/:/app/
       command:
         - run
     rasa-actions:
