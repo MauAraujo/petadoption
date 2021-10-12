@@ -111,5 +111,15 @@ services:
         - minio3
         - minio4
 
+    rasa:
+      image: rasa/rasa:2.8.9-full
+      ports:
+        - 5005:5005
+      volumes:
+        - assistant/:/app
+      command:
+        - run
     rasa-actions:
       build: assistant/actions
+      ports:
+        - 5055:5055
