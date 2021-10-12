@@ -15,7 +15,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-client = MongoClient("mongodb://root:admin@127.0.0.1:27017/")
+client = MongoClient("mongodb://root:admin@147.182.175.166:27017/")
 db = client.petadoption
 
 
@@ -53,7 +53,7 @@ class Action_Breed_Api(Action):
             text="Visita este link para ver la dieta personalizada:"
         )
         dispatcher.utter_message(
-            text=f"http://127.0.0.1:3000/articulo/{animal}/{age}/{breed}"
+            text=f"http://147.182.175.166:3000/articulo/{animal}/{age}/{breed}"
         )
 
         dispatcher.utter_message(text="¿Te puedo ayudar con otra cosa?")

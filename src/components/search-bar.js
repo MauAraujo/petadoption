@@ -14,7 +14,7 @@ import "./styles/search-bar.scss";
 import qs from 'qs';
 
 const searchClient = instantMeiliSearch(
-  "http://127.0.0.1:7700",
+  "http://147.182.175.166:7700",
   "7807a8dcffdfc5e8400074eafe451e9aab4c9864"
 );
 

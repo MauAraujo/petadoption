@@ -18,10 +18,10 @@ import {
 const axios = require('axios');
 
 const client = new MeiliSearch({
-  host: 'http://127.0.0.1:7700'
+  host: 'http://147.182.175.166:7700'
 })
 
-const api = 'http://127.0.0.1:8082';
+const api = 'http://147.182.175.166:8082';
 
 export async function getPublications(filter) {
   //const path = filter ? `/publications${filter}` : '/publications';

@@ -38,7 +38,7 @@ export default function Homepage() {
       </div>
       <Widget
         initPayload={"/get_started"}
-        socketUrl={"http://localhost:5005"}
+        socketUrl={"http://147.182.175.166:5005"}
         socketPath={"/socket.io/"}
         customData={{ "language": "es" }}
         title={"Información sobre mascotas"}

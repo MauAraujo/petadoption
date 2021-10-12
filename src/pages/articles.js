@@ -19,7 +19,7 @@ import { Card } from 'antd';
 const { Meta } = Card;
 const DEBOUNCE_TIME = 400;
 const searchClient = instantMeiliSearch(
-  "http://localhost:7700"
+  "http://147.182.175.166:7700"
 );
 
 export default function Articles() {
@@ -107,7 +107,7 @@ const Hits = ({ hits, history }) => (
         key={hit.objectID}
         hoverable
         style={{ width: 320 }}
-        cover={<img alt="example" src={`http://127.0.0.1:8000/unsafe/fit-in/x340/filters:format(webp)/${encodeURIComponent(hit.cover)}`} />}
+        cover={<img alt="example" src={`http://147.182.175.166:8000/unsafe/fit-in/x340/filters:format(webp)/${encodeURIComponent(hit.cover)}`} />}
         onClick={e => {
           history.push('/articulo/' + hit.id);
         }}

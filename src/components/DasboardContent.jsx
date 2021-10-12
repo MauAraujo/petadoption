@@ -29,7 +29,7 @@ const { Option } = Select;
 const Minio = require('minio');
 
 var minioClient = new Minio.Client({
-  endPoint: 'localhost',
+  endPoint: '147.182.175.166',
   port: 9000,
   useSSL: false,
   accessKey: 'pet-adoption-client',
@@ -73,7 +73,7 @@ export function NewPost(props) {
   };
 
   const uploadProps = {
-    action: "http://127.0.0.1:8082/publications/image",
+    action: "http://147.182.175.166:8082/publications/image",
     multiple: false,
     listType: "picture",
     className: "upload-list-inline",

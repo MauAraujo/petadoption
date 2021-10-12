@@ -1,20 +1,20 @@
 import React from 'react';
 import "./styles/steps.scss";
 
-const jumplarge = 'http://localhost:9000/pet-adoption/static/DogJumpDoodle1200w.webp'
-const jumpmedium = 'http://localhost:9000/pet-adoption/static/DogJumpDoodle600w.webp'
-const jumpsmall = 'http://localhost:9000/pet-adoption/static/DogJumpDoodle300w.webp'
-const jumpxsmall = 'http://localhost:9000/pet-adoption/static/DogJumpDoodle150w.webp'
+const jumplarge = 'http://147.182.175.166:9000/pet-adoption/static/DogJumpDoodle1200w.webp'
+const jumpmedium = 'http://147.182.175.166:9000/pet-adoption/static/DogJumpDoodle600w.webp'
+const jumpsmall = 'http://147.182.175.166:9000/pet-adoption/static/DogJumpDoodle300w.webp'
+const jumpxsmall = 'http://147.182.175.166:9000/pet-adoption/static/DogJumpDoodle150w.webp'
 
-const doogielarge = 'http://localhost:9000/pet-adoption/static/DoogieDoodle1200w.webp'
-const doogiemedium = 'http://localhost:9000/pet-adoption/static/DoogieDoodle600w.webp'
-const doogiesmall = 'http://localhost:9000/pet-adoption/static/DoogieDoodle300w.webp'
-const doogiexsmall = 'http://localhost:9000/pet-adoption/static/DoogieDoodle150w.webp'
+const doogielarge = 'http://147.182.175.166:9000/pet-adoption/static/DoogieDoodle1200w.webp'
+const doogiemedium = 'http://147.182.175.166:9000/pet-adoption/static/DoogieDoodle600w.webp'
+const doogiesmall = 'http://147.182.175.166:9000/pet-adoption/static/DoogieDoodle300w.webp'
+const doogiexsmall = 'http://147.182.175.166:9000/pet-adoption/static/DoogieDoodle150w.webp'
 
-const layinglarge = 'http://localhost:9000/pet-adoption/static/LayingDoodle1200w.webp'
-const layingmedium = 'http://localhost:9000/pet-adoption/static/LayingDoodle600w.webp'
-const layingsmall = 'http://localhost:9000/pet-adoption/static/LayingDoodle300w.webp'
-const layingxsmall = 'http://localhost:9000/pet-adoption/static/LayingDoodle150w.webp'
+const layinglarge = 'http://147.182.175.166:9000/pet-adoption/static/LayingDoodle1200w.webp'
+const layingmedium = 'http://147.182.175.166:9000/pet-adoption/static/LayingDoodle600w.webp'
+const layingsmall = 'http://147.182.175.166:9000/pet-adoption/static/LayingDoodle300w.webp'
+const layingxsmall = 'http://147.182.175.166:9000/pet-adoption/static/LayingDoodle150w.webp'
 
 export default function Steps(props) {
   return (

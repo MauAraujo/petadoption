@@ -1,17 +1,17 @@
 import React from 'react';
 import './styles/discoverd.scss';
 
-const articleLocation = 'http://localhost:3000/articulos';
+const articleLocation = 'http://147.182.175.166:3000/articulos';
 
-const plarge = 'http://localhost:9000/pet-adoption/static/puppy1300w.webp'
-const pmedium = 'http://localhost:9000/pet-adoption/static/puppy650w.webp'
-const psmall = 'http://localhost:9000/pet-adoption/static/puppy325w.webp'
-const pxsmall = 'http://localhost:9000/pet-adoption/static/puppy162w.webp'
+const plarge = 'http://147.182.175.166:9000/pet-adoption/static/puppy1300w.webp'
+const pmedium = 'http://147.182.175.166:9000/pet-adoption/static/puppy650w.webp'
+const psmall = 'http://147.182.175.166:9000/pet-adoption/static/puppy325w.webp'
+const pxsmall = 'http://147.182.175.166:9000/pet-adoption/static/puppy162w.webp'
 
-const clarge = 'http://localhost:9000/pet-adoption/static/cat1300w.webp'
-const cmedium = 'http://localhost:9000/pet-adoption/static/cat650w.webp'
-const csmall = 'http://localhost:9000/pet-adoption/static/cat325w.webp'
-const cxsmall = 'http://localhost:9000/pet-adoption/static/cat162w.webp'
+const clarge = 'http://147.182.175.166:9000/pet-adoption/static/cat1300w.webp'
+const cmedium = 'http://147.182.175.166:9000/pet-adoption/static/cat650w.webp'
+const csmall = 'http://147.182.175.166:9000/pet-adoption/static/cat325w.webp'
+const cxsmall = 'http://147.182.175.166:9000/pet-adoption/static/cat162w.webp'
 
 export default function DiscoverCard(props) {
   return (

@@ -24,7 +24,7 @@ export default function DetailHero(props) {
                 <Carousel.Item key={pet.images.indexOf(elem)}>
                   <img
                     className="d-block w-100"
-                    src={`http://127.0.0.1:8000/unsafe/fit-in/x560/filters:format(webp)/${encodeURIComponent(elem)}`}
+                    src={`http://147.182.175.166:8000/unsafe/fit-in/x560/filters:format(webp)/${encodeURIComponent(elem)}`}
                     alt={pet.images.indexOf(elem)}
                   />
                 </Carousel.Item>
@@ -34,9 +34,8 @@ export default function DetailHero(props) {
           <div className="col-12 col-md-7 px-3 py-3 py-md-5 px-md-5">
             <div className="header">
               <h1 className="title">{pet.name}</h1>
-              <h3 className="subtitle">{`${pet.breed || "Raza desconocida"} · ${
-                pet.location || "Lugar desconocido"
-              }`}</h3>
+              <h3 className="subtitle">{`${pet.breed || "Raza desconocida"} · ${pet.location || "Lugar desconocido"
+                }`}</h3>
             </div>
             <h4 className="section">Mis datos</h4>
 
@@ -67,28 +66,28 @@ export default function DetailHero(props) {
             <p className="txt">
               {props.pet?.description || "Sin descripción"}
             </p>
-              {
-                  props.pet.goodWith ?
-                      <div>
-                          <h4 className="section">Cualidades</h4>
-                          <p className="txt">
-                              {props.pet?.goodWith || ""}
-                          </p>
-                      </div>
-                      :
-                  <div></div>
-              }
-              {
-                  props.pet.preferences ?
-                      <div>
-                          <h4 className="section">Preferencias y Tratos Especiales</h4>
-                          <p className="txt">
-                              {props.pet?.preferences || ""}
-                          </p>
-                      </div>
-                      :
-                      <div></div>
-              }
+            {
+              props.pet.goodWith ?
+                <div>
+                  <h4 className="section">Cualidades</h4>
+                  <p className="txt">
+                    {props.pet?.goodWith || ""}
+                  </p>
+                </div>
+                :
+                <div></div>
+            }
+            {
+              props.pet.preferences ?
+                <div>
+                  <h4 className="section">Preferencias y Tratos Especiales</h4>
+                  <p className="txt">
+                    {props.pet?.preferences || ""}
+                  </p>
+                </div>
+                :
+                <div></div>
+            }
           </div>
         </div>
       )}

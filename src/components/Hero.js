@@ -2,10 +2,10 @@ import React from "react";
 import "./styles/hero.scss";
 import { Link } from "react-router-dom";
 
-const large = 'http://localhost:9000/pet-adoption/static/pets1200w.webp'
-const medium = 'http://localhost:9000/pet-adoption/static/pets600w.webp'
-const small = 'http://localhost:9000/pet-adoption/static/pets300w.webp'
-const xsmall = 'http://localhost:9000/pet-adoption/static/pets150w.webp'
+const large = 'http://147.182.175.166:9000/pet-adoption/static/pets1200w.webp'
+const medium = 'http://147.182.175.166:9000/pet-adoption/static/pets600w.webp'
+const small = 'http://147.182.175.166:9000/pet-adoption/static/pets300w.webp'
+const xsmall = 'http://147.182.175.166:9000/pet-adoption/static/pets150w.webp'
 
 export default function Hero() {
   return (

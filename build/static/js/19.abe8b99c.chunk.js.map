@@ -1,1 +1,45 @@
-{"version":3,"sources":["services/articles.service.jsx","pages/article-detail.js"],"names":["axios","require","api","getArticle","articleID","a","get","catch","err","console","log","response","data","ArticleDetail","params","useParams","useState","article","setArticle","useEffect","id","art","fetchArticle","className","title","alt","src","cover","content"],"mappings":"kPAAMA,EAAQC,EAAQ,KAChBC,EAAM,wBAEL,SAAeC,EAAtB,kC,4CAAO,WAA0BC,GAA1B,eAAAC,EAAA,sEACoBL,EAAMM,IAAN,UAAaJ,EAAb,2CAAmDE,IACrEG,OAAM,SAAAC,GAAG,OAAIC,QAAQC,IAAIF,MAF3B,cACGG,EADH,yBAGIA,EAASC,MAHb,4C,0DCOQ,SAASC,IACtB,IAAMC,EAASC,cACf,EAA8BC,mBAAS,IAAvC,mBAAOC,EAAP,KAAgBC,EAAhB,KAWA,OATAC,qBAAU,WAAM,4CACd,4BAAAd,EAAA,sEACkBF,EAAWW,EAAOM,IADpC,OACMC,EADN,OAEEH,EAAWG,GAFb,4CADc,uBAAC,WAAD,wBAKdC,GACAb,QAAQC,IAAIO,KACX,IAGD,qBAAKM,UAAU,UAAf,SACE,sBAAKA,UAAU,oBAAf,UACE,oBAAIA,UAAU,gBAAd,SAA+BN,EAAQO,QACvC,qBAAKD,UAAU,gBAAf,SACE,qBAAKE,IAAI,GAAGC,IAAKT,EAAQU,UAE3B,cAAC,IAAD,IACA,cAAC,IAAD,CAAeJ,UAAU,eAAzB,SAAyCN,EAAQW","file":"static/js/19.abe8b99c.chunk.js","sourcesContent":["const axios = require('axios');\nconst api = 'http://127.0.0.1:7700';\n\nexport async function getArticle(articleID) {\n    const response = await axios.get(`${api}/indexes/pet-articles/documents/${articleID}`)\n        .catch(err => console.log(err));\n    return response.data;\n}\n","import React, { useState, useEffect } from 'react';\nimport ReactMarkdown from 'react-markdown';\nimport { getArticle } from \"../services/articles.service\";\nimport {\n  useParams,\n} from \"react-router-dom\";\nimport \"./styles/article.scss\";\nimport { BackTop } from 'antd';\n\n\nexport default function ArticleDetail() {\n  const params = useParams();\n  const [article, setArticle] = useState([]);\n\n  useEffect(() => {\n    async function fetchArticle() {\n      let art = await getArticle(params.id);\n      setArticle(art);\n    }\n    fetchArticle();\n    console.log(article);\n  }, []);\n\n  return (\n    <div className=\"article\">\n      <div className=\"article-container\">\n        <h1 className=\"article-title\">{article.title}</h1>\n        <div className=\"article-cover\">\n          <img alt=\"\" src={article.cover}></img>\n        </div>\n        <BackTop />\n        <ReactMarkdown className=\"article-body\">{article.content}</ReactMarkdown>\n      </div>\n    </div>\n  );\n}\n"],"sourceRoot":""}
+{
+    "version": 3,
+    "sources": [
+        "services/articles.service.jsx",
+        "pages/article-detail.js"
+    ],
+    "names": [
+        "axios",
+        "require",
+        "api",
+        "getArticle",
+        "articleID",
+        "a",
+        "get",
+        "catch",
+        "err",
+        "console",
+        "log",
+        "response",
+        "data",
+        "ArticleDetail",
+        "params",
+        "useParams",
+        "useState",
+        "article",
+        "setArticle",
+        "useEffect",
+        "id",
+        "art",
+        "fetchArticle",
+        "className",
+        "title",
+        "alt",
+        "src",
+        "cover",
+        "content"
+    ],
+    "mappings": "kPAAMA,EAAQC,EAAQ,KAChBC,EAAM,wBAEL,SAAeC,EAAtB,kC,4CAAO,WAA0BC,GAA1B,eAAAC,EAAA,sEACoBL,EAAMM,IAAN,UAAaJ,EAAb,2CAAmDE,IACrEG,OAAM,SAAAC,GAAG,OAAIC,QAAQC,IAAIF,MAF3B,cACGG,EADH,yBAGIA,EAASC,MAHb,4C,0DCOQ,SAASC,IACtB,IAAMC,EAASC,cACf,EAA8BC,mBAAS,IAAvC,mBAAOC,EAAP,KAAgBC,EAAhB,KAWA,OATAC,qBAAU,WAAM,4CACd,4BAAAd,EAAA,sEACkBF,EAAWW,EAAOM,IADpC,OACMC,EADN,OAEEH,EAAWG,GAFb,4CADc,uBAAC,WAAD,wBAKdC,GACAb,QAAQC,IAAIO,KACX,IAGD,qBAAKM,UAAU,UAAf,SACE,sBAAKA,UAAU,oBAAf,UACE,oBAAIA,UAAU,gBAAd,SAA+BN,EAAQO,QACvC,qBAAKD,UAAU,gBAAf,SACE,qBAAKE,IAAI,GAAGC,IAAKT,EAAQU,UAE3B,cAAC,IAAD,IACA,cAAC,IAAD,CAAeJ,UAAU,eAAzB,SAAyCN,EAAQW",
+    "file": "static/js/19.abe8b99c.chunk.js",
+    "sourcesContent": [
+        "const axios = require('axios');\nconst api = 'http://147.182.175.166:7700';\n\nexport async function getArticle(articleID) {\n    const response = await axios.get(`${api}/indexes/pet-articles/documents/${articleID}`)\n        .catch(err => console.log(err));\n    return response.data;\n}\n",
+        "import React, { useState, useEffect } from 'react';\nimport ReactMarkdown from 'react-markdown';\nimport { getArticle } from \"../services/articles.service\";\nimport {\n  useParams,\n} from \"react-router-dom\";\nimport \"./styles/article.scss\";\nimport { BackTop } from 'antd';\n\n\nexport default function ArticleDetail() {\n  const params = useParams();\n  const [article, setArticle] = useState([]);\n\n  useEffect(() => {\n    async function fetchArticle() {\n      let art = await getArticle(params.id);\n      setArticle(art);\n    }\n    fetchArticle();\n    console.log(article);\n  }, []);\n\n  return (\n    <div className=\"article\">\n      <div className=\"article-container\">\n        <h1 className=\"article-title\">{article.title}</h1>\n        <div className=\"article-cover\">\n          <img alt=\"\" src={article.cover}></img>\n        </div>\n        <BackTop />\n        <ReactMarkdown className=\"article-body\">{article.content}</ReactMarkdown>\n      </div>\n    </div>\n  );\n}\n"
+    ],
+    "sourceRoot": ""
+}
