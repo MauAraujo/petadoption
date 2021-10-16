@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/discoverd.scss';
 
-const articleLocation = 'http://147.182.175.166:3000/articulos';
+const articleLocation = 'http://147.182.175.166/articulos';
 
 const plarge = 'http://147.182.175.166:9000/pet-adoption/static/puppy1300w.webp'
 const pmedium = 'http://147.182.175.166:9000/pet-adoption/static/puppy650w.webp'
@@ -40,7 +40,7 @@ export default function DiscoverCard(props) {
           </img>
           <div className="card-body">
             <h2 className="card-title">Cuidado de gatos</h2>
-            <a href="#" className="button">Aprende mas</a>
+            <a href={articleLocation + "?menu%5Banimal%5D=perro&page=1"} className="button">Aprende mas</a>
           </div>
         </div>
       </div>
