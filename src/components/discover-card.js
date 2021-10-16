@@ -40,7 +40,7 @@ export default function DiscoverCard(props) {
           </img>
           <div className="card-body">
             <h2 className="card-title">Cuidado de gatos</h2>
-            <a href={articleLocation + "?menu%5Banimal%5D=perro&page=1"} className="button">Aprende mas</a>
+            <a href={articleLocation + "?menu%5Banimal%5D=gato&page=1"} className="button">Aprende mas</a>
           </div>
         </div>
       </div>
