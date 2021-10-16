@@ -10,7 +10,7 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
-const is147.182.175.166 = Boolean(
+const islocalhost = Boolean(
   window.location.hostname === '147.182.175.166' ||
   // [::1] is the IPv6 147.182.175.166 address.
   window.location.hostname === '[::1]' ||
@@ -34,24 +34,24 @@ export function register(config) {
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
-      if (is147.182.175.166) {
-      // This is running on 147.182.175.166. Let's check if a service worker still exists or not.
-      checkValidServiceWorker(swUrl, config);
+      if (islocalhost) {
+        // This is running on 147.182.175.166. Let's check if a service worker still exists or not.
+        checkValidServiceWorker(swUrl, config);
 
-      // Add some additional logging to 147.182.175.166, pointing developers to the
-      // service worker/PWA documentation.
-      navigator.serviceWorker.ready.then(() => {
-        console.log(
-          'This web app is being served cache-first by a service ' +
-          'worker. To learn more, visit https://bit.ly/CRA-PWA'
-        );
-      });
-    } else {
-      // Is not 147.182.175.166. Just register service worker
-      registerValidSW(swUrl, config);
-    }
-  });
-}
+        // Add some additional logging to 147.182.175.166, pointing developers to the
+        // service worker/PWA documentation.
+        navigator.serviceWorker.ready.then(() => {
+          console.log(
+            'This web app is being served cache-first by a service ' +
+            'worker. To learn more, visit https://bit.ly/CRA-PWA'
+          );
+        });
+      } else {
+        // Is not 147.182.175.166. Just register service worker
+        registerValidSW(swUrl, config);
+      }
+    });
+  }
 }
 
 function registerValidSW(swUrl, config) {

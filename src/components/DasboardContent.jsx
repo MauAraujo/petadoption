@@ -36,7 +36,7 @@ var minioClient = new Minio.Client({
   secretKey: 'secret-pet-adoption'
 });
 
-const minioURL = "172.20.0.7"
+const minioURL = "147.182.175.166"
 
 let dummy =
   "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
@@ -227,8 +227,7 @@ export function Posts(props) {
   const [imgKeys, setImgKeys] = useState([]);
 
   const uploadProps = {
-    action:
-      "",
+    action: "http://147.182.175.166:8082/publications/image",
     multiple: false,
     listType: "picture",
     className: "upload-list-inline",
@@ -237,8 +236,7 @@ export function Posts(props) {
         'Content-Type': file.type,
       };
       const bucket = 'pet-adoption'
-      const user = props.user.current.user;
-      const path = `publications/${user.id}/${file.name}`;
+      const path = `publications/${props.user.id}/${file.name}`;
       const buffer = Buffer.from(await file.arrayBuffer());
       console.log(path);
       console.log(buffer);
@@ -283,7 +281,7 @@ export function Posts(props) {
   const editPublication = async () => {
     const values = cleanData(form.getFieldsValue());
     delete values.image;
-    values["images"] = [...imgKeys, ...edit["images"]];
+    values["images"] = imgKeys;
     console.log(values);
 
     await updatePublication(edit["ID"], { ...edit, ...values });

@@ -26,7 +26,7 @@ export default function ArticleDetail() {
       <div className="article-container">
         <h1 className="article-title">{article.title}</h1>
         <div className="article-cover">
-          <img alt="" src={article.cover}></img>
+          <img alt="" src={`http://147.182.175.166:8000/unsafe/fit-in/x680/filters:format(webp)/${encodeURIComponent(article.cover)}`}></img>
         </div>
         <BackTop />
         <ReactMarkdown className="article-body">{article.content}</ReactMarkdown>

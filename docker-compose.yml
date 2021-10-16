@@ -113,12 +113,13 @@ services:
 
     rasa:
       image: rasa/rasa:2.8.9-full
+      user: root
       ports:
         - 5005:5005
       volumes:
         - /assistant/:/app/
       command:
-        - run
+        - run --cors "*" --model models/20210907-184826.tar.gz
     rasa-actions:
       build: assistant/actions
       ports:

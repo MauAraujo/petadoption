@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 rasa = "*"
 requests = "*"
-rasa-x = "*"
 pymongo = "*"
 
 [dev-packages]
