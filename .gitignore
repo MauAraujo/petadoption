@@ -25,7 +25,6 @@ yarn-debug.log*
 yarn-error.log*
 
 # assistant
-assistant/models
 assistant/temp_models
 assistant/*.db
 assistant/events.db*
