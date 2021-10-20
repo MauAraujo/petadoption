@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // AddPublicationRoutes agrega las rutas bajo /publications que
@@ -26,6 +27,10 @@ func AddRecommendationRoutes(rg *gin.RouterGroup) {
 		err := collection.FindOne(context.TODO(), bson.D{{"breed", breed}}).Decode(&result)
 
 		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				c.JSON(http.StatusOK, "")
+				return
+			}
 			panic(err)
 		}
 		c.JSON(http.StatusOK, result)

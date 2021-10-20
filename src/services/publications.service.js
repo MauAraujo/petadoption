@@ -76,7 +76,8 @@ export async function removePublication(publicationID) {
 
 export async function getRecommendations(animal, age, breed) {
   var image, recommendations
-  if (animal === 'dog') {
+  if (animal === 'perro') {
+    breed = breed.toLowerCase()
     let img = await axios.get(`https://dog.ceo/api/breed/${breed}/images/random`)
     image = img.data.message
     let response = await axios.get(api + `/recommendations/${age}/${breed}`).catch(err => {
@@ -91,6 +92,7 @@ export async function getRecommendations(animal, age, breed) {
     let response = await axios.get(api + `/recommendations/${age}/${id}`).catch(err => {
       console.log(err);
     });
+    console.log(response)
     recommendations = getCatRecommendations(age, response.data)
   }
 

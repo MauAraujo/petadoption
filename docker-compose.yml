@@ -1,20 +1,5 @@
 version: '3.9'
 
-x-minio-common: &minio-common
-  image: minio/minio:RELEASE.2021-08-31T05-46-54Z
-  command: server --console-address ":9001" http://minio{1...4}/data{1...2}
-  expose:
-    - "9000"
-    - "9001"
-  environment:
-    MINIO_ROOT_USER: minio
-    MINIO_ROOT_PASSWORD: minio123
-  healthcheck:
-    test: ["CMD", "curl", "-f", "http://147.182.175.166:9000/minio/health/live"]
-    interval: 30s
-    timeout: 20s
-    retries: 3
-
 services:
     web:
         build: .
@@ -33,7 +18,7 @@ services:
         depends_on:
             - mongo
             - meilisearch
-            - nginx-minio
+            - minio
             - thumbor
 
     mongo:
@@ -71,44 +56,20 @@ services:
       ports:
         - '8000:8000'
 
-    minio1:
-      <<: *minio-common
-      hostname: minio1
-      volumes:
-        - /data/data1-1:/data1
-        - /data/data1-2:/data2
-
-    minio2:
-      <<: *minio-common
-      hostname: minio2
-      volumes:
-        - /data/data2-1:/data1
-        - /data/data2-2:/data2
-
-    minio3:
-      <<: *minio-common
-      hostname: minio3
-      volumes:
-        - /data/data3-1:/data1
-        - /data/data3-2:/data2
-
-    minio4:
-      <<: *minio-common
-      hostname: minio4
-      volumes:
-        - /data/data4-1:/data1
-        - /data/data4-2:/data2
-
-    nginx-minio:
-      image: nginx:1.19.2-alpine
-      hostname: nginx
-      volumes:
-        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    minio:
+      hostname: minio
+      image: minio/minio
+      command: server /data --console-address ":9001"
       ports:
-        - "9000:9000"
-        - "9001:9001"
-      depends_on:
-        - minio1
-        - minio2
-        - minio3
-        - minio4
+        - 9000:9000
+        - 9001:9001
+      environment:
+        MINIO_ROOT_USER: minio
+        MINIO_ROOT_PASSWORD: minio123
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/minio/health/live"]
+        interval: 30s
+        timeout: 20s
+        retries: 3
+      volumes:
+        - /data/minio:/data

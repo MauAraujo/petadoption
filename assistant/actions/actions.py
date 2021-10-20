@@ -52,7 +52,7 @@ class Action_Breed_Api(Action):
             text="Visita este link para ver la dieta personalizada:"
         )
         dispatcher.utter_message(
-            text=f"http://147.182.175.166:3000/articulo/{animal}/{age}/{breed}"
+            text=f"http://147.182.175.166/dieta/{animal}/{age}/{breed}"
         )
 
         dispatcher.utter_message(text="¿Te puedo ayudar con otra cosa?")
