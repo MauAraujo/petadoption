@@ -2,13 +2,13 @@ import React from "react";
 import "./styles/detail-hero.scss";
 import { Spin, Space } from "antd";
 import Carousel from "react-bootstrap/Carousel";
-//import { updatePublication } from "../services/publications.service";
+import { updatePublication } from "../services/publications.service";
 
 export default function DetailHero(props) {
   const { pet } = props;
-
-  if (pet?.publicationID) {
-    //updatePublication(pet.publicationID, { ...pet, views: ++pet.views || 1 });
+  console.log(props)
+  if (pet?.ID) {
+    updatePublication(pet.ID, { ...pet, views: ++pet.views || 1 });
   }
   return (
     <div className="hero-container-detail">

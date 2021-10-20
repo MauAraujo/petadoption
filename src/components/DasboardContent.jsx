@@ -444,7 +444,7 @@ export function Posts(props) {
               <Meta
                 title={publication.name}
                 description={`${publication.animal?.toUpperCase() || ""} | ${new Date(
-                  publication.publicationDate
+                  publication.date
                 ).toLocaleDateString() || new Date()
                   } | ${publication.views || 0} Visualizaciones`}
               />
