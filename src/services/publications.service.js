@@ -76,7 +76,7 @@ export async function removePublication(publicationID) {
 
 export async function getRecommendations(animal, age, breed) {
   var image, recommendations
-  if (animal === 'perro') {
+  if (animal === 'dog') {
     breed = breed.toLowerCase()
     let img = await axios.get(`https://dog.ceo/api/breed/${breed}/images/random`)
     image = img.data.message

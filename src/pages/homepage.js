@@ -36,7 +36,7 @@ export default function Homepage() {
       <div className="discovery-container discovery">
         <DiscoverCard />
       </div>
-      <Widget
+      {/* <Widget
         initPayload={"/get_started"}
         socketUrl={"http://147.182.175.166:5005"}
         socketPath={"/socket.io/"}
@@ -56,7 +56,7 @@ export default function Homepage() {
         inputTextFieldHint={'Escribe un mensaje'}
         showFullScreenButton={true}
         displayUnreadCount={true}
-      />
+      /> */}
     </div>
   );
 }

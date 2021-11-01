@@ -18,20 +18,20 @@ export default function DetailHero(props) {
         </Space>
       ) : (
         <div className="row">
-          <div className="col-12 col-md-5">
+          <div className="col-12 col-md-6">
             <Carousel>
               {pet.images?.map((elem) => (
                 <Carousel.Item key={pet.images.indexOf(elem)}>
                   <img
                     className="d-block w-100"
-                    src={`http://147.182.175.166:8000/unsafe/fit-in/x560/filters:format(webp)/${encodeURIComponent(elem)}`}
+                    src={`http://147.182.175.166:8000/unsafe/fit-in/x560/center/middle/smart/filters:format(webp)/${encodeURIComponent(elem)}`}
                     alt={pet.images.indexOf(elem)}
                   />
                 </Carousel.Item>
               ))}
             </Carousel>
           </div>
-          <div className="col-12 col-md-7 px-3 py-3 py-md-5 px-md-5">
+          <div className="col-12 col-md-6 px-3 py-3 py-md-5 px-md-5">
             <div className="header">
               <h1 className="title">{pet.name}</h1>
               <h3 className="subtitle">{`${pet.breed || "Raza desconocida"} · ${pet.location || "Lugar desconocido"
