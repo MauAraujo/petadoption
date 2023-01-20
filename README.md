@@ -3,6 +3,8 @@ This web application was created originally in 2019 to help nonprofit animal ado
 
 The solution was conceived to be an animal catalog with instant search (powered by [MeiliSearch](https://www.meilisearch.com/)) where people could find animals currently looking for a home, which could be filtered instantly to find certain breeds, sizes, unique characteristics, etc. that would help the animal find a suitable home.
 
+Authentication is done using JWT and a Go server that handles routes and connection to the database. An admin dashboard allows administrators to create and modify the animal care articles in the site.
+
 
 ![image](https://user-images.githubusercontent.com/19579265/213796855-3ec42b2f-ff92-47f9-957f-5e13338ea9cc.png)
 
