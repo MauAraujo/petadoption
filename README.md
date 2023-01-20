@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Pet Adoption
+This web application was created originally in 2019 to help nonprofit animal adoption foundations in Mexico automate certain parts of their adoption process, to help them reduce load on their volunteer team.
 
-## Available Scripts
+The solution was conceived to be an animal catalog with instant search (powered by [MeiliSearch](https://www.meilisearch.com/)) where people could find the most suitable pet for their needs (such as size, if the animal is good with kids, etc.). 
 
-In the project directory, you can run:
+![image](https://user-images.githubusercontent.com/19579265/213796855-3ec42b2f-ff92-47f9-957f-5e13338ea9cc.png)
+![image](https://user-images.githubusercontent.com/19579265/213796144-2ec0444b-c91e-4ea8-84cb-e9a2512d5736.png)
+![image](https://user-images.githubusercontent.com/19579265/213796148-ed428f78-c485-44ee-b122-2da44486d3c6.png)
 
-### `npm start`
+# AI Assistant
+In addition, the site includes an AI assistant (powered by Rasa(https://rasa.com/)) which answers common questions about animal care. The idea behind this is to divert the most common questions to an assistant and help the volunteer team save their precious time for other, more pressing tasks. 
 
-Runs the app in the development mode.<br />
-Open [http://147.182.175.166:3000](http://147.182.175.166:3000) to view it in the browser.
+The site includes all the information in form of articles and the assistant helps by giving concise answers. The assistant was trained to give a tailored response depending on the breed of the cat or dog the user asks about. It will respond with information about common problems, nutrition tips and breed-specific instructions. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![image](https://user-images.githubusercontent.com/19579265/213796170-703e1e01-736a-45c2-b1c0-1662fc02c838.png)
+![image](https://user-images.githubusercontent.com/19579265/213796204-8fbb132f-20e8-45b8-8c28-18bede605608.png)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Design
+The web application is designed with purely open-source tools, using:
+- [Meilisearch](https://www.meilisearch.com/) for instant search
+- [MongoDB Community Edition](https://www.mongodb.com/) for storing animal records
+- [MinIO](https://min.io/) as an object store for all images in the site and user-uploaded images
+- [Rasa](https://rasa.com/) For training the assistant
+- [Thumbor](https://www.thumbor.org/) for on-demand image resizing and cropping
 
-### `npm run build`
+The only part which is not open souce is the [EmailJS](https://www.emailjs.com/) integration.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Using a mostly open source stack makes the operation costs as cheap as possible, and provides the ability to self-host, making it easy to deploy on volunteer-run servers.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+A rough diagram of the application: 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image](https://user-images.githubusercontent.com/19579265/213796224-99098824-1220-4b17-ab8d-1c2d68bc2f07.png)
 
-### `npm run eject`
+# Notes from the Team
+This application was made a few years ago when the team was beginning to work on web applications, so it contains certain practices that might not hold up to the best standard today. However, the code is now open sourced to keep a record of the progress the team has made since then, and to showcase the design and ideas which were incredible at the time. We also hope this project can inspire other initiatives to help nonprofit foundations using open source softwware.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
