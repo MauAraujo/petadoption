@@ -1,18 +1,51 @@
-#action {
-    background-color: #966FBF;
+@import "../../assets/scss/variables.scss";
+
+#action-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
-.card-body {
+.action-card {
+  margin-top: 30px;
+
+  #action {
+    //background-color: #966fbf;
+    background-color: $main;
+    width: 25em;
+    height: 15em;
+  }
+
+  .card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
-}
+    align-items: center;
+  }
 
-.btn {
-    background-color: white;
-    color: black;
+  .btn {
+    width: 75%;
+    margin-bottom: 20px;
+    background-color: $button;
+    color: $buttontext;
     font-weight: bold;
     border-color: transparent;
-}
+  }
 
+  .social-banner {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .social {
+    font-size: 3em;
+
+    path {
+      //fill: white;
+      fill: $stroke;
+    }
+  }
+}

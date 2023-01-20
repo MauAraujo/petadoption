@@ -1,0 +1,36 @@
+@import "../../assets/scss/variables.scss";
+
+.social-media {
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  i {
+    // background-color: $third;
+    border-radius: 80%;
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    padding: 0.5rem;
+  }
+}
+
+a {
+  h3 {
+    // color: $third;
+  }
+}
+
+a:hover {
+  text-decoration-line: none;
+  text-decoration: none !important;
+  i {
+    // background-color: $fifth;
+  }
+  h3 {
+    // color: $fifth !important;
+  }
+}

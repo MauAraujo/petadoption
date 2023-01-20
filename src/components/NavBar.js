@@ -1,62 +1,53 @@
-import React from 'react'
-import { NavLink } from "react-router-dom"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBars } from "@fortawesome/free-solid-svg-icons"
-import './styles/NavBar.scss'
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./styles/NavBar.scss";
+import { Navbar, Container, Nav, Image } from "react-bootstrap";
+import logo from "../assets/images/cat.svg";
 
 export default function NavBar() {
   return (
-    <nav className='navbar navbar-expand-lg navbar-light fixed-top'>
-      <div className='container'>
-        <NavLink className='navbar-brand d-none d-sm-block' to='/'>
-          Logotipo
-          {/* <img className='img-fluid logo' src={logo} alt='' /> */}
-        </NavLink>
+    <Navbar collapseOnSelect expand="lg" fixed="top" className="header">
+      <Container>
+        <Navbar.Brand>
+          <NavLink className="navbar-brand d-none d-sm-block" to="/">
+            <Image
+              className="logo"
+              src={logo}
+              alt={"Logotipo de la página"}
+            ></Image>
+            <span className="brand-name">Pet Adoption</span>
+          </NavLink>
+        </Navbar.Brand>
 
-        <button
-          className='navbar-toggler'
-          type='button'
-          data-toggle='collapse'
-          data-target='#navbarSupportedContent'
-          aria-controls='navbarSupportedContent'
-          aria-expanded='false'
-          aria-label='Toggle navigation'>
-          <span className='navbar-toggler-icon'></span>
-        </button>
-
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul className='navbar-nav mr-auto'>
-            <li className='nav-item'>
+        <Navbar.Toggle aria-controls="header" />
+        <Navbar.Collapse id="header">
+          <Nav className="mr-auto">
+            <Nav.Item>
               <span>|</span>
-            </li>
-            <li className='nav-item-capital'>
-              <NavLink exact activeClassName='active' to='/catalogo'>
-                Adopciones
+            </Nav.Item>
+            <Nav.Item className="nav-item-capital">
+              <NavLink exact activeClassName="active" to="/articulos">
+                Artículos
               </NavLink>
-            </li>
-          </ul>
-          <ul className='navbar-nav ml-auto'>
-            <li className='nav-item-capital'>
-              <NavLink exact activeClassName='active' to='/catalogo'>
+            </Nav.Item>
+          </Nav>
+          <Nav className="ml-auto">
+            <Nav.Item className="nav-item-capital">
+              <NavLink exact activeClassName="active" to="/catalogo">
                 Adopta ahora
               </NavLink>
-            </li>
-            <li className='nav-item'>
+            </Nav.Item>
+            <Nav.Item>
               <span>|</span>
-            </li>
-            <li className='nav-item'>
-              <NavLink exact activeClassName='active' to='/'>
+            </Nav.Item>
+            <Nav.Item>
+              <NavLink exact activeClassName="active" to="/login">
                 Ingresar
               </NavLink>
-            </li>
-            <li className='nav-item'>
-              <NavLink exact activeClassName='active' to='/'>
-                <FontAwesomeIcon icon={faBars} />
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  )
+            </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 }

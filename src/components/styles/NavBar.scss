@@ -1,40 +1,49 @@
-@import '../../assets/scss/variables.scss';
+@import "../../assets/scss/variables.scss";
 
 .navbar {
-    background-color: $pink !important;
+  background-color: $background;
 
-    .nav-item {
-        padding: .3em .5em;
-        color: $yellow;
+  .nav-item {
+    padding: 0.3em 0.5em;
+    color: $headline;
 
-        a {
-            color: $yellow;
-            font-weight: light;
-            transition: ease .4s;
-            &:hover {
-                color: $purple;
-                text-decoration: none;
-            }
-        }
-
-        &-capital {
-            @extend .nav-item;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
+    a {
+      color: $headline;
+      font-family: "Montserrat", sans-serif;
+      font-weight: light;
+      transition: ease 0.4s;
+      &:hover {
+        color: $highlight;
+        text-decoration: none;
+      }
     }
+
+    &-capital {
+      @extend .nav-item;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
 }
 
-.sub-header{
-    background-color: $purple;
-    // margin: 0px;
-    color: white;
-    // height: 50px;
-    padding: 15px;
-    
+.sub-header {
+  background-color: $background;
+  color: $paragraph;
+  padding: 15px;
 }
 
-.search{
-    background-color: transparent;
-    color: white;
+.search {
+  background-color: transparent;
+  color: $paragraph;
+}
+
+.logo {
+  max-width: 2rem;
+}
+
+.brand-name {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  color: $headline;
+  font-size: 1.3rem;
 }

@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+# /build
 
 # misc
 .DS_Store
@@ -17,7 +17,15 @@
 .env.development.local
 .env.test.local
 .env.production.local
+petadoption.code-workspace
+.vscode
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# assistant
+assistant/temp_models
+assistant/*.db
+assistant/events.db*
+assistant/actions/__pycache__

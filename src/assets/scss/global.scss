@@ -1,9 +1,8 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 body {
-  background: $gray;
-  color: #2D2D2D;
-
+  background-color: $background !important;
+  // color: #2d2d2d;
   //Utils
 
   .contain {
@@ -13,74 +12,78 @@ body {
     overflow: hidden;
   }
 
-  .bg-white {
-    background: white !important;
-    min-height: 25vh;
+  a {
+    text-decoration: none;
   }
 
-  .bg-yellow {
-    background: $yellow !important;
+  .catalog {
+    background: $background !important;
     min-height: 85vh;
   }
-
   //typography
   .title {
+    font-family: "Montserrat", sans-serif;
     font-size: 4.2em;
     font-weight: bold;
     text-transform: uppercase;
-    color: $pink;
+    //color: $pink;
+    color: $headline;
 
     @media screen and (max-width: 414px) {
-        font-size: 2em;
+      font-size: 2em;
     }
   }
 
   .subtitle {
+    font-family: "Montserrat", sans-serif;
     font-size: 2.4em;
     font-weight: bold;
     text-transform: uppercase;
-    color: $green;
-
-    &-pet {
-      color: $pink;
-      text-align: center;
-      font-size: 2.6em;
-    }
+    //color: $green;
+    color: $headline;
   }
 
   .txt {
-    font-weight: 1.1em;
-    font-weight: lighter;
+    font-family: "Open Sans", sans-serif;
+    color: $paragraph;
+    font-size: 1.2em;
   }
 
+  svg {
+    color: $stroke;
+  }
   //buttoms
   .button {
-    background: $purple;
-    color: $yellow;
+    //background: $purple;
+    //color: $yellow;
+    font-family: "Montserrat", sans-serif;
+    background: $button;
+    color: $buttontext;
     font-weight: bold;
     font-size: 1.2em;
-    padding: .4em 1em;
-    border-radius: .4em;
+    padding: 0.4em 1em;
+    border-radius: 0.4em;
     min-width: 90%;
     text-align: center;
     cursor: pointer;
-    transition: ease .4s;
+    transition: ease 0.4s;
+    text-decoration: none;
 
     &:hover {
-      background: darken($color: $purple, $amount: 30%);
+      //background: darken($color: $pink, $amount: 30%);
       color: whitesmoke;
     }
 
     @media screen and (max-width: 414px) {
-        min-width: 100%;
+      min-width: 100%;
     }
 
     &-aux {
       @extend .button;
-      background: $pink;
+      background: $button;
 
       &:hover {
-        background: darken($color: $pink, $amount: 10%);
+        //background: darken($color: $pink, $amount: 10%);
         color: whitesmoke;
       }
     }
@@ -88,19 +91,93 @@ body {
 
   //forms
   .input {
-    border: none;
-    border-radius: .5em;
-    background: $gray;
-    color: $purple;
+    //border: none;
+    border-radius: 0.5em;
+    border-color: $stroke;
+    background: $main;
+    color: $paragraph;
     font-size: 1.4em;
     font-weight: bold;
-    padding: 1.2em .8em;
+    padding: 1.2em 0.8em;
   }
 
   .input-outline {
     background-color: transparent !important;
-    color: white !important;
+    //color: white !important;
+    color: $stroke !important;
     border-radius: 0;
-    border-color: white;
+    //border-color: white;
+    border-color: $stroke;
   }
+}
+
+#root {
+  // $pink: #f397B0;
+  // $yellow: #FDFFD5;
+  // $purple: #966FBF;
+  // $gray: #EBEBEB;
+  // $green: #76D9D2;
+
+  // margin-left: 5em;
+  // margin-right: 5em;
+  background-color: $background;
+
+  // --amplify-primary-color: #966fbf;
+  // --amplify-primary-tint: #f397b0;
+  // --amplify-primary-shade: #f397b0;
+}
+
+.label {
+  color: $headline;
+  font-family: inherit;
+  font-size: larger;
+  font-weight: 800;
+  margin: 0.5rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 15% 1fr 15%;
+  grid-template-rows: repeat(1, 1fr);
+  gap: 0px 0px;
+  grid-template-areas:
+    ". hero ."
+    ". searchBar ."
+    "available available available"
+    ". steps ."
+    ". discovery .";
+}
+
+.ant-card-meta-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4em !important;
+  font-weight: bold;
+  //color: $green;
+  color: $headline;
+}
+.hero {
+  grid-area: hero;
+}
+.searchBar {
+  grid-area: searchBar;
+}
+.available {
+  grid-area: available;
+}
+.steps {
+  grid-area: steps;
+}
+.discovery {
+  grid-area: discovery;
+}
+.rw-header,
+.rw-client,
+.rw-launcher,
+.rw-title {
+  background-color: $stroke !important;
+  color: white !important;
+}
+.rw-response {
+  background-color: $button !important;
+  color: $buttontext !important;
 }

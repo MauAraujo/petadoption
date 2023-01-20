@@ -1,0 +1,23 @@
+@import "../../assets/scss/variables.scss";
+
+.title-container {
+  max-width: 50%;
+  padding: 20px;
+  margin: 20px;
+}
+.title {
+  font-size: 20px !important;
+}
+
+.diet {
+  &-form {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  &-item {
+    min-width: 40%;
+  }
+}

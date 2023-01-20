@@ -1,0 +1,328 @@
+[
+  {
+    "text": "Mi mascota es un dingo",
+    "entities": [
+      {
+        "start": 17,
+        "end": 22,
+        "value": "dingo",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Un Bombay",
+    "entities": [
+      {
+        "start": 3,
+        "end": 9,
+        "value": "Bombay",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "pug",
+    "entities": [
+      {
+        "start": 0,
+        "end": 3,
+        "value": "pug",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Es un chihuahua",
+    "entities": [
+      {
+        "start": 6,
+        "end": 15,
+        "value": "chihuahua",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tengo un samoyed",
+    "entities": [
+      {
+        "start": 9,
+        "end": 16,
+        "value": "samoyed",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Es un havanese",
+    "entities": [
+      {
+        "start": 6,
+        "end": 14,
+        "value": "havanese",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "es un labrador",
+    "entities": [
+      {
+        "start": 6,
+        "end": 14,
+        "value": "labrador",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Es un Maine Coon",
+    "entities": [
+      {
+        "start": 6,
+        "end": 16,
+        "value": "Maine Coon",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Es un pitbull",
+    "entities": [
+      {
+        "start": 6,
+        "end": 13,
+        "value": "pitbull",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "boston bulldogbulldog",
+    "entities": [
+      {
+        "start": 0,
+        "end": 14,
+        "value": "boston bulldog",
+        "entity": "breed"
+      },
+      {
+        "start": 14,
+        "end": 21,
+        "value": "bulldog",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "ChihuahuaChihuahua",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "Chihuahua",
+        "entity": "breed"
+      },
+      {
+        "start": 9,
+        "end": 18,
+        "value": "Chihuahua",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "boston bulldogbulldog",
+    "entities": [
+      {
+        "start": 0,
+        "end": 14,
+        "value": "boston bulldog",
+        "entity": "breed"
+      },
+      {
+        "start": 14,
+        "end": 21,
+        "value": "bulldog",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Tengo un Highlander",
+    "entities": [
+      {
+        "start": 9,
+        "end": 19,
+        "value": "Highlander",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Es un shiba",
+    "entities": [
+      {
+        "start": 6,
+        "end": 11,
+        "value": "shiba",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "es husky",
+    "entities": [
+      {
+        "start": 3,
+        "end": 8,
+        "value": "husky",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "es un maine coonmaine coon",
+    "entities": [
+      {
+        "start": 6,
+        "end": 16,
+        "value": "maine coon",
+        "entity": "breed"
+      },
+      {
+        "start": 16,
+        "end": 26,
+        "value": "maine coon",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "chihuahuachihuahua",
+    "entities": [
+      {
+        "start": 0,
+        "end": 9,
+        "value": "chihuahua",
+        "entity": "breed"
+      },
+      {
+        "start": 9,
+        "end": 18,
+        "value": "chihuahua",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "Tengo un fox terrier",
+    "entities": [
+      {
+        "start": 9,
+        "end": 20,
+        "value": "fox terrier",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "tengo un cocker spaniel",
+    "entities": [
+      {
+        "start": 9,
+        "end": 23,
+        "value": "cocker spaniel",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "vizsla",
+    "entities": [
+      {
+        "start": 0,
+        "end": 6,
+        "value": "vizsla",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "es un Sphynx",
+    "entities": [
+      {
+        "start": 6,
+        "end": 12,
+        "value": "Sphynx",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "husky",
+    "entities": [],
+    "predicted_entities": [
+      {
+        "entity": "breed",
+        "start": 0,
+        "end": 5,
+        "confidence_entity": 0.9983335137367249,
+        "value": "husky",
+        "extractor": "DIETClassifier"
+      }
+    ]
+  },
+  {
+    "text": "golden retriever",
+    "entities": [
+      {
+        "start": 0,
+        "end": 16,
+        "value": "golden retriever",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  },
+  {
+    "text": "es maine coonmaine coon",
+    "entities": [
+      {
+        "start": 3,
+        "end": 13,
+        "value": "maine coon",
+        "entity": "breed"
+      },
+      {
+        "start": 13,
+        "end": 23,
+        "value": "maine coon",
+        "entity": "breed"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

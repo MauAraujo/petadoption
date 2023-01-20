@@ -1,0 +1,497 @@
+version: "2.0"
+nlu:
+  - intent: get_started
+    examples: |
+      - inicia
+      - quiero ayuda
+      - ayuda
+      - me ayudas?
+      - que puedes hacer?
+      - hola?
+      - ?
+      - Ayuda
+      - Inicia
+      - Inicio
+      - Ayúdame
+  - intent: chitchat
+    examples: |
+      - hola
+      - [boston bulldog](breed)[bulldog](breed)
+  - intent: chitchat/greet
+    examples: |
+      - cómo estás?
+      - hey
+      - saludos
+      - buenas
+  - intent: chitchat/ask_topics
+    examples: |
+      - que temas conoces?
+      - que me puedes decir?
+      - que sabes?
+      - sobre qué te puedo preguntar?
+  - intent: chitchat/thank
+    examples: |
+      - gracias
+      - excelente
+      - muchas gracias
+      - te agradezco
+  - intent: chitchat/farewell
+    examples: |
+      - adiós
+      - bye
+      - hasta luego
+      - nos vemos
+      - hasta la vista
+  - intent: affirm
+    examples: |
+      - si
+      - yes
+      - por supuesto
+      - claro
+      - si quieres
+      - see
+      - s
+      - y
+      - por favor
+      - absolutamente
+      - me gustaría
+      - sería bueno
+      - Si
+  - intent: deny
+    examples: |
+      - no
+      - n
+      - para nada
+      - no quiero
+      - no me gusta
+      - nah
+      - negativo
+      - mmm no
+  - intent: faq_common
+    examples: |
+      - quiero saber sobre mascotas
+      - quiero adoptar una mascota
+      - preguntas frecuentes
+      - temas comunes
+      - ayuda general
+  - intent: faq_custom
+    examples: |
+      - quiero hacer una consulta personalizada
+      - personalizada
+      - consulta personalizada
+      - recomiendame algo para mi mascota
+      - recomienda para mi mascota
+      - que le doy a mi mascota?
+      - quiero que me recomiendes una dieta
+  - intent: faq/ask_cat_diseases
+    examples: |
+      - De que se enferman los gatos?
+      - mi gatito esta enfermo
+      - de que se enferman los gatos?
+      - Enfermedades comunes en gatos
+  - intent: faq/ask_dog_diseases
+    examples: |
+      - De que se enferman los perros?
+      - mi perrito esta enfermo
+      - Enfermedades comunes en perros
+      - De que se enferma mi perro
+  - intent: faq/ask_cat_nutrition
+    examples: |
+      - Que le doy de comer a mi gato?
+      - que le doy a mi gato de comer?
+      - que comen los gatos?
+      - alimentos aptos para gato
+      - alimentos de gatito
+      - que come mi gato
+      - alimento para gato
+      - calorías para perro
+      - Que comen los gatos
+      - cuidados de gato
+  - intent: faq/ask_dog_nutrition
+    examples: |
+      - Que le doy de comer a mi perro?
+      - que le doy de comer a mi perro?
+      - Cúal es la mejor comida para darle?
+      - Dieta de un perro
+      - Alimentos aptos para mi perro
+      - que comen los perros
+      - Que le doy de comer a mi perro
+      - Cuál es la dieta de un perro
+  - intent: faq/ask_cat_grooming
+    examples: |
+      - Como limpio a mi gato?
+  - intent: faq/ask_dog_grooming
+    examples: |
+      - Como limpio a mi perro?
+      - Cómo limpio a mi perro?
+      - Tengo que cepillar a mi perro?
+      - Qué tan seguido se baña un perro?
+      - Que tan seguido lavo a mi perro?
+  - intent: faq/ask_cat_supplies
+    examples: |
+      - Que necesito para cuidar a mi gato?
+      - Qué necesito para cuidar de un gato?
+      - Qué cosas necesito comprarle a mi gato?
+      - Qué compro para tener a un gato?
+      - Qué necesito para adoptar un gato?
+  - intent: faq/ask_dog_supplies
+    examples: |
+      - Que necesito para cuidar a mi perro?
+      - Suministros para cuidar perros
+      - objetos necesarios para cuidado de perros
+  - intent: faq/ask_dog_exercise
+    examples: |
+      - Cuanto ejercicio necesita mi perro?
+      - cuanto ejercicio necesita mi perro?
+      - ejercicio para Perro
+      - ejercicio diario para un perro
+      - Cuánto ejercicio hace un perro
+  - intent: faq/ask_cat_housing
+    examples: |
+      - Donde puedo tener a mi gato?
+      - espacio adecuado para tener un gato
+  - intent: faq/ask_dog_housing
+    examples: |
+      - Donde puedo tener a mi perro?
+      - Donde tengo a mi perro?
+      - Dónde puedo tener a mi perro
+  - intent: faq/ask_cat_sterilization
+    examples: |
+      - Deberia esterilizar a mi gato?
+      - esterilizo a mi gatito?
+      - Esterilización de gatos
+  - intent: faq/ask_dog_sterilization
+    examples: |
+      - Deberia esterilizar a mi perro?
+      - sobre la esterilizacion de perros
+      - esterilizo a mi perrita?
+      - Esterilización de perros
+  - intent: faq/ask_cat_litter
+    examples: |
+      - Necesito comprar una caja de arena?
+      - Información sobre la caja de arena
+      - caja de arena
+  - intent: faq/ask_dog_poisonous
+    examples: |
+      - Que comida le hace mal a mi perro?
+      - Alimentos dañinos para perros
+      - Que comidas les hacen daño a los perros
+      - que le hace daño a mi perrito
+  - intent: faq/ask_cat_poisonous
+    examples: |
+      - Que comida le hace mal a mi gato?
+      - alimentos seguros para mi gato
+      - Qué le hace daño a mi gato?
+      - Qué comidas le hacen daño a mi gato?
+      - Comidas adecuadas para un gato
+  - intent: ask_breed
+    examples: |
+      - Mi mascota es un [golden retriever](breed)
+      - Es un [akita](breed)
+      - Tengo un [Highlander](breed)
+      - Un [Burmese](breed)
+      - [vizsla](breed)
+      - Es un [shiba](breed)
+      - Es un [golden retriever](breed)
+      - es un [akita](breed)
+      - Mi mascota es un [dingo](breed)
+      - Es un [Maine Coon](breed)
+      - Tengo un [fox terrier](breed)
+      - Un [Bombay](breed)
+      - [pug](breed)
+      - Es un [Munchkin](breed)
+      - Es un [chihuahua](breed)
+      - es un [Sphynx](breed)
+      - husky
+      - es un gato de [Bengala](breed)
+      - es un perro [Yorkshire](breed)
+      - [golden retriever](breed)
+      - Es un [pomeranian](breed)
+      - Es un [pitbull](breed)
+      - tengo un [cocker spaniel](breed)
+      - tengo un [samoyed](breed)
+      - es [husky](breed)
+      - [schnauzer](breed) miniature
+      - [schnauzer](breed) miniatura
+      - Es un [havanese](breed)
+      - es un [pomeranian](breed)
+      - es un [maine coon](breed)[maine coon](breed)
+      - [chihuahua](breed)[chihuahua](breed)
+      - es un [sphynx](breed)[sphynx](breed)
+      - es un [siamese](breed)
+      - es [maine coon](breed)[maine coon](breed)
+      - es un [labrador](breed)
+      - es [pomeranian](breed)
+      - [boston bulldog](breed)[bulldog](breed)
+      - Es un [Golden](breed) [Retriever](breed)
+      - [Shiba](breed)[Shiba](breed)
+      - [Golden retriever](breed)[Golden retriever](breed)
+      - [Chihuahua](breed)[Chihuahua](breed)
+      - [Vizsla](breed)[Vizsla](breed)
+  - intent: ask_age
+    examples: |
+      - 12
+  - intent: ask_breed_nutrition
+    examples: |
+      - Cuál es la dieta de un chihuahua
+      - qué come un chihuahua
+      - Que comen los [golden retriever](breed)[golden retriever](breed)
+      - que comen los [shiba](breed)[shiba](breed)?
+      - que comen los [labrador](breed)[labrador](breed)?
+  - lookup: animal
+    examples: |
+      - perro
+      - gato
+  - lookup: age
+    examples: |
+      - baby
+      - adult
+      - senior
+  - lookup: breed
+    examples: |
+      - affenpinscher
+      - african
+      - airedale
+      - akita
+      - appenzeller
+      - australian shepherd
+      - basenji
+      - beagle
+      - bluetick
+      - borzoi
+      - bouvier
+      - boxer
+      - brabancon
+      - briard
+      - norwegian buhund
+      - boston bulldog
+      - english bulldog
+      - french bulldog
+      - staffordshire bullterrier
+      - australian cattledog
+      - chihuahua
+      - chow
+      - clumber
+      - cockapoo
+      - border collie
+      - coonhound
+      - cardigan corgi
+      - cotondetulear
+      - dachshund
+      - dalmatian
+      - great dane
+      - scottish deerhound
+      - dhole
+      - dingo
+      - doberman
+      - norwegian elkhound
+      - entlebucher
+      - eskimo
+      - finnish lapphund
+      - bichon frise
+      - germanshepherd
+      - italian greyhound
+      - groenendael
+      - havanese
+      - afghan hound
+      - basset hound
+      - blood hound
+      - english hound
+      - ibizan hound
+      - plott hound
+      - walker hound
+      - husky
+      - keeshond
+      - kelpie
+      - komondor
+      - kuvasz
+      - labradoodle
+      - labrador
+      - leonberg
+      - lhasa
+      - malamute
+      - malinois
+      - maltese
+      - bull mastiff
+      - english mastiff
+      - tibetan mastiff
+      - mexicanhairless
+      - mix
+      - bernese mountain
+      - swiss mountain
+      - newfoundland
+      - otterhound
+      - caucasian ovcharka
+      - papillon
+      - pekinese
+      - pembroke
+      - miniature pinscher
+      - pitbull
+      - german pointer
+      - germanlonghair pointer
+      - pomeranian
+      - miniature poodle
+      - standard poodle
+      - toy poodle
+      - pug
+      - puggle
+      - pyrenees
+      - redbone
+      - chesapeake retriever
+      - curly retriever
+      - flatcoated retriever
+      - golden retriever
+      - rhodesian ridgeback
+      - rottweiler
+      - saluki
+      - samoyed
+      - schipperke
+      - giant schnauzer
+      - miniature schnauzer
+      - english setter
+      - gordon setter
+      - irish setter
+      - english sheepdog
+      - shetland sheepdog
+      - shiba
+      - shihtzu
+      - blenheim spaniel
+      - brittany spaniel
+      - cocker spaniel
+      - irish spaniel
+      - japanese spaniel
+      - sussex spaniel
+      - welsh spaniel
+      - english springer
+      - stbernard
+      - american terrier
+      - australian terrier
+      - bedlington terrier
+      - border terrier
+      - cairn terrier
+      - dandie terrier
+      - fox terrier
+      - irish terrier
+      - kerryblue terrier
+      - lakeland terrier
+      - norfolk terrier
+      - norwich terrier
+      - patterdale terrier
+      - russell terrier
+      - scottish terrier
+      - sealyham terrier
+      - silky terrier
+      - tibetan terrier
+      - toy terrier
+      - westhighland terrier
+      - wheaten terrier
+      - yorkshire terrier
+      - vizsla
+      - spanish waterdog
+      - weimaraner
+      - whippet
+      - irish wolfhound
+      - Abyssinian
+      - Aegean
+      - American Bobtail
+      - American Curl
+      - American Ringtail
+      - American Shorthair
+      - American Wirehair
+      - Aphrodite Giant
+      - Arabian Mau
+      - Asian
+      - Asian Semi-longhair
+      - Australian Mist
+      - Balinese
+      - Bambino
+      - Bengal
+      - Birman
+      - Bombay
+      - Brazilian Shorthair
+      - British Longhair
+      - British Semi-longhair
+      - British Shorthair
+      - Burmese
+      - Burmilla
+      - California Spangled
+      - Chantilly-Tiffany
+      - Chartreux
+      - Chausie
+      - Colorpoint Shorthair
+      - Cornish
+      - Cornish Rex
+      - Cymric
+      - Cyprus
+      - Devon Rex
+      - Donskoy
+      - Don Sphynx
+      - Dragon Li
+      - Chinese Li Hua
+      - Dwelf
+      - Egyptian Mau
+      - European Shorthair
+      - Exotic Shorthair
+      - Foldex
+      - German Rex
+      - Havana Brown
+      - Highlander
+      - Himalayan
+      - Japanese Bobtail
+      - Javanese
+      - Colorpoint Longhair
+      - Kanaani Germany
+      - Khao Manee
+      - Kinkalow
+      - Korat
+      - Korean Bobtail
+      - Korn Ja Thailand
+      - Kurilian Bobtail
+      - Kuril Islands Bobtail
+      - Lambkin
+      - Lykoi
+      - Maine Coon
+      - Manx
+      - Mekong Bobtail
+      - Minskin
+      - Napoleon
+      - Munchkin
+      - Nebelung
+      - Norwegian Forest Cat
+      - Ocicat
+      - Ojos Azules
+      - Oregon Rex
+      - Oriental Bicolor
+      - Oriental Longhair
+      - Oriental Shorthair
+      - Persian
+      - Peterbald
+      - Pixie-bob
+      - Ragamuffin
+      - Ragdoll
+      - Raas
+      - Russian Blue
+      - Russian White
+      - Savannah
+      - Scottish Fold
+      - Selkirk Rex
+      - Serengeti
+      - Serrade petit
+      - Siamese
+      - Neva Masquerade
+      - Siberian
+      - Singapura
+      - Snowshoe
+      - Sokoke
+      - Somali
+      - Sphynx
+      - Suphalak
+      - Thai
+      - Thai Lilac
+      - Tonkinese
+      - Toyger
+      - Turkish Angora
+      - Turkish Van
+      - Van cat
+      - Ukrainian Levkoy
+      - York Chocolat

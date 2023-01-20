@@ -1,18 +1,20 @@
-@import '../../assets/scss/variables.scss';
+@import "../../assets/scss/variables.scss";
 
 .sub-header {
-
   min-height: 10vh;
 
   .input-outline {
-    border-radius: .4em;
+    border-radius: 0.4em;
 
     &::placeholder {
-      color: white;
+      color: $paragraph;
     }
   }
 
-  
+  button {
+    background-color: $button;
+    color: $buttontext;
+  }
 
   .btn-outline.search {
     border: solid 1px white;

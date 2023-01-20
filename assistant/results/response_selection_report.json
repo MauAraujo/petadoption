@@ -1,0 +1,186 @@
+{
+  "faq/ask_cat_supplies": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1,
+    "confused_with": {
+      "faq/ask_dog_supplies": 1
+    }
+  },
+  "faq/ask_dog_grooming": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1,
+    "confused_with": {
+      "faq/ask_dog_nutrition": 1
+    }
+  },
+  "faq/ask_dog_exercise": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 5,
+    "confused_with": {}
+  },
+  "faq/ask_dog_supplies": {
+    "precision": 0.6666666666666666,
+    "recall": 0.6666666666666666,
+    "f1-score": 0.6666666666666666,
+    "support": 3,
+    "confused_with": {
+      "faq/ask_cat_supplies": 1
+    }
+  },
+  "chitchat/greet": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 4,
+    "confused_with": {
+      "chitchat/farewell": 3,
+      "chitchat/ask_topics": 1
+    }
+  },
+  "chitchat/thank": {
+    "precision": 1.0,
+    "recall": 0.5,
+    "f1-score": 0.6666666666666666,
+    "support": 4,
+    "confused_with": {
+      "chitchat/ask_topics": 1,
+      "chitchat/greet": 1
+    }
+  },
+  "faq/ask_cat_grooming": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 1,
+    "confused_with": {
+      "faq/ask_dog_grooming": 1
+    }
+  },
+  "faq/ask_dog_diseases": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1-score": 0.888888888888889,
+    "support": 4,
+    "confused_with": {}
+  },
+  "faq/ask_dog_poisonous": {
+    "precision": 0.6666666666666666,
+    "recall": 0.5,
+    "f1-score": 0.5714285714285715,
+    "support": 4,
+    "confused_with": {
+      "faq/ask_dog_nutrition": 2
+    }
+  },
+  "faq/ask_dog_nutrition": {
+    "precision": 0.6,
+    "recall": 0.75,
+    "f1-score": 0.6666666666666665,
+    "support": 8,
+    "confused_with": {
+      "faq/ask_cat_poisonous": 1,
+      "faq/ask_cat_nutrition": 1
+    }
+  },
+  "faq/ask_cat_diseases": {
+    "precision": 1.0,
+    "recall": 0.75,
+    "f1-score": 0.8571428571428571,
+    "support": 4,
+    "confused_with": {
+      "faq/ask_dog_diseases": 1
+    }
+  },
+  "chitchat/ask_topics": {
+    "precision": 0.6666666666666666,
+    "recall": 1.0,
+    "f1-score": 0.8,
+    "support": 4,
+    "confused_with": {}
+  },
+  "faq/ask_cat_nutrition": {
+    "precision": 0.75,
+    "recall": 0.9,
+    "f1-score": 0.8181818181818182,
+    "support": 10,
+    "confused_with": {
+      "faq/ask_dog_nutrition": 1
+    }
+  },
+  "chitchat/farewell": {
+    "precision": 0.4,
+    "recall": 0.4,
+    "f1-score": 0.4000000000000001,
+    "support": 5,
+    "confused_with": {
+      "chitchat/greet": 3
+    }
+  },
+  "faq/ask_cat_poisonous": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2,
+    "confused_with": {
+      "faq/ask_cat_nutrition": 1,
+      "faq/ask_dog_poisonous": 1
+    }
+  },
+  "faq/ask_cat_sterilization": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 3,
+    "confused_with": {}
+  },
+  "faq/ask_cat_litter": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 3,
+    "confused_with": {}
+  },
+  "faq/ask_dog_housing": {
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1-score": 0.8571428571428571,
+    "support": 3,
+    "confused_with": {}
+  },
+  "faq/ask_cat_housing": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1-score": 0.0,
+    "support": 2,
+    "confused_with": {
+      "faq/ask_cat_nutrition": 1,
+      "faq/ask_dog_housing": 1
+    }
+  },
+  "faq/ask_dog_sterilization": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 4,
+    "confused_with": {}
+  },
+  "accuracy": 0.6933333333333334,
+  "macro avg": {
+    "precision": 0.5650000000000001,
+    "recall": 0.5733333333333333,
+    "f1-score": 0.5596392496392497,
+    "support": 75
+  },
+  "weighted avg": {
+    "precision": 0.6677777777777777,
+    "recall": 0.6933333333333334,
+    "f1-score": 0.6696411736411736,
+    "support": 75
+  }
+}

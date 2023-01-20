@@ -1,85 +1,102 @@
-import React, { Fragment } from 'react'
-import './styles/catalogo.scss'
+import React, { Fragment, useState } from "react";
+import "./styles/catalogo.scss";
 //components
-import Hero from '../components/Hero'
-import SearchBar from '../components/search-bar'
-import Available from '../components/available'
-import Steps from '../components/steps'
-import SubHeader from '../components/subHeader'
+import SubHeader from "../components/SubHeader";
+import { InstantSearch, connectHits } from "react-instantsearch-dom";
+import MenuSelect from "../components/MenuSelect";
+import qs from "qs";
+import { Col, Container, Row } from "react-bootstrap";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
+import "instantsearch.css/themes/algolia-min.css";
 
-let dummy = 'https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg'
+const DEBOUNCE_TIME = 400;
+const searchClient = instantMeiliSearch(process.env.REACT_APP_MEILISEARCH_URL);
 
 export default function Catalogo() {
+  const history = useHistory();
+  const location = useLocation();
+  const createURL = (state) => `?${qs.stringify(state)}`;
+  const searchStateToUrl = (searchState) =>
+    searchState ? `${location.pathname}${createURL(searchState)}` : "";
+  const urlToSearchState = ({ search }) => qs.parse(search.slice(1));
 
-  let card = () => {
-    return (
-      <div className='col-12 col-md-2 mb-5'>
-        <div className='img-container'>
-          <img className='contain' src={dummy} alt={dummy} />
-        </div>
-        <div className='title-container'>
-          <h6 className='subtitle-pet text-center'>Nombre</h6>
-        </div>
-      </div>
-    )
-  }
+  const searchQuery = urlToSearchState(location);
+  const [searchState, setSearchState] = useState(searchQuery);
+  const [debouncedSetState, setDebouncedSetState] = useState(null);
+
+  const onSearchStateChange = (updatedSearchState) => {
+    clearTimeout(debouncedSetState);
+
+    setDebouncedSetState(
+      setTimeout(() => {
+        history.push(searchStateToUrl(updatedSearchState), updatedSearchState);
+      }, DEBOUNCE_TIME)
+    );
+    setSearchState(updatedSearchState);
+  };
 
   return (
     <Fragment>
-      <SubHeader />
-      <section className='bg-yellow'>
-        <div className='container-fluid'>
-          <div className='row py-4'>
-            <div className='col-12 col-md-2'>aside</div>
-            {/* // area de catalogo */}
-            <div className='col-12 col-md-8'>
-              <h2 className='subtitle'>Mascotas</h2>
-              <div className='row catalogo'>
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-                {card()}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <InstantSearch
+        indexName="pet-adoption"
+        searchClient={searchClient}
+        searchState={searchState}
+        onSearchStateChange={onSearchStateChange}
+        createURL={createURL}
+      >
+        <SubHeader />
+        <section className="catalog">
+          <Container fluid>
+            <Row className="py-4">
+              <Col md={2} className="side">
+                <h2 className="label">Animal</h2>
+                <MenuSelect attribute="animal" />
+                <h2 className="label">Raza</h2>
+                <MenuSelect attribute="breed" />
+                <h2 className="label">Genero</h2>
+                <MenuSelect attribute="gender" />
+                <h2 className="label">Colores</h2>
+                <MenuSelect attribute="colors" />
+                <h2 className="label">Tamaño</h2>
+                <MenuSelect attribute="size" />
+              </Col>
+              <Col md={10}>
+                <h2 className="subtitle">Mascotas</h2>
+                <CustomHits />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+      </InstantSearch>
     </Fragment>
-  )
+  );
 }
 
-export function Select() {
-  return (<Fragment>
-    <div className="container">
-      <div className="row">
-        <div className="col-12">
-          Raza
-        </div>
-        <div className="col-12">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+const Hits = ({ hits, history }) => {
+  const thumborURL = process.env.REACT_APP_THUMBOR_URL;
+  return (
+    <Row className="catalogo">
+      {hits.map((hit) => (
+        <Col md={2} className="publication-card" key={hit.id}>
+          <Link to={"/detail/" + hit.id}>
+            <div className="img-container">
+              <img
+                className="contain"
+                src={`${thumborURL}/unsafe/fit-in/x360/filters:format(webp)/${encodeURIComponent(
+                  hit.images[0]
+                )}`}
+                alt=""
+              />
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </Fragment>)
-}
+            <div className="title-container">
+              <h6 className="subtitle-pet text-center">{hit.name}</h6>
+            </div>
+          </Link>
+        </Col>
+      ))}
+    </Row>
+  );
+};
+
+const CustomHits = connectHits(Hits);

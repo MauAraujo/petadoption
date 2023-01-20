@@ -1,44 +1,25 @@
-@import '../../assets/scss/variables.scss';
+@import "../../assets/scss/variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 .discover-container {
-
-  .img-container {
-    max-height: 60vh !important;
-    overflow: hidden;
-    border-radius: .4em;
+  img {
+    max-height: 380px;
+    height: auto;
   }
 
-  .title {
-    color: white;
+  .card-container {
+    margin: 2em 0 2em 0;
   }
 
-  .gradient {
-    position: absolute;
-    width: 95%;
-    height: 100%;
-    top: 0;
-    right: 0;
-    background: rgb(150,111,191);
-    background: linear-gradient(0deg, rgba(150,111,191,1) 0%, rgba(0,187,255,0) 80%); 
-    margin-right: 15px;
-    margin-left: 15px;
+  h2 {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.4em;
+    font-weight: bold;
+    //color: $green;
+    color: $headline;
   }
+}
 
-  .text-container {
-    position: absolute;
-    bottom: 5%;
-    right: 0;
-    width: 100%;
-  }
-
-  .button {
-    background: $yellow;
-    color: $purple;
-    border-radius: 5em;
-    min-width: 70%;
-    -webkit-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.38);
-    -moz-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.38);
-    box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.38);
-  }
-
+.discovery-container {
+  margin: 2em 0 2em 0;
 }

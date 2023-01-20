@@ -1,0 +1,78 @@
+version: "2.0"
+stories:
+  - story: faq common
+    steps:
+      - intent: get_started
+      - action: utter_offer_help
+      - intent: faq_common
+      - action: utter_ask_question
+  - story: faq custom affirmativve
+    steps:
+      - intent: get_started
+      - action: utter_offer_help
+      - intent: faq_custom
+      - action: utter_ask_animal
+      - intent: fill_slot
+        entities:
+          - animal: perro
+      - action: utter_ask_age
+      - intent: fill_slot
+        entities:
+          - age: adolescent
+      - action: utter_ask_breed
+      - intent: ask_breed
+        entities:
+          - breed: samoyed
+      - action: action_breed_api
+      - intent: affirm
+      - action: utter_offer_help
+  - story: faq custom negative
+    steps:
+      - intent: get_started
+      - action: utter_offer_help
+      - intent: faq_custom
+      - action: utter_ask_animal
+      - intent: fill_slot
+        entities:
+          - animal: perro
+      - action: utter_ask_age
+      - intent: fill_slot
+        entities:
+          - age: adolescent
+      - action: utter_ask_breed
+      - intent: ask_breed
+        entities:
+          - breed: samoyed
+      - action: action_breed_api
+      - intent: deny
+      - action: utter_chitchat/farewell
+  - story: Story from Conversation ID 80c2df8b35ac4ea9ad462c4be0cfa5ab
+    steps:
+      - slot_was_set:
+          - breed: shiba
+      - slot_was_set:
+          - animal: perro
+      - action: utter_ask_age
+      - intent: fill_slot
+        entities:
+          - age: adult
+      - slot_was_set:
+          - age: adult
+      - action: action_breed_api
+  - story: Story from Conversation ID 9423aa844ea840f9bbb62657e3ae6716
+    steps:
+      - slot_was_set:
+          - breed: labrador
+      - action: utter_ask_animal
+      - intent: fill_slot
+        entities:
+          - animal: perro
+      - slot_was_set:
+          - animal: perro
+      - action: utter_ask_age
+      - intent: fill_slot
+        entities:
+          - age: adult
+      - slot_was_set:
+          - age: adult
+      - action: action_breed_api

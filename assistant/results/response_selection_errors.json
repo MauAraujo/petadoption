@@ -1,0 +1,186 @@
+[
+  {
+    "text": "saludos",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/farewell",
+      "confidence": 0.9435813426971436
+    }
+  },
+  {
+    "text": "bye",
+    "intent_response_key_target": "chitchat/farewell",
+    "intent_response_key_prediction": {
+      "name": "chitchat/greet",
+      "confidence": 0.9160316586494446
+    }
+  },
+  {
+    "text": "Alimentos aptos para mi perro",
+    "intent_response_key_target": "faq/ask_dog_nutrition",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_cat_nutrition",
+      "confidence": 0.3960001766681671
+    }
+  },
+  {
+    "text": "Que necesito para cuidar a mi gato?",
+    "intent_response_key_target": "faq/ask_cat_supplies",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_supplies",
+      "confidence": 0.9828493595123291
+    }
+  },
+  {
+    "text": "espacio adecuado para tener un gato",
+    "intent_response_key_target": "faq/ask_cat_housing",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_cat_nutrition",
+      "confidence": 0.6906148195266724
+    }
+  },
+  {
+    "text": "Alimentos dañinos para perros",
+    "intent_response_key_target": "faq/ask_dog_poisonous",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_nutrition",
+      "confidence": 0.2235337346792221
+    }
+  },
+  {
+    "text": "hey",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/farewell",
+      "confidence": 0.9995655417442322
+    }
+  },
+  {
+    "text": "te agradezco",
+    "intent_response_key_target": "chitchat/thank",
+    "intent_response_key_prediction": {
+      "name": "chitchat/ask_topics",
+      "confidence": 0.999858558177948
+    }
+  },
+  {
+    "text": "adiós",
+    "intent_response_key_target": "chitchat/farewell",
+    "intent_response_key_prediction": {
+      "name": "chitchat/greet",
+      "confidence": 0.6461157202720642
+    }
+  },
+  {
+    "text": "Cúal es la mejor comida para darle?",
+    "intent_response_key_target": "faq/ask_dog_nutrition",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_cat_poisonous",
+      "confidence": 0.29654672741889954
+    }
+  },
+  {
+    "text": "Que necesito para cuidar a mi perro?",
+    "intent_response_key_target": "faq/ask_dog_supplies",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_cat_supplies",
+      "confidence": 0.8408028483390808
+    }
+  },
+  {
+    "text": "Que comida le hace mal a mi perro?",
+    "intent_response_key_target": "faq/ask_dog_poisonous",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_nutrition",
+      "confidence": 0.5340270400047302
+    }
+  },
+  {
+    "text": "excelente",
+    "intent_response_key_target": "chitchat/thank",
+    "intent_response_key_prediction": {
+      "name": "chitchat/greet",
+      "confidence": 0.4291967749595642
+    }
+  },
+  {
+    "text": "cómo estás?",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/farewell",
+      "confidence": 0.8434022665023804
+    }
+  },
+  {
+    "text": "mi gatito esta enfermo",
+    "intent_response_key_target": "faq/ask_cat_diseases",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_diseases",
+      "confidence": 0.376526802778244
+    }
+  },
+  {
+    "text": "calorías para perro",
+    "intent_response_key_target": "faq/ask_cat_nutrition",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_nutrition",
+      "confidence": 0.6166959404945374
+    }
+  },
+  {
+    "text": "Como limpio a mi gato?",
+    "intent_response_key_target": "faq/ask_cat_grooming",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_grooming",
+      "confidence": 0.5597569346427917
+    }
+  },
+  {
+    "text": "Que comida le hace mal a mi gato?",
+    "intent_response_key_target": "faq/ask_cat_poisonous",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_poisonous",
+      "confidence": 0.9954384565353394
+    }
+  },
+  {
+    "text": "buenas",
+    "intent_response_key_target": "chitchat/greet",
+    "intent_response_key_prediction": {
+      "name": "chitchat/ask_topics",
+      "confidence": 0.4986918270587921
+    }
+  },
+  {
+    "text": "nos vemos",
+    "intent_response_key_target": "chitchat/farewell",
+    "intent_response_key_prediction": {
+      "name": "chitchat/greet",
+      "confidence": 0.9999485015869141
+    }
+  },
+  {
+    "text": "Como limpio a mi perro?",
+    "intent_response_key_target": "faq/ask_dog_grooming",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_nutrition",
+      "confidence": 0.33919739723205566
+    }
+  },
+  {
+    "text": "Donde puedo tener a mi gato?",
+    "intent_response_key_target": "faq/ask_cat_housing",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_dog_housing",
+      "confidence": 0.7834925055503845
+    }
+  },
+  {
+    "text": "alimentos seguros para mi gato",
+    "intent_response_key_target": "faq/ask_cat_poisonous",
+    "intent_response_key_prediction": {
+      "name": "faq/ask_cat_nutrition",
+      "confidence": 0.7952840328216553
+    }
+  }
+]

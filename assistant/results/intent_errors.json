@@ -1,0 +1,242 @@
+[
+  {
+    "text": "hola?",
+    "intent": "get_started",
+    "intent_prediction": {
+      "name": "chitchat",
+      "confidence": 0.9955211877822876
+    }
+  },
+  {
+    "text": "que temas conoces?",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "faq_common",
+      "confidence": 0.7429647445678711
+    }
+  },
+  {
+    "text": "bye",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.6825419664382935
+    }
+  },
+  {
+    "text": "no me gusta",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "chitchat",
+      "confidence": 0.36488640308380127
+    }
+  },
+  {
+    "text": "ayuda general",
+    "intent": "faq_common",
+    "intent_prediction": {
+      "name": "get_started",
+      "confidence": 0.9920264482498169
+    }
+  },
+  {
+    "text": "pug",
+    "intent": "ask_breed",
+    "intent_prediction": {
+      "name": "get_started",
+      "confidence": 0.45600053668022156
+    }
+  },
+  {
+    "text": "que puedes hacer?",
+    "intent": "get_started",
+    "intent_prediction": {
+      "name": "chitchat",
+      "confidence": 0.9997487664222717
+    }
+  },
+  {
+    "text": "?",
+    "intent": "get_started",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.866660475730896
+    }
+  },
+  {
+    "text": "hola",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "get_started",
+      "confidence": 0.9995755553245544
+    }
+  },
+  {
+    "text": "hey",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.5900861620903015
+    }
+  },
+  {
+    "text": "adiós",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.6966503858566284
+    }
+  },
+  {
+    "text": "quiero saber sobre mascotas",
+    "intent": "faq_common",
+    "intent_prediction": {
+      "name": "chitchat",
+      "confidence": 0.8247320652008057
+    }
+  },
+  {
+    "text": "es un gato de Bengala",
+    "intent": "ask_breed",
+    "intent_prediction": {
+      "name": "faq",
+      "confidence": 0.9515445232391357
+    }
+  },
+  {
+    "text": "boston bulldogbulldog",
+    "intent": "ask_breed",
+    "intent_prediction": {
+      "name": "chitchat",
+      "confidence": 0.9999191761016846
+    }
+  },
+  {
+    "text": "boston bulldogbulldog",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "ask_breed",
+      "confidence": 0.999994158744812
+    }
+  },
+  {
+    "text": "sobre qué te puedo preguntar?",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "faq",
+      "confidence": 0.7030170559883118
+    }
+  },
+  {
+    "text": "excelente",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.9258190989494324
+    }
+  },
+  {
+    "text": "para nada",
+    "intent": "deny",
+    "intent_prediction": {
+      "name": "faq",
+      "confidence": 0.686619758605957
+    }
+  },
+  {
+    "text": "preguntas frecuentes",
+    "intent": "faq_common",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.6509314775466919
+    }
+  },
+  {
+    "text": "cómo estás?",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "faq",
+      "confidence": 0.3688528537750244
+    }
+  },
+  {
+    "text": "que me puedes decir?",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "get_started",
+      "confidence": 0.9634337425231934
+    }
+  },
+  {
+    "text": "absolutamente",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "chitchat",
+      "confidence": 0.9748830199241638
+    }
+  },
+  {
+    "text": "quiero adoptar una mascota",
+    "intent": "faq_common",
+    "intent_prediction": {
+      "name": "faq_custom",
+      "confidence": 0.43258988857269287
+    }
+  },
+  {
+    "text": "que le doy a mi mascota?",
+    "intent": "faq_custom",
+    "intent_prediction": {
+      "name": "faq",
+      "confidence": 0.978182852268219
+    }
+  },
+  {
+    "text": "es un perro Yorkshire",
+    "intent": "ask_breed",
+    "intent_prediction": {
+      "name": "faq",
+      "confidence": 0.8353898525238037
+    }
+  },
+  {
+    "text": "buenas",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "affirm",
+      "confidence": 0.7846773862838745
+    }
+  },
+  {
+    "text": "que sabes?",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "faq_common",
+      "confidence": 0.46736013889312744
+    }
+  },
+  {
+    "text": "nos vemos",
+    "intent": "chitchat",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.8621430993080139
+    }
+  },
+  {
+    "text": "me gustaría",
+    "intent": "affirm",
+    "intent_prediction": {
+      "name": "deny",
+      "confidence": 0.7392435073852539
+    }
+  },
+  {
+    "text": "temas comunes",
+    "intent": "faq_common",
+    "intent_prediction": {
+      "name": "chitchat",
+      "confidence": 0.854880690574646
+    }
+  }
+]
