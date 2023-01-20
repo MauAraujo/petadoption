@@ -14,7 +14,7 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-client = MongoClient("mongodb://root:admin@147.182.175.166:27017/")
+client = MongoClient("")
 db = client.petadoption
 
 
