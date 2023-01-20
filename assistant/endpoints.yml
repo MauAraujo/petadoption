@@ -31,5 +31,5 @@
 #    queues:
 #    - ${RABBITMQ_QUEUE}
 action_endpoint:
-   url: http://147.182.175.166:5055/webhook
-   token: ""
+  url: http://147.182.175.166:5055/webhook
+  token: ""

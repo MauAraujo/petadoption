@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
+import React, { useState, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 import { getArticle } from "../services/articles.service";
-import {
-  useParams,
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./styles/article.scss";
-import { BackTop } from 'antd';
-
+import { BackTop } from "antd";
 
 export default function ArticleDetail() {
   const params = useParams();
   const [article, setArticle] = useState([]);
+  const thumborURL = process.env.THUMBOR_URL;
 
   useEffect(() => {
     async function fetchArticle() {
@@ -26,10 +24,17 @@ export default function ArticleDetail() {
       <div className="article-container">
         <h1 className="article-title">{article.title}</h1>
         <div className="article-cover">
-          <img alt="" src={`http://147.182.175.166:8000/unsafe/fit-in/x680/filters:format(webp)/${encodeURIComponent(article.cover)}`}></img>
+          <img
+            alt=""
+            src={`${thumborURL}/unsafe/fit-in/x680/filters:format(webp)/${encodeURIComponent(
+              article.cover
+            )}`}
+          ></img>
         </div>
         <BackTop />
-        <ReactMarkdown className="article-body">{article.content}</ReactMarkdown>
+        <ReactMarkdown className="article-body">
+          {article.content}
+        </ReactMarkdown>
       </div>
     </div>
   );

@@ -10,7 +10,11 @@ export default function NavBar() {
       <Container>
         <Navbar.Brand>
           <NavLink className="navbar-brand d-none d-sm-block" to="/">
-            <Image className="logo" src={logo} alt={"Logotipo de la página"}></Image>
+            <Image
+              className="logo"
+              src={logo}
+              alt={"Logotipo de la página"}
+            ></Image>
             <span className="brand-name">Pet Adoption</span>
           </NavLink>
         </Navbar.Brand>

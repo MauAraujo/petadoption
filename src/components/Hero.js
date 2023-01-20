@@ -1,11 +1,7 @@
 import React from "react";
 import "./styles/hero.scss";
 import { Link } from "react-router-dom";
-
-const large = 'http://147.182.175.166:9000/pet-adoption/static/pets1200w.webp'
-const medium = 'http://147.182.175.166:9000/pet-adoption/static/pets600w.webp'
-const small = 'http://147.182.175.166:9000/pet-adoption/static/pets300w.webp'
-const xsmall = 'http://147.182.175.166:9000/pet-adoption/static/pets150w.webp'
+import ResizeImage from "../lib/resize";
 
 export default function Hero() {
   return (
@@ -14,12 +10,24 @@ export default function Hero() {
         <div className="col-12 col-md-5">
           <img
             className="contain"
-            src={medium}
-            srcSet={`${xsmall} 150w, ${small} 300w, ${medium} 600w, ${large} 1200w`}
-            alt={"Mascotas sentadas juntas"} />
+            src={ResizeImage(650, "webp", "pets.png")}
+            srcSet={`${ResizeImage(
+              162,
+              "webp",
+              "pets.png"
+            )} 162w, ${ResizeImage(
+              325,
+              "webp",
+              "pets.png"
+            )} 325w, ${ResizeImage(
+              650,
+              "webp",
+              "pets.png"
+            )} 650w, ${ResizeImage(1300, "webp", "pets.png")} 1300w`}
+            alt={"Mascotas sentadas juntas"}
+          />
         </div>
         <div className="col-12 col-md-7 px-3 py-3 py-md-5 px-md-5">
-          {/* <h3 className='subtitle'>Titulo | subtitulo</h3> */}
           <h1 className="title">Encuentra la mascota ideal</h1>
           <div className="subtitle-container">
             <p className="txt">

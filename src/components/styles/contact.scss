@@ -1,4 +1,4 @@
-@import '../../assets/scss/variables.scss';
+@import "../../assets/scss/variables.scss";
 
 .social-media {
   border-radius: 50px;
@@ -27,7 +27,7 @@ a {
 a:hover {
   text-decoration-line: none;
   text-decoration: none !important;
-  i{
+  i {
     // background-color: $fifth;
   }
   h3 {

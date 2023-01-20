@@ -529,13 +529,13 @@ div#blog .read {
 }
 
 @supports (--c: 0) {
-  [style*='--aspect-ratio-padding:'] {
+  [style*="--aspect-ratio-padding:"] {
     position: relative;
     overflow: hidden;
     padding-top: var(--aspect-ratio-padding);
   }
 
-  [style*='--aspect-ratio-padding:'] > * {
+  [style*="--aspect-ratio-padding:"] > * {
     position: absolute;
     top: 0;
     left: 0;

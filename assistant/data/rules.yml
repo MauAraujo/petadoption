@@ -1,22 +1,22 @@
 version: "2.0"
 rules:
-- rule: respond to FAQs
-  steps:
-  - intent: faq
-  - action: utter_faq
-- rule: respond to chitchat
-  steps:
-  - intent: chitchat
-  - action: utter_chitchat
-- rule: respond to common FAQ
-  steps:
-  - intent: faq_common
-  - action: utter_ask_question
-- rule: respond to custom FAQ
-  steps:
-  - intent: faq_custom
-  - action: utter_ask_animal
-- rule: respond to breed nutrition
-  steps:
-  - intent: ask_breed_nutrition
-  - action: utter_ask_breed_nutrition
+  - rule: respond to FAQs
+    steps:
+      - intent: faq
+      - action: utter_faq
+  - rule: respond to chitchat
+    steps:
+      - intent: chitchat
+      - action: utter_chitchat
+  - rule: respond to common FAQ
+    steps:
+      - intent: faq_common
+      - action: utter_ask_question
+  - rule: respond to custom FAQ
+    steps:
+      - intent: faq_custom
+      - action: utter_ask_animal
+  - rule: respond to breed nutrition
+    steps:
+      - intent: ask_breed_nutrition
+      - action: utter_ask_breed_nutrition

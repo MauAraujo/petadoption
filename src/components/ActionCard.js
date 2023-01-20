@@ -11,7 +11,6 @@ import { Modal } from "antd";
 import { Col } from "react-bootstrap";
 import "./styles/contact.scss";
 import { Form, Input, Alert, Select } from "antd";
-// import { Button } from "../Components/Buttons";
 import TextArea from "antd/lib/input/TextArea";
 import { sendEmail } from "../services/email.service";
 const { Option } = Select;
@@ -24,13 +23,11 @@ export default function ActionCard(props) {
   const onFinish = () => {
     const values = contactForm.getFieldsValue();
     values["pet_name"] = props.pet?.name || "";
-    console.log(values);
 
     sendEmail(values).then(
       (result) => {
         setemailSent({ sent: true, ok: true });
         contactForm.resetFields();
-        console.log(result.text);
         setTimeout(() => {
           setemailSent({});
         }, 3000);
@@ -38,7 +35,6 @@ export default function ActionCard(props) {
       },
       (error) => {
         setemailSent({ sent: true, ok: false });
-        console.log(error.text);
         setTimeout(() => {
           setemailSent({});
         }, 3000);
@@ -60,8 +56,6 @@ export default function ActionCard(props) {
         okText="Enviar"
         cancelText="Cancelar"
       >
-        {/* <ContactForm></ContactForm> */}
-
         <Col sm={12} lg={6}>
           <h1 className="txt-primary">Contact</h1>
 
@@ -84,8 +78,6 @@ export default function ActionCard(props) {
           ) : null}
           <Form
             form={contactForm}
-            // labelCol={{ span: 4 }}
-            // wrapperCol={{ span: 14 }}
             layout="vertical"
             initialValues={{ size: "large" }}
             size={"large"}
@@ -157,7 +149,6 @@ export default function ActionCard(props) {
                 },
               ]}
             >
-              {/* <Input placeholder="Teléfono celular"></Input> */}
               <Input placeholder="Teléfono celular"></Input>
             </Form.Item>
             <Form.Item
@@ -241,23 +232,6 @@ export default function ActionCard(props) {
                 placeholder="¿Tiene otras mascotas? ¿De que especie?"
               />
             </Form.Item>
-
-            {/* <Form.Item
-              name="message"
-              label="Message"
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: "Ingrese un mensaje por favor",
-                },
-              ]}
-            >
-              <TextArea
-                rows={4}
-                placeholder="Por que le gustaria adoptar esta mascota?"
-              />
-            </Form.Item> */}
           </Form>
         </Col>
       </Modal>
@@ -273,9 +247,6 @@ export default function ActionCard(props) {
           >
             ¡Adóptame!
           </button>
-          {/* <button type="button" className="btn btn-primary rounded-pill">
-            Donativo
-          </button> */}
           <div className="social-banner">
             <FontAwesomeIcon className="social" icon={faFacebookF} />
             <FontAwesomeIcon className="social" icon={faTwitter} />

@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from "react";
 //components
 import Hero from "../components/Hero";
-import SearchBar from "../components/search-bar";
-import Available from "../components/available";
-import Steps from "../components/steps";
-import DiscoverCard from "../components/discover-card";
-import Widget from 'rasa-webchat';
+import SearchBar from "../components/SearchBar";
+import Available from "../components/Available";
+import Steps from "../components/Steps";
+import DiscoverCard from "../components/DiscoverCard";
+import Widget from "rasa-webchat";
 import "../services/publications.service";
 import { getPublications } from "../services/publications.service";
 import { useHistory, Link } from "react-router-dom";
 
-
 export default function Homepage() {
   const [publications, setpublications] = useState([]);
+  const rasaURL = process.env.REACT_APP_RASA_URL;
 
   useEffect(() => {
     async function fetchPublications() {
       let publications = await getPublications();
-      publications = publications?.slice(publications.length - 6, publications.length);
+      publications = publications?.slice(
+        publications.length - 6,
+        publications.length
+      );
       setpublications(publications);
     }
     fetchPublications();
-    console.log(publications);
   }, []);
 
   return (
@@ -36,11 +38,11 @@ export default function Homepage() {
       <div className="discovery-container discovery">
         <DiscoverCard />
       </div>
-      {/* <Widget
+      <Widget
         initPayload={"/get_started"}
-        socketUrl={"http://147.182.175.166:5005"}
+        socketUrl={rasaURL}
         socketPath={"/socket.io/"}
-        customData={{ "language": "es" }}
+        customData={{ language: "es" }}
         title={"Información sobre mascotas"}
         customMessageDelay={(message) => {
           let delay = message.length * 30;
@@ -51,12 +53,12 @@ export default function Homepage() {
         hideWhenNotConnected={true}
         showMessageDate={true}
         params={{
-          storage: "session"
+          storage: "session",
         }}
-        inputTextFieldHint={'Escribe un mensaje'}
+        inputTextFieldHint={"Escribe un mensaje"}
         showFullScreenButton={true}
         displayUnreadCount={true}
-      /> */}
+      />
     </div>
   );
 }

@@ -11,8 +11,6 @@ export default function ContactForm() {
   const [contactForm] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log(values);
-
     sendEmail(values).then(
       (result) => {
         setemailSent({ sent: true, ok: true });
@@ -150,7 +148,7 @@ export default function ContactForm() {
             },
           ]}
         >
-          <Select defaultValue="casa" style={{ width: 120 }} >
+          <Select defaultValue="casa" style={{ width: 120 }}>
             <Option value="casa">Casa</Option>
             <Option value="departamento">Departamento</Option>
           </Select>
@@ -178,7 +176,6 @@ export default function ContactForm() {
           </Button>
         </Form.Item>
       </Form>
-
     </Col>
   );
 }

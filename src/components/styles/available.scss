@@ -1,52 +1,54 @@
-@import '../../assets/scss/variables.scss';
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import "../../assets/scss/variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 .available-container {
-    background: $main;
-    padding: 2em 15% 2em 15%;
+  background: $main;
+  padding: 2em 15% 2em 15%;
 
   .img-container {
-      max-height: 60vh !important;
-      overflow: hidden;
-      border-radius: .4em;
-      position: relative;
+    max-height: 60vh !important;
+    overflow: hidden;
+    border-radius: 0.4em;
+    position: relative;
   }
 
-  img, .img-container {
-      height: 100%;
-      width: 100%;
+  img,
+  .img-container {
+    height: 100%;
+    width: 100%;
   }
 }
 
 .available {
   .title-container {
-      background: white;
-      padding: .8em;
-      margin-top: -10%;
-      position: relative;
-      bottom: -5%;
-      width: 90%;
-      -webkit-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.28);
-      -moz-box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.28);
-      box-shadow: 10px 10px 5px -7px rgba(0,0,0,0.28);
-      border-radius: .4em;
+    background: white;
+    padding: 0.8em;
+    margin-top: -10%;
+    position: relative;
+    bottom: -5%;
+    width: 90%;
+    -webkit-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.28);
+    -moz-box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.28);
+    box-shadow: 10px 10px 5px -7px rgba(0, 0, 0, 0.28);
+    border-radius: 0.4em;
   }
 
   .img-container {
-      max-height: 60vh !important;
-      overflow: hidden;
-      border-radius: .4em;
-      position: relative;
+    max-height: 60vh !important;
+    overflow: hidden;
+    border-radius: 0.4em;
+    position: relative;
   }
 
-  img, .img-container {
-      width: 100%;
-      height: 100%;
+  img,
+  .img-container {
+    width: 100%;
+    height: 100%;
   }
 
   .subtitle {
-      &-pet {
-          font-family: "open Sans", sans-serif;
+    &-pet {
+      font-family: "open Sans", sans-serif;
       font-size: 1.2em;
       //color: $purple;
       color: $paragraph;
@@ -54,7 +56,7 @@
   }
 
   .publication-card {
-      min-width: 220px;
-      min-height: 240px;
+    min-width: 220px;
+    min-height: 240px;
   }
 }

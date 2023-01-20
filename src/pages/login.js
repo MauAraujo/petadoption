@@ -23,20 +23,10 @@ class Login extends React.Component {
   }
 
   async onNewPasswordSet({ password }) {
-    console.debug("New password", password);
     this.setState({ isLoading: true });
 
     try {
-      const { requiredAttributes } = this.state.user.challengeParam;
-      console.log(this.state.user);
-        console.log(requiredAttributes);
-        var user;
-      // const user = await Auth.completeNewPassword(
-      //   this.state.user,
-      //   password,
-      //   requiredAttributes
-      // );
-
+      var user;
       if (!user.challengeName) {
         this.finishAuth(user);
       }
@@ -46,27 +36,25 @@ class Login extends React.Component {
   }
 
   finishAuth(user) {
-    console.debug("Signed in");
     this.setState({ isLoggedIn: true, isLoading: false });
     this.props.history.push("/dashboard");
   }
 
   async SignIn({ username, password }) {
     this.setState({ isLoading: true });
-    console.log(username, password);
-      try {
-          const user = await LogIn(username, password);
-          if (user !== null) {
-              this.finishAuth(user);
-          }
-      } catch (error) {
-          console.log(error);
+    try {
+      const user = await LogIn(username, password);
+      if (user !== null) {
+        this.finishAuth(user);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   render() {
     return (
-        <div className="login-card">
+      <div className="login-card">
         {!this.state.isLoggedIn ? (
           <SignIn
             onFinish={this.onCredentialsEntered}
@@ -102,7 +90,11 @@ function SignIn(props) {
     },
   };
   return (
-      <Card className="inner-card" style={{ width: "40%" }} title="Ingresa tus datos">
+    <Card
+      className="inner-card"
+      style={{ width: "40%" }}
+      title="Ingresa tus datos"
+    >
       <Form
         {...layout}
         name="basic"
@@ -180,7 +172,11 @@ function NewPassword(props) {
     },
   };
   return (
-      <Card className="inner-card" style={{ width: "40%" }} title="Cambia tu contraseña">
+    <Card
+      className="inner-card"
+      style={{ width: "40%" }}
+      title="Cambia tu contraseña"
+    >
       <Form
         {...layout}
         name="basic"

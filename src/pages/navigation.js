@@ -1,25 +1,21 @@
 import React, { Fragment, Suspense, lazy } from "react";
-import {
-  Switch,
-  Route,
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 //Layout
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 // Pages
-const Homepage = lazy(() => import("./homepage"));
+const Homepage = lazy(() => import("./home"));
 const Detail = lazy(() => import("./detail"));
 const Catalogo = lazy(() => import("./catalogo"));
 const Dashboard = lazy(() => import("./dashboard"));
 const Login = lazy(() => import("./login"));
 const Articles = lazy(() => import("./articles"));
-const ArticleDetail = lazy(() => import("./article-detail"));
+const ArticleDetail = lazy(() => import("./articleDetail"));
 const Diet = lazy(() => import("./diet"));
-const DietDetail = lazy(() => import("./diet-detail"));
+const DietDetail = lazy(() => import("./dietDetail"));
 
 export default function AppNavigation() {
   return (
     <Fragment>
-      {/* <Legal/> */}
       <Layout>
         <Suspense fallback={<div>Cargando...</div>}>
           <Switch>

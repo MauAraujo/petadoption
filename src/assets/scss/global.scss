@@ -22,7 +22,7 @@ body {
   }
   //typography
   .title {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 4.2em;
     font-weight: bold;
     text-transform: uppercase;
@@ -35,7 +35,7 @@ body {
   }
 
   .subtitle {
-      font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 2.4em;
     font-weight: bold;
     text-transform: uppercase;
@@ -44,7 +44,7 @@ body {
   }
 
   .txt {
-      font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     color: $paragraph;
     font-size: 1.2em;
   }
@@ -55,8 +55,8 @@ body {
   //buttoms
   .button {
     //background: $purple;
-      //color: $yellow;
-    font-family: 'Montserrat', sans-serif;
+    //color: $yellow;
+    font-family: "Montserrat", sans-serif;
     background: $button;
     color: $buttontext;
     font-weight: bold;
@@ -149,11 +149,11 @@ body {
 }
 
 .ant-card-meta-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.4em !important;
-    font-weight: bold;
-    //color: $green;
-    color: $headline;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.4em !important;
+  font-weight: bold;
+  //color: $green;
+  color: $headline;
 }
 .hero {
   grid-area: hero;
@@ -165,12 +165,15 @@ body {
   grid-area: available;
 }
 .steps {
-    grid-area: steps;
+  grid-area: steps;
 }
 .discovery {
   grid-area: discovery;
 }
-.rw-header, .rw-client, .rw-launcher, .rw-title {
+.rw-header,
+.rw-client,
+.rw-launcher,
+.rw-title {
   background-color: $stroke !important;
   color: white !important;
 }

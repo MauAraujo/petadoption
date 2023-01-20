@@ -18,7 +18,7 @@ import { Container, Row } from "react-bootstrap";
 import {
   uploadPublication,
   updatePublication,
-  removePublication
+  removePublication,
 } from "../services/publications.service";
 import filters from "../data/filters.json";
 import { getPublications } from "../services/publications.service";
@@ -26,17 +26,18 @@ import Meta from "antd/lib/card/Meta";
 import { Link } from "react-router-dom";
 
 const { Option } = Select;
-const Minio = require('minio');
+const Minio = require("minio");
 
 var minioClient = new Minio.Client({
-  endPoint: '147.182.175.166',
+  endPoint: process.env.MINIO_ENDPOINT,
   port: 9000,
   useSSL: false,
-  accessKey: 'pet-adoption-client',
-  secretKey: 'secret-pet-adoption'
+  accessKey: "pet-adoption-client",
+  secretKey: "secret-pet-adoption",
 });
 
-const minioURL = "147.182.175.166"
+const minioURL = process.env.MINIO_URL;
+const serverURL = process.env.SERVER_URL;
 
 let dummy =
   "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
@@ -50,14 +51,11 @@ const formItemLayout = {
 };
 
 export function NewPost(props) {
-  console.log(props.user);
   const [form] = Form.useForm();
   const [imgKeys, setImgKeys] = useState([]);
 
   //   Submit
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-    console.log(imgKeys);
     delete values.image;
     values["images"] = imgKeys;
 
@@ -73,38 +71,34 @@ export function NewPost(props) {
   };
 
   const uploadProps = {
-    action: "http://147.182.175.166:8082/publications/image",
+    action: `${serverURL}/publications/image`,
     multiple: false,
     listType: "picture",
     className: "upload-list-inline",
     beforeUpload: async (file) => {
       const metaData = {
-        'Content-Type': file.type,
+        "Content-Type": file.type,
       };
-      const bucket = 'pet-adoption'
+      const bucket = "pet-adoption";
       const path = `publications/${props.user.id}/${file.name}`;
       const buffer = Buffer.from(await file.arrayBuffer());
-      console.log(path);
-      console.log(buffer);
 
       minioClient.putObject(bucket, path, buffer, metaData, (err) => {
-        if (err) return console.log(err)
-        console.log('File uploaded successfully.')
-        let url = `http://${minioURL}:9000/${bucket}/${path}`
+        if (err) return console.log(err);
+        console.log("File uploaded successfully.");
+        let url = `${minioURL}/${bucket}/${path}`;
         if (!imgKeys.includes(url)) {
-          setImgKeys(imgKeys.concat([url]))
+          setImgKeys(imgKeys.concat([url]));
         }
       });
-
     },
     onRemove: (file) => {
       const path = `publications/${props.user.id}/${file.name}`;
-      minioClient.removeObject('pet-adoption', path, function (err) {
+      minioClient.removeObject("pet-adoption", path, function (err) {
         if (err) {
-          return console.log('Unable to remove object', err)
+          return console.log("Unable to remove object", err);
         }
-        console.log('Removed the object')
-      })
+      });
     },
   };
 
@@ -118,7 +112,7 @@ export function NewPost(props) {
         size="large"
         initialValues={{
           age: 1,
-          size: "middle"
+          size: "middle",
         }}
       >
         <Form.Item
@@ -227,38 +221,34 @@ export function Posts(props) {
   const [imgKeys, setImgKeys] = useState([]);
 
   const uploadProps = {
-    action: "http://147.182.175.166:8082/publications/image",
+    action: `${serverURL}/publications/image`,
     multiple: false,
     listType: "picture",
     className: "upload-list-inline",
     beforeUpload: async (file) => {
       const metaData = {
-        'Content-Type': file.type,
+        "Content-Type": file.type,
       };
-      const bucket = 'pet-adoption'
+      const bucket = "pet-adoption";
       const path = `publications/${props.user.id}/${file.name}`;
       const buffer = Buffer.from(await file.arrayBuffer());
-      console.log(path);
-      console.log(buffer);
 
       minioClient.putObject(bucket, path, buffer, metaData, (err) => {
-        if (err) return console.log(err)
-        console.log('File uploaded successfully.')
-        let url = `http://${minioURL}:9000/${bucket}/${path}`
+        if (err) return console.log(err);
+        console.log("File uploaded successfully.");
+        let url = `{minioURL}/${bucket}/${path}`;
         if (!imgKeys.includes(url)) {
-          setImgKeys(imgKeys.concat([url]))
+          setImgKeys(imgKeys.concat([url]));
         }
       });
-
     },
     onRemove: (file) => {
       const path = `publications/${props.user.id}/${file.name}`;
-      minioClient.removeObject('pet-adoption', path, function (err) {
+      minioClient.removeObject("pet-adoption", path, function (err) {
         if (err) {
-          return console.log('Unable to remove object', err)
+          return console.log("Unable to remove object", err);
         }
-        console.log('Removed the object')
-      })
+      });
     },
   };
 
@@ -282,7 +272,6 @@ export function Posts(props) {
     const values = cleanData(form.getFieldsValue());
     delete values.image;
     values["images"] = imgKeys;
-    console.log(values);
 
     await updatePublication(edit["ID"], { ...edit, ...values });
     message.success("La publicación se ha editado exitosamente");
@@ -321,7 +310,6 @@ export function Posts(props) {
             ]}
           >
             <Input placeholder="Nombre"></Input>
-
           </Form.Item>
           {filters.map((filter) => {
             return buildFilters(filter);
@@ -415,13 +403,15 @@ export function Posts(props) {
                     form.setFieldsValue(publication);
                   }}
                 />,
-                <Link to={"/detail/" + (publication.ID)}>
+                <Link to={"/detail/" + publication.ID}>
                   <EyeOutlined />
                 </Link>,
                 <Popconfirm
                   onConfirm={async () => {
                     await removePublication(publication.ID);
-                    message.success("La publicación se ha eliminado exitosamente");
+                    message.success(
+                      "La publicación se ha eliminado exitosamente"
+                    );
                     setpublications(await getPublications());
                   }}
                   cancelText={"Cancelar"}
@@ -435,18 +425,15 @@ export function Posts(props) {
                   title="Esta seguro que desea eliminar?"
                   icon={<DeleteOutlined style={{ color: "red" }} />}
                 >
-                  <DeleteOutlined
-                    key="delete"
-                  />
+                  <DeleteOutlined key="delete" />
                 </Popconfirm>,
               ]}
             >
               <Meta
                 title={publication.name}
-                description={`${publication.animal?.toUpperCase() || ""} | ${new Date(
-                  publication.date
-                ).toLocaleDateString() || new Date()
-                  } | ${publication.views || 0} Visualizaciones`}
+                description={`${publication.animal?.toUpperCase() || ""} | ${
+                  new Date(publication.date).toLocaleDateString() || new Date()
+                } | ${publication.views || 0} Visualizaciones`}
               />
             </Card>
           );
@@ -457,7 +444,6 @@ export function Posts(props) {
 }
 
 export function Inbox(props) {
-  console.log(props.user);
   return <Fragment>Inbox </Fragment>;
 }
 

@@ -1,8 +1,7 @@
-
-import React, { Component } from 'react';
-import { connectMenu } from 'react-instantsearch-dom';
+import React, { Component } from "react";
+import { connectMenu } from "react-instantsearch-dom";
 import { Select, Input } from "antd";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const { Option } = Select;
 
@@ -18,12 +17,11 @@ class MenuSelect extends Component {
     refine: PropTypes.func.isRequired,
   };
 
-  onChange = event => {
-      const { refine } = this.props;
-      //const value = event.currentTarget.value;
-      const value = event;
+  onChange = (event) => {
+    const { refine } = this.props;
+    const value = event;
 
-    if (value !== 'see_all_categories') {
+    if (value !== "see_all_categories") {
       refine(value);
     } else {
       refine();
@@ -32,14 +30,19 @@ class MenuSelect extends Component {
 
   render() {
     const { items } = this.props;
-    const { value: selected } = items.find(item => item.isRefined) || {
-      value: 'see_all_categories',
+    const { value: selected } = items.find((item) => item.isRefined) || {
+      value: "see_all_categories",
     };
 
     return (
-        <Select style={{ width: "100%", margin: "0.5rem" }} className="menu-select" value={selected} onChange={this.onChange}>
+      <Select
+        style={{ width: "100%", margin: "0.5rem" }}
+        className="menu-select"
+        value={selected}
+        onChange={this.onChange}
+      >
         <Option value="see_all_categories">Elije una opcion</Option>
-        {items.map(item => (
+        {items.map((item) => (
           <Option key={item.value} value={item.value}>
             {item.label}
           </Option>

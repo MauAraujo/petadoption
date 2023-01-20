@@ -23,7 +23,7 @@ export default function Inbox() {
       {text}
     </span>
   );
-  
+
   return (
     <List
       itemLayout="vertical"

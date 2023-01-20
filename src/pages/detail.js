@@ -1,31 +1,30 @@
 import React, { Fragment, useEffect, useState } from "react";
 //components
-import ActionCard from "../components/actionCard";
-import DetailCard from "../components/detailCard";
-import DetailHero from "../components/detailHero";
+import ActionCard from "../components/ActionCard";
+import DetailCard from "../components/DetailCard";
+import DetailHero from "../components/DetailHero";
 
 import { getPublication } from "../services/publications.service";
 import { useLocation } from "react-router-dom";
 
 export default function Detail() {
   const [publication, setpublication] = useState(null);
-    const path = useLocation().pathname.split("/");
+  const path = useLocation().pathname.split("/");
+  const publicationID = path[path.length - 1];
 
-    const publicationID = path[path.length- 1];
-    console.log(publicationID);
-  useEffect( () => {
+  useEffect(() => {
     async function fetchPublication() {
-        const item = await getPublication(publicationID);
-        console.log(item);
-        setpublication(item);
+      const item = await getPublication(publicationID);
+      console.log(item);
+      setpublication(item);
     }
-      fetchPublication();
-  },[]);
+    fetchPublication();
+  }, []);
 
   return (
     <Fragment>
       <div className="container my-4">
-        <DetailHero pet={publication|| {}}/>
+        <DetailHero pet={publication || {}} />
       </div>
       <div className="container my-3">
         <div className="row">

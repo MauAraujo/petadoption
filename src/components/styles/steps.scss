@@ -1,35 +1,35 @@
-@import '../../assets/scss/variables.scss';
+@import "../../assets/scss/variables.scss";
 
 .steps {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    grid-area: steps;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: steps;
 
-    .steps-inner {
-        height: 100%;
-    }
+  .steps-inner {
+    height: 100%;
+  }
 
-    .subtitle-pet {
-        font-family: "Montserrat", sans-serif;
-        //color: $pink;
-        color: $headline;
-        text-align: center;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 2.6em;
-    }
+  .subtitle-pet {
+    font-family: "Montserrat", sans-serif;
+    //color: $pink;
+    color: $headline;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 2.6em;
+  }
 
-    .txt-pet {
-        font-family: "Open Sans", sans-serif;
-        margin-top: 1em;
-        color: $paragraph;
-        font-size: 1.3em;
-    }
+  .txt-pet {
+    font-family: "Open Sans", sans-serif;
+    margin-top: 1em;
+    color: $paragraph;
+    font-size: 1.3em;
+  }
 
-    .img-pet {
-        width: 100%;
-        margin-bottom: 2em;
-    }
+  .img-pet {
+    width: 100%;
+    margin-bottom: 2em;
+  }
 }

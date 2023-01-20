@@ -7,7 +7,7 @@ let dummy =
   "https://i.pinimg.com/originals/22/d2/aa/22d2aa3cf43c1e6a72d18887be3846c2.jpg";
 
 export default function Available(props) {
-  console.log(props);
+  const thumborURL = process.env.REACT_APP_THUMBOR_URL;
 
   let card = (publication, index) => {
     console.log(publication);
@@ -21,7 +21,13 @@ export default function Available(props) {
           <div className="img-container">
             <img
               className="contain"
-              src={publication.images ? `http://147.182.175.166:8000/unsafe/fit-in/x340/filters:format(webp)/${encodeURIComponent(publication.images[0])}` : dummy}
+              src={
+                publication.images
+                  ? `${thumborURL}/unsafe/fit-in/x340/filters:format(webp)/${encodeURIComponent(
+                      publication.images[0]
+                    )}`
+                  : dummy
+              }
               alt={dummy}
             />
           </div>
@@ -41,11 +47,6 @@ export default function Available(props) {
           {props.publications.map((publication, index) => {
             return card(publication, index);
           })}
-          {/* {}
-                   {petCard()}
-                   {petCard()}
-                   {petCard()}
-                   {petCard()} */}
         </div>
       </div>
     );

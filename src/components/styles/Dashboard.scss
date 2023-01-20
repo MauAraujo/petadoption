@@ -1,43 +1,44 @@
-@import '../../assets/scss/variables.scss';
+@import "../../assets/scss/variables.scss";
 
-.toggleMenu{
-    height: auto;
-    font-size: x-large;
+.toggleMenu {
+  height: auto;
+  font-size: x-large;
 }
 
-.sider{
-    top:0px
+.sider {
+  top: 0px;
 }
 
-.content{
-    min-height: 70vh;
-    margin: 2rem;
-    padding: 1rem;
+.content {
+  min-height: 70vh;
+  margin: 2rem;
+  padding: 1rem;
 }
 
 /* tile uploaded pictures */
 .upload-list-inline .ant-upload-list-item {
-    float: left;
-    width: 200px;
-    margin-right: 8px;
+  float: left;
+  width: 200px;
+  margin-right: 8px;
 }
 
-.upload-list-inline [class*='-upload-list-rtl'] .ant-upload-list-item {
-    float: right;
+.upload-list-inline [class*="-upload-list-rtl"] .ant-upload-list-item {
+  float: right;
 }
 .upload-list-inline .ant-upload-animate-enter {
-    animation-name: uploadAnimateInlineIn;
+  animation-name: uploadAnimateInlineIn;
 }
 .upload-list-inline .ant-upload-animate-leave {
-    animation-name: uploadAnimateInlineOut;
+  animation-name: uploadAnimateInlineOut;
 }
 
-img, .img-container {
-    max-width: 100%;
-    max-height:  100%;
-    object-fit: cover;
+img,
+.img-container {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }
 
 .ant-card-cover {
-    height: 15em;
+  height: 15em;
 }

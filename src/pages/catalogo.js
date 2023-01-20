@@ -1,44 +1,36 @@
 import React, { Fragment, useState } from "react";
 import "./styles/catalogo.scss";
 //components
-import SubHeader from "../components/subHeader";
-import {
-  InstantSearch,
-  connectHits
-} from "react-instantsearch-dom";
-import MenuSelect from '../components/MenuSelect';
-import qs from 'qs';
+import SubHeader from "../components/SubHeader";
+import { InstantSearch, connectHits } from "react-instantsearch-dom";
+import MenuSelect from "../components/MenuSelect";
+import qs from "qs";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { instantMeiliSearch } from '@meilisearch/instant-meilisearch';
+import { instantMeiliSearch } from "@meilisearch/instant-meilisearch";
 import "instantsearch.css/themes/algolia-min.css";
 
 const DEBOUNCE_TIME = 400;
-const searchClient = instantMeiliSearch(
-  "http://147.182.175.166:7700"
-);
+const searchClient = instantMeiliSearch(process.env.REACT_APP_MEILISEARCH_URL);
 
 export default function Catalogo() {
   const history = useHistory();
   const location = useLocation();
-  const createURL = state => `?${qs.stringify(state)}`;
-  const searchStateToUrl = searchState =>
-    searchState ? `${location.pathname}${createURL(searchState)}` : '';
+  const createURL = (state) => `?${qs.stringify(state)}`;
+  const searchStateToUrl = (searchState) =>
+    searchState ? `${location.pathname}${createURL(searchState)}` : "";
   const urlToSearchState = ({ search }) => qs.parse(search.slice(1));
 
   const searchQuery = urlToSearchState(location);
   const [searchState, setSearchState] = useState(searchQuery);
   const [debouncedSetState, setDebouncedSetState] = useState(null);
 
-  const onSearchStateChange = updatedSearchState => {
+  const onSearchStateChange = (updatedSearchState) => {
     clearTimeout(debouncedSetState);
 
     setDebouncedSetState(
       setTimeout(() => {
-        history.push(
-          searchStateToUrl(updatedSearchState),
-          updatedSearchState,
-        );
+        history.push(searchStateToUrl(updatedSearchState), updatedSearchState);
       }, DEBOUNCE_TIME)
     );
     setSearchState(updatedSearchState);
@@ -46,7 +38,8 @@ export default function Catalogo() {
 
   return (
     <Fragment>
-      <InstantSearch indexName="pet-adoption"
+      <InstantSearch
+        indexName="pet-adoption"
         searchClient={searchClient}
         searchState={searchState}
         onSearchStateChange={onSearchStateChange}
@@ -80,29 +73,30 @@ export default function Catalogo() {
   );
 }
 
+const Hits = ({ hits, history }) => {
+  const thumborURL = process.env.REACT_APP_THUMBOR_URL;
+  return (
+    <Row className="catalogo">
+      {hits.map((hit) => (
+        <Col md={2} className="publication-card" key={hit.id}>
+          <Link to={"/detail/" + hit.id}>
+            <div className="img-container">
+              <img
+                className="contain"
+                src={`${thumborURL}/unsafe/fit-in/x360/filters:format(webp)/${encodeURIComponent(
+                  hit.images[0]
+                )}`}
+                alt=""
+              />
+            </div>
+            <div className="title-container">
+              <h6 className="subtitle-pet text-center">{hit.name}</h6>
+            </div>
+          </Link>
+        </Col>
+      ))}
+    </Row>
+  );
+};
 
-const Hits = ({ hits, history }) => (
-  <Row className="catalogo">
-    {hits.map(hit => (
-      <Col
-        md={2}
-        className="publication-card"
-        key={hit.id}
-      >
-        <Link to={"/detail/" + (hit.id)}>
-          <div className="img-container">
-            <img
-              className="contain"
-              src={`http://147.182.175.166:8000/unsafe/fit-in/x360/filters:format(webp)/${encodeURIComponent(hit.images[0])}`}
-              alt=""
-            />
-          </div>
-          <div className="title-container">
-            <h6 className="subtitle-pet text-center">{hit.name}</h6>
-          </div>
-        </Link>
-      </Col>
-    ))}
-  </Row>
-);
 const CustomHits = connectHits(Hits);
